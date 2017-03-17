@@ -158,8 +158,8 @@ namespace TerrainGenerator
                 deltaX = currentMouseState.X - (Game.GraphicsDevice.Viewport.Width / 2);
                 deltaY = currentMouseState.Y - (Game.GraphicsDevice.Viewport.Height / 2);
 
-                mouseRotationBuffer.X -= 0.0001f * deltaX * dt;
-                mouseRotationBuffer.Y -= 0.0001f * deltaY * dt;
+                mouseRotationBuffer.X -= 0.01f * deltaX * dt;
+                mouseRotationBuffer.Y -= 0.01f * deltaY * dt;
 
                 //if (mouseRotationBuffer.X < MathHelper.ToRadians(-75.0f))
                 //    mouseRotationBuffer.X = mouseRotationBuffer.X - (mouseRotationBuffer.X - MathHelper.ToRadians(-75.0f));
@@ -176,7 +176,7 @@ namespace TerrainGenerator
                 deltaY = 0;
             }
 
-            //Mouse.SetPosition(Game.GraphicsDevice.Viewport.Width / 2, Game.GraphicsDevice.Viewport.Height / 2);
+            Mouse.SetPosition(Game.GraphicsDevice.Viewport.Width / 2, Game.GraphicsDevice.Viewport.Height / 2);
             prevMouseState = currentMouseState;
 
             base.Update(gameTime);
