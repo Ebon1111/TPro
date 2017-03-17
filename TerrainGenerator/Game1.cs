@@ -26,7 +26,13 @@ namespace TerrainGenerator
         // Camera
         Vector3 camTarget;
         Vector3 camPosition;
+
         Matrix viewMatrix;
+
+
+        // Test 1st person
+        Camera camera;
+        // cam end
 
         Effect effect;
         VertexPositionColor[] vertices;
@@ -42,13 +48,20 @@ namespace TerrainGenerator
         {
             graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
+
+            // IsMouseVisible = true;
+            
         }
 
         protected override void Initialize()
         {
             // Setup Camera
-            camTarget = new Vector3(0f, 0f, 0f);
-            camPosition = new Vector3(0f, 0f, -50f);
+            // camTarget = new Vector3(0f, 0f, 0f);
+            camPosition = new Vector3(0f, 5f, -50f);
+
+            // Test 1st Camera
+            camera = new Camera(this, camPosition, Vector3.Zero, 10.0f);
+            Components.Add(camera);
 
             graphics.PreferredBackBufferWidth = 500;
             graphics.PreferredBackBufferHeight = 500;
@@ -132,64 +145,106 @@ namespace TerrainGenerator
                 }
             }
         }
+
         private void SetUpCamera()
         {
             // viewMatrix = Matrix.CreateLookAt(new Vector3(0, 10, 0), new Vector3(0, 0, 0), new Vector3(0, 0, -1));
-            viewMatrix = Matrix.CreateLookAt(camPosition, camTarget, Vector3.Up); // Vector3.Up == Vector(0, 1, 0);
+            // viewMatrix = Matrix.CreateLookAt(camPosition, camTarget, Vector3.Up); // Vector3.Up == Vector(0, 1, 0);
             // orthographic
-            projectionMatrix = Matrix.CreatePerspectiveFieldOfView(MathHelper.PiOver4, device.Viewport.AspectRatio, 1.0f, 300.0f);
+            // projectionMatrix = Matrix.CreatePerspectiveFieldOfView(MathHelper.PiOver4, device.Viewport.AspectRatio, 1.0f, 300.0f);
+            projectionMatrix = camera.Projection;
+            // Set up in Camera Consrtuctor
+            //projectionMatrix = Matrix.CreatePerspectiveFieldOfView(
+            //    MathHelper.PiOver4,
+            //    device.Viewport.AspectRatio,
+            //    0.05f,
+            //    1000.0f);
         }
 
         protected override void Update(GameTime gameTime)
         {
-            if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed)
-                this.Exit();
+            //if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed)
+            //    this.Exit();
 
-            angle += 0.005f;
+            //angle += 0.005f;
 
-            if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
-                Exit();
+            //if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
+            //    Exit();
 
-            if (Keyboard.GetState().IsKeyDown(Keys.Left))
-            {
-                camPosition.X -= 1f;
-                camTarget.X -= 1f;
-            }
-            if (Keyboard.GetState().IsKeyDown(Keys.Right))
-            {
-                camPosition.X += 1f;
-                camTarget.X += 1f;
-            }
-            if (Keyboard.GetState().IsKeyDown(Keys.Up))
-            {
-                camPosition.Y += 1f;
-                camTarget.Y += 1f;
-            }
-            if (Keyboard.GetState().IsKeyDown(Keys.Down))
-            {
-                camPosition.Y -= 1f;
-                camTarget.Y -= 1f;
-            }
-            if (Keyboard.GetState().IsKeyDown(Keys.OemPlus))
-            {
-                camPosition.Z += 1f;
-            }
-            if (Keyboard.GetState().IsKeyDown(Keys.OemMinus))
-            {
-                camPosition.Z -= 1f;
-            }
-            if (Keyboard.GetState().IsKeyDown(Keys.Space))
-            {
-                orbit = !orbit;
-            }
+            //if (Keyboard.GetState().IsKeyDown(Keys.Left))
+            //{
+            //    camPosition.X += 1f;
+            //    camTarget.X += 1f;
+            //}
+            //if (Keyboard.GetState().IsKeyDown(Keys.Right))
+            //{
+            //    camPosition.X -= 1f;
+            //    camTarget.X -= 1f;
+            //}
+            //if (Keyboard.GetState().IsKeyDown(Keys.Up))
+            //{
+            //    camPosition.Y += 1f;
+            //    camTarget.Y += 1f;
+            //}
+            //if (Keyboard.GetState().IsKeyDown(Keys.Down))
+            //{
+            //    camPosition.Y -= 1f;
+            //    camTarget.Y -= 1f;
+            //}
+            //if (Keyboard.GetState().IsKeyDown(Keys.OemPlus))
+            //{
+            //    camPosition.Z += 1f;
+            //}
+            //if (Keyboard.GetState().IsKeyDown(Keys.OemMinus))
+            //{
+            //    camPosition.Z -= 1f;
+            //}
+            //if (Keyboard.GetState().IsKeyDown(Keys.Space))
+            //{
+            //    orbit = !orbit;
+            //}
 
-            if (orbit)
-            {
-                Matrix rotationMatrix = Matrix.CreateRotationY(MathHelper.ToRadians(1f));
-                camPosition = Vector3.Transform(camPosition, rotationMatrix);
-            }
+            //if (orbit)
+            //{
+            //    Matrix rotationMatrix = Matrix.CreateRotationY(MathHelper.ToRadians(1f));
+            //    camPosition = Vector3.Transform(camPosition, rotationMatrix);
+            //}
 
-            viewMatrix = Matrix.CreateLookAt(camPosition, camTarget, Vector3.Up);
+            // first person cam
+
+
+            // cam end
+
+            //camPosition.X += Mouse.GetState().X;
+            //camTarget.X += Mouse.GetState().X;
+            //camPosition.Y += Mouse.GetState().Y;
+            //camTarget.Y += Mouse.GetState().Y;
+
+            //Mouse.SetPosition(0, 0);
+
+            viewMatrix = camera.viewMatrix;
+            // viewMatrix = Matrix.CreateLookAt(camPosition, camTarget, Vector3.Up);
+
+
+            //#region Constrain mouse to window
+
+            //if (Mouse.GetState().X < 0)
+
+            //    Mouse.SetPosition(0, Mouse.GetState().Y);
+
+            //if (Mouse.GetState().X > GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Width)
+
+            //    Mouse.SetPosition(GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Width, Mouse.GetState().Y);
+
+            //if (Mouse.GetState().Y < 0)
+
+            //    Mouse.SetPosition(Mouse.GetState().X, 0);
+
+            //if (Mouse.GetState().Y > GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Height)
+
+            //    Mouse.SetPosition(Mouse.GetState().X, GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Height);
+
+            //#endregion
 
             base.Update(gameTime);
         }
@@ -219,4 +274,5 @@ namespace TerrainGenerator
             base.Draw(gameTime);
         }
     }
+
 }
