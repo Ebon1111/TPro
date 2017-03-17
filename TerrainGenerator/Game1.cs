@@ -57,6 +57,7 @@ namespace TerrainGenerator
             Window.Title = "Riemer's XNA Tutorials -- 3D Series 1";
 
             base.Initialize();
+
         }
 
         protected override void LoadContent()
