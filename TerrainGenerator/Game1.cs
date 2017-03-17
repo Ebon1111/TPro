@@ -55,6 +55,7 @@ namespace TerrainGenerator
             Window.Title = "World Generator";
 
             base.Initialize();
+
         }
 
         protected override void LoadContent()
