@@ -21,8 +21,6 @@ namespace TerrainGenerator
             }
         }
 
-        Matrix projectionMatrix;
-
         int[] indices;
         public int[] Indices
         {
@@ -36,29 +34,40 @@ namespace TerrainGenerator
         int terrainWidth;
         int terrainHeight;
 
+        List<Color> colours = new List<Color>();
+
         public Terrain(Game game, GraphicsDevice device, int terrainWidth, int terrainHeight) 
             : base(game)
         {
             this.device = device;
             this.terrainWidth = terrainWidth;
             this.terrainHeight = terrainHeight;
+
             LoadHeightData();
             SetUpVertices();
             SetUpIndices();
         }
 
-        /// <summary>
-        /// Generate vertices based on terrainWidth and terrainHeight
-        /// </summary>
+        ///<summary>
+        ///Generate vertices based on terrainWidth and terrainHeight
+        ///</summary>
         private void SetUpVertices()
         {
+            int counter = 0;
+            CreateColour();
             vertices = new VertexPositionColor[terrainWidth * terrainHeight];
             for (int x = 0; x < terrainWidth; x++)
             {
                 for (int y = 0; y < terrainHeight; y++)
                 {
                     vertices[x + y * terrainWidth].Position = new Vector3(x, heightData[x, y], -y);
-                    vertices[x + y * terrainWidth].Color = Color.White;
+                    
+                    vertices[x + y * terrainWidth].Color = colours[counter];
+
+                    if (counter < (colours.Count - 1))
+                        counter++;
+                    else
+                        counter = 0;
                 }
             }
         }
@@ -109,6 +118,22 @@ namespace TerrainGenerator
                         return (float)(mantissa * exponent);
                     })();
                 }
+            }
+        }
+
+        private void CreateColour()
+        {
+            int r = 255;
+            int g = 252;
+            int b = 111;
+            while (r != 0)
+            {
+                colours.Add(new Color(r--, g, b));
+                if (g > 0)
+                    g--;
+                if (b > 255)
+                    b--;
+                    
             }
         }
     }
