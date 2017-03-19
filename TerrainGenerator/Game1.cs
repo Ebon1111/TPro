@@ -23,17 +23,16 @@ namespace TerrainGenerator
         Effect effect;
 
         // Terrain Size
-        private int terrainWidth = 1000;
-        private int terrainHeight = 1000;
-        Terrain terrain;
+        int terrainWidth = 1000;
+        int terrainHeight = 1000;
+        public Terrain terrain;
 
         public Game1()
         {
             graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
 
-            // IsMouseVisible = true;
-
+             IsMouseVisible = true;
         }
 
         protected override void Initialize()
@@ -74,7 +73,7 @@ namespace TerrainGenerator
         }
 
         /// <summary>
-        /// Pass the camera's projecction to game
+        /// Pass the camera's projection to game
         /// </summary>
         private void SetUpCamera()
         {
@@ -84,7 +83,7 @@ namespace TerrainGenerator
         protected override void Update(GameTime gameTime)
         {
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed)
-                this.Exit();
+                Exit();
             
             viewMatrix = camera.viewMatrix;
             

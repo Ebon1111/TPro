@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace TerrainGenerator
 {
-    class Terrain : GameComponent
+    public class Terrain : GameComponent
     {
         GraphicsDevice device;
 

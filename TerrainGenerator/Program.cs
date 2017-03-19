@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Windows.Forms;
 
 namespace TerrainGenerator
 {
@@ -14,8 +15,7 @@ namespace TerrainGenerator
         [STAThread]
         static void Main()
         {
-            using (var game = new Game1())
-                game.Run();
+            Application.Run(new Control());
         }
     }
 #endif
