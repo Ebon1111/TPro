@@ -28,51 +28,50 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.inCamSpeed = new System.Windows.Forms.NumericUpDown();
+            this.cameraSpeed = new System.Windows.Forms.NumericUpDown();
             this.lbCamSpeed = new System.Windows.Forms.Label();
             this.btnGenerate = new System.Windows.Forms.Button();
             this.gbTerrainControls = new System.Windows.Forms.GroupBox();
-            this.btnBaseColour = new System.Windows.Forms.Button();
-            this.inTerrainWidth = new System.Windows.Forms.NumericUpDown();
+            this.baseColour = new System.Windows.Forms.Button();
+            this.terrainWidth = new System.Windows.Forms.NumericUpDown();
             this.lbTerrainWidth = new System.Windows.Forms.Label();
-            this.inTerrainNoise = new System.Windows.Forms.NumericUpDown();
-            this.inTerrainHeight = new System.Windows.Forms.NumericUpDown();
+            this.terrainNoise = new System.Windows.Forms.NumericUpDown();
+            this.terrainHeight = new System.Windows.Forms.NumericUpDown();
             this.lbTerrainHeight = new System.Windows.Forms.Label();
             this.lbTerrainNoise = new System.Windows.Forms.Label();
             this.gbCameraControls = new System.Windows.Forms.GroupBox();
             this.gbViewControls = new System.Windows.Forms.GroupBox();
             this.lbViewVisibility = new System.Windows.Forms.Label();
-            this.inViewVisibility = new System.Windows.Forms.NumericUpDown();
+            this.visibility = new System.Windows.Forms.NumericUpDown();
             this.gbResolutionControls = new System.Windows.Forms.GroupBox();
-            this.inViewResolutionX = new System.Windows.Forms.NumericUpDown();
-            this.inViewResolutionY = new System.Windows.Forms.NumericUpDown();
+            this.resX = new System.Windows.Forms.NumericUpDown();
+            this.resY = new System.Windows.Forms.NumericUpDown();
             this.lbResolutionX = new System.Windows.Forms.Label();
-            ((System.ComponentModel.ISupportInitialize)(this.inCamSpeed)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.cameraSpeed)).BeginInit();
             this.gbTerrainControls.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.inTerrainWidth)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.inTerrainNoise)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.inTerrainHeight)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.terrainWidth)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.terrainNoise)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.terrainHeight)).BeginInit();
             this.gbCameraControls.SuspendLayout();
             this.gbViewControls.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.inViewVisibility)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.visibility)).BeginInit();
             this.gbResolutionControls.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.inViewResolutionX)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.inViewResolutionY)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.resX)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.resY)).BeginInit();
             this.SuspendLayout();
             // 
-            // inCamSpeed
+            // cameraSpeed
             // 
-            this.inCamSpeed.DecimalPlaces = 2;
-            this.inCamSpeed.Increment = new decimal(new int[] {
+            this.cameraSpeed.DecimalPlaces = 2;
+            this.cameraSpeed.Increment = new decimal(new int[] {
             1,
             0,
             0,
             65536});
-            this.inCamSpeed.Location = new System.Drawing.Point(6, 32);
-            this.inCamSpeed.Name = "inCamSpeed";
-            this.inCamSpeed.Size = new System.Drawing.Size(60, 20);
-            this.inCamSpeed.TabIndex = 0;
-            this.inCamSpeed.ValueChanged += new System.EventHandler(this.cameraSpeed_ValueChanged);
+            this.cameraSpeed.Location = new System.Drawing.Point(6, 32);
+            this.cameraSpeed.Name = "cameraSpeed";
+            this.cameraSpeed.Size = new System.Drawing.Size(60, 20);
+            this.cameraSpeed.TabIndex = 0;
             // 
             // lbCamSpeed
             // 
@@ -95,11 +94,11 @@
             // 
             // gbTerrainControls
             // 
-            this.gbTerrainControls.Controls.Add(this.btnBaseColour);
-            this.gbTerrainControls.Controls.Add(this.inTerrainWidth);
+            this.gbTerrainControls.Controls.Add(this.baseColour);
+            this.gbTerrainControls.Controls.Add(this.terrainWidth);
             this.gbTerrainControls.Controls.Add(this.lbTerrainWidth);
-            this.gbTerrainControls.Controls.Add(this.inTerrainNoise);
-            this.gbTerrainControls.Controls.Add(this.inTerrainHeight);
+            this.gbTerrainControls.Controls.Add(this.terrainNoise);
+            this.gbTerrainControls.Controls.Add(this.terrainHeight);
             this.gbTerrainControls.Controls.Add(this.lbTerrainHeight);
             this.gbTerrainControls.Controls.Add(this.lbTerrainNoise);
             this.gbTerrainControls.Location = new System.Drawing.Point(102, 12);
@@ -109,23 +108,22 @@
             this.gbTerrainControls.TabStop = false;
             this.gbTerrainControls.Text = "Terrain";
             // 
-            // btnBaseColour
+            // baseColour
             // 
-            this.btnBaseColour.Location = new System.Drawing.Point(6, 136);
-            this.btnBaseColour.Name = "btnBaseColour";
-            this.btnBaseColour.Size = new System.Drawing.Size(60, 22);
-            this.btnBaseColour.TabIndex = 11;
-            this.btnBaseColour.Text = "Base";
-            this.btnBaseColour.UseVisualStyleBackColor = true;
-            this.btnBaseColour.Click += new System.EventHandler(this.baseColour_Click);
+            this.baseColour.Location = new System.Drawing.Point(6, 136);
+            this.baseColour.Name = "baseColour";
+            this.baseColour.Size = new System.Drawing.Size(60, 22);
+            this.baseColour.TabIndex = 11;
+            this.baseColour.Text = "Base";
+            this.baseColour.UseVisualStyleBackColor = true;
+            this.baseColour.Click += new System.EventHandler(this.btnColour_Click);
             // 
-            // inTerrainWidth
+            // terrainWidth
             // 
-            this.inTerrainWidth.Location = new System.Drawing.Point(6, 71);
-            this.inTerrainWidth.Name = "inTerrainWidth";
-            this.inTerrainWidth.Size = new System.Drawing.Size(60, 20);
-            this.inTerrainWidth.TabIndex = 6;
-            this.inTerrainWidth.ValueChanged += new System.EventHandler(this.terrainWidth_ValueChanged);
+            this.terrainWidth.Location = new System.Drawing.Point(6, 71);
+            this.terrainWidth.Name = "terrainWidth";
+            this.terrainWidth.Size = new System.Drawing.Size(60, 20);
+            this.terrainWidth.TabIndex = 6;
             // 
             // lbTerrainWidth
             // 
@@ -136,27 +134,25 @@
             this.lbTerrainWidth.TabIndex = 5;
             this.lbTerrainWidth.Text = "width";
             // 
-            // inTerrainNoise
+            // terrainNoise
             // 
-            this.inTerrainNoise.DecimalPlaces = 2;
-            this.inTerrainNoise.Increment = new decimal(new int[] {
+            this.terrainNoise.DecimalPlaces = 2;
+            this.terrainNoise.Increment = new decimal(new int[] {
             1,
             0,
             0,
             65536});
-            this.inTerrainNoise.Location = new System.Drawing.Point(6, 110);
-            this.inTerrainNoise.Name = "inTerrainNoise";
-            this.inTerrainNoise.Size = new System.Drawing.Size(60, 20);
-            this.inTerrainNoise.TabIndex = 4;
-            this.inTerrainNoise.ValueChanged += new System.EventHandler(this.terrainNoise_ValueChanged);
+            this.terrainNoise.Location = new System.Drawing.Point(6, 110);
+            this.terrainNoise.Name = "terrainNoise";
+            this.terrainNoise.Size = new System.Drawing.Size(60, 20);
+            this.terrainNoise.TabIndex = 4;
             // 
-            // inTerrainHeight
+            // terrainHeight
             // 
-            this.inTerrainHeight.Location = new System.Drawing.Point(6, 32);
-            this.inTerrainHeight.Name = "inTerrainHeight";
-            this.inTerrainHeight.Size = new System.Drawing.Size(60, 20);
-            this.inTerrainHeight.TabIndex = 3;
-            this.inTerrainHeight.ValueChanged += new System.EventHandler(this.terrainHeight_ValueChanged);
+            this.terrainHeight.Location = new System.Drawing.Point(6, 32);
+            this.terrainHeight.Name = "terrainHeight";
+            this.terrainHeight.Size = new System.Drawing.Size(60, 20);
+            this.terrainHeight.TabIndex = 3;
             // 
             // lbTerrainHeight
             // 
@@ -179,7 +175,7 @@
             // gbCameraControls
             // 
             this.gbCameraControls.Controls.Add(this.lbCamSpeed);
-            this.gbCameraControls.Controls.Add(this.inCamSpeed);
+            this.gbCameraControls.Controls.Add(this.cameraSpeed);
             this.gbCameraControls.Location = new System.Drawing.Point(15, 12);
             this.gbCameraControls.Name = "gbCameraControls";
             this.gbCameraControls.Size = new System.Drawing.Size(72, 166);
@@ -190,7 +186,7 @@
             // gbViewControls
             // 
             this.gbViewControls.Controls.Add(this.lbViewVisibility);
-            this.gbViewControls.Controls.Add(this.inViewVisibility);
+            this.gbViewControls.Controls.Add(this.visibility);
             this.gbViewControls.Controls.Add(this.gbResolutionControls);
             this.gbViewControls.Location = new System.Drawing.Point(12, 184);
             this.gbViewControls.Name = "gbViewControls";
@@ -208,24 +204,23 @@
             this.lbViewVisibility.TabIndex = 3;
             this.lbViewVisibility.Text = "visibility";
             // 
-            // inViewVisibility
+            // visibility
             // 
-            this.inViewVisibility.DecimalPlaces = 2;
-            this.inViewVisibility.Increment = new decimal(new int[] {
+            this.visibility.DecimalPlaces = 2;
+            this.visibility.Increment = new decimal(new int[] {
             1,
             0,
             0,
             65536});
-            this.inViewVisibility.Location = new System.Drawing.Point(9, 41);
-            this.inViewVisibility.Name = "inViewVisibility";
-            this.inViewVisibility.Size = new System.Drawing.Size(60, 20);
-            this.inViewVisibility.TabIndex = 2;
-            this.inViewVisibility.ValueChanged += new System.EventHandler(this.viewVisibility_ValueChanged);
+            this.visibility.Location = new System.Drawing.Point(9, 41);
+            this.visibility.Name = "visibility";
+            this.visibility.Size = new System.Drawing.Size(60, 20);
+            this.visibility.TabIndex = 2;
             // 
             // gbResolutionControls
             // 
-            this.gbResolutionControls.Controls.Add(this.inViewResolutionX);
-            this.gbResolutionControls.Controls.Add(this.inViewResolutionY);
+            this.gbResolutionControls.Controls.Add(this.resX);
+            this.gbResolutionControls.Controls.Add(this.resY);
             this.gbResolutionControls.Controls.Add(this.lbResolutionX);
             this.gbResolutionControls.Location = new System.Drawing.Point(6, 135);
             this.gbResolutionControls.Name = "gbResolutionControls";
@@ -234,21 +229,19 @@
             this.gbResolutionControls.TabStop = false;
             this.gbResolutionControls.Text = "resolution";
             // 
-            // inViewResolutionX
+            // resX
             // 
-            this.inViewResolutionX.Location = new System.Drawing.Point(6, 19);
-            this.inViewResolutionX.Name = "inViewResolutionX";
-            this.inViewResolutionX.Size = new System.Drawing.Size(57, 20);
-            this.inViewResolutionX.TabIndex = 7;
-            this.inViewResolutionX.ValueChanged += new System.EventHandler(this.viewResolutionX_ValueChanged);
+            this.resX.Location = new System.Drawing.Point(6, 19);
+            this.resX.Name = "resX";
+            this.resX.Size = new System.Drawing.Size(57, 20);
+            this.resX.TabIndex = 7;
             // 
-            // inViewResolutionY
+            // resY
             // 
-            this.inViewResolutionY.Location = new System.Drawing.Point(87, 19);
-            this.inViewResolutionY.Name = "inViewResolutionY";
-            this.inViewResolutionY.Size = new System.Drawing.Size(57, 20);
-            this.inViewResolutionY.TabIndex = 8;
-            this.inViewResolutionY.ValueChanged += new System.EventHandler(this.viewResolutionY_ValueChanged);
+            this.resY.Location = new System.Drawing.Point(87, 19);
+            this.resY.Name = "resY";
+            this.resY.Size = new System.Drawing.Size(57, 20);
+            this.resY.TabIndex = 8;
             // 
             // lbResolutionX
             // 
@@ -276,27 +269,27 @@
             this.Name = "Control";
             this.ShowIcon = false;
             this.Text = "WGenerator v1";
-            ((System.ComponentModel.ISupportInitialize)(this.inCamSpeed)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.cameraSpeed)).EndInit();
             this.gbTerrainControls.ResumeLayout(false);
             this.gbTerrainControls.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.inTerrainWidth)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.inTerrainNoise)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.inTerrainHeight)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.terrainWidth)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.terrainNoise)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.terrainHeight)).EndInit();
             this.gbCameraControls.ResumeLayout(false);
             this.gbCameraControls.PerformLayout();
             this.gbViewControls.ResumeLayout(false);
             this.gbViewControls.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.inViewVisibility)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.visibility)).EndInit();
             this.gbResolutionControls.ResumeLayout(false);
             this.gbResolutionControls.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.inViewResolutionX)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.inViewResolutionY)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.resX)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.resY)).EndInit();
             this.ResumeLayout(false);
 
         }
 
         #endregion
-        private System.Windows.Forms.NumericUpDown inCamSpeed;
+        private System.Windows.Forms.NumericUpDown cameraSpeed;
         private System.Windows.Forms.Label lbCamSpeed;
         private System.Windows.Forms.Button btnGenerate;
         private System.Windows.Forms.GroupBox gbTerrainControls;
@@ -304,16 +297,16 @@
         private System.Windows.Forms.GroupBox gbViewControls;
         private System.Windows.Forms.Label lbTerrainHeight;
         private System.Windows.Forms.Label lbTerrainNoise;
-        private System.Windows.Forms.NumericUpDown inTerrainNoise;
-        private System.Windows.Forms.NumericUpDown inTerrainHeight;
+        private System.Windows.Forms.NumericUpDown terrainNoise;
+        private System.Windows.Forms.NumericUpDown terrainHeight;
         private System.Windows.Forms.Label lbResolutionX;
-        private System.Windows.Forms.NumericUpDown inViewResolutionY;
-        private System.Windows.Forms.NumericUpDown inViewResolutionX;
+        private System.Windows.Forms.NumericUpDown resY;
+        private System.Windows.Forms.NumericUpDown resX;
         private System.Windows.Forms.GroupBox gbResolutionControls;
         private System.Windows.Forms.Label lbViewVisibility;
-        private System.Windows.Forms.NumericUpDown inViewVisibility;
-        private System.Windows.Forms.NumericUpDown inTerrainWidth;
+        private System.Windows.Forms.NumericUpDown visibility;
+        private System.Windows.Forms.NumericUpDown terrainWidth;
         private System.Windows.Forms.Label lbTerrainWidth;
-        private System.Windows.Forms.Button btnBaseColour;
+        private System.Windows.Forms.Button baseColour;
     }
 }
