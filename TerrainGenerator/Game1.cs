@@ -21,6 +21,7 @@ namespace TerrainGenerator
         Camera camera;
 
         Effect effect;
+        Texture2D texture;
 
         // Terrain Size
         int terrainWidth = 1000;
@@ -42,9 +43,7 @@ namespace TerrainGenerator
             camera = new Camera(this, camPosition, Vector3.Zero, 10.0f);
             Components.Add(camera);
 
-            // Terrain
-            terrain = new Terrain(this, device, terrainWidth, terrainHeight);
-            Components.Add(terrain);
+            
 
             // Setup Resolution
             graphics.PreferredBackBufferWidth = 1024;
@@ -64,6 +63,10 @@ namespace TerrainGenerator
             device = graphics.GraphicsDevice;
 
             effect = Content.Load<Effect>("effects");
+
+            // Terrain
+            terrain = new Terrain(this, device, terrainWidth, terrainHeight);
+            Components.Add(terrain);
 
             SetUpCamera();
         }
@@ -96,14 +99,15 @@ namespace TerrainGenerator
 
             RasterizerState rs = new RasterizerState();
             rs.CullMode = CullMode.None;
-            rs.FillMode = FillMode.WireFrame;
+            // rs.FillMode = FillMode.WireFrame;
             device.RasterizerState = rs;
 
+            Matrix worldMatrix = Matrix.Identity;
             effect.CurrentTechnique = effect.Techniques["ColoredNoShading"];
             effect.Parameters["xView"].SetValue(viewMatrix);
             effect.Parameters["xProjection"].SetValue(projectionMatrix);
-            Matrix worldMatrix = Matrix.Identity;
             effect.Parameters["xWorld"].SetValue(worldMatrix);
+            effect.Parameters["xTexture"].SetValue(texture);
 
             drawTerrain(terrain.Vertices, terrain.Indices);
 
@@ -117,8 +121,6 @@ namespace TerrainGenerator
                 pass.Apply();
 
                 device.DrawUserIndexedPrimitives(PrimitiveType.TriangleList, vertices, 0, vertices.Length, indices, 0, indices.Length / 3, VertexPositionColor.VertexDeclaration);
-
-                device.DrawUserPrimitives(PrimitiveType.TriangleList, indices, 0, 2, VertexPositionColor.VertexDeclaration);
             }
         }
     }
