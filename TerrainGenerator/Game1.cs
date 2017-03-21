@@ -5,6 +5,19 @@ using System;
 
 namespace TerrainGenerator
 {
+    public struct Config
+    {
+        public int widthTerrain;
+        public int heightTerrain;
+        public float noiseRange;
+        public Color lineColour;
+        public int graphicResolution;
+        public float cameraSpeed;
+        public Vector3 cameraStartingPosition;
+        public float visibility;
+
+    }
+
     /// <summary>
     /// Purpose: 1) Practice programming in c# with XNA library.
     ///          2) Practice creating objects and 3D environment

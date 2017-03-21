@@ -64,6 +64,23 @@ namespace TerrainGenerator
             SetUpIndices();
         }
 
+        /// <summary>
+        /// Using control-box to terrain
+        /// </summary>
+        /// <param name="game">Current Game</param>
+        /// <param name="device">Current Graphic Device</param>
+        /// <param name="config">Control Box Values</param>
+        public Terrain(Game game, GraphicsDevice device, Config config) :base(game)
+        {
+            this.device = device;
+            terrainWidth = config.widthTerrain;
+            terrainHeight = config.heightTerrain;
+
+            LoadHeightData();
+            SetUpVertices();
+            SetUpIndices();
+        }
+
         ///<summary>
         ///Generate vertices based on terrainWidth and terrainHeight
         ///</summary>

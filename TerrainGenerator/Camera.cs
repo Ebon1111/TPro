@@ -91,6 +91,27 @@ namespace TerrainGenerator
         }
 
         /// <summary>
+        /// Using control-box to create cemara
+        /// </summary>
+        /// <param name="game">Current Game</param>
+        /// <param name="config">Control Box Values</param>
+        /// <param name="rotation">Initializing Rotation</param>
+        public Camera(Game game, Config config, Vector3 rotation) : base(game)
+        {
+            camSpeed = config.cameraSpeed;
+            Projection = Matrix.CreatePerspectiveFieldOfView(
+                MathHelper.PiOver4,
+                Game.GraphicsDevice.Viewport.AspectRatio,
+                1.0f,
+                config.visibility); // Visibility of Distance
+
+            // Set camera position and rotation;
+            MoveTo(config.cameraStartingPosition, rotation);
+
+            prevMouseState = Mouse.GetState();
+        }
+
+        /// <summary>
         /// Update camLookAt field for getting the correct view
         /// </summary>
         private void UpdateLookAt()
