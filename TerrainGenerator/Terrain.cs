@@ -2,9 +2,6 @@
 using Microsoft.Xna.Framework.Graphics;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace TerrainGenerator
 {
@@ -19,7 +16,7 @@ namespace TerrainGenerator
     /// </summary>
     public class Terrain : GameComponent
     {
-        GraphicsDevice device;
+        //GraphicsDevice device; we don't need this!
 
         VertexPositionColor[] vertices;
         public VertexPositionColor[] Vertices
@@ -49,14 +46,13 @@ namespace TerrainGenerator
         /// Terrain Constructor
         /// </summary>
         /// <param name="game">Current Game</param>
-        /// <param name="device">Current Graphic Device</param>
         /// <param name="terrainWidth">Width for Terrain</param>
         /// <param name="terrainHeight">Height for Terrain</param>
-        public Terrain(Game game, GraphicsDevice device, int terrainWidth, int terrainHeight) 
+        public Terrain(Game game, int terrainWidth, int terrainHeight) 
             : base(game)
         {
-            this.device = device;
-            this.terrainWidth = terrainWidth;
+            //this.device        = device;
+            this.terrainWidth  = terrainWidth;
             this.terrainHeight = terrainHeight;
 
             LoadHeightData();
@@ -68,14 +64,14 @@ namespace TerrainGenerator
         /// Using control-box to terrain
         /// </summary>
         /// <param name="game">Current Game</param>
-        /// <param name="device">Current Graphic Device</param>
         /// <param name="config">Control Box Values</param>
-        public Terrain(Game game, GraphicsDevice device, Config config) :base(game)
+        public Terrain(Game game, Config config) 
+            :base(game)
         {
-            this.device = device;
-            terrainWidth = config.widthTerrain;
+            //this.device   = device;
             terrainHeight = config.heightTerrain;
-
+            terrainWidth  = config.widthTerrain;
+            
             LoadHeightData();
             SetUpVertices();
             SetUpIndices();
@@ -116,10 +112,10 @@ namespace TerrainGenerator
             {
                 for (int x = 0; x < terrainWidth - 1; x++)
                 {
-                    int lowerLeft = x + y * terrainWidth;
+                    int lowerLeft  = x + y * terrainWidth;
                     int lowerRight = (x + 1) + y * terrainWidth;
-                    int topLeft = x + (y + 1) * terrainWidth;
-                    int topRight = (x + 1) + (y + 1) * terrainWidth;
+                    int topLeft    = x + (y + 1) * terrainWidth;
+                    int topRight   = (x + 1) + (y + 1) * terrainWidth;
 
                     indices[counter++] = topLeft;
                     indices[counter++] = lowerRight;

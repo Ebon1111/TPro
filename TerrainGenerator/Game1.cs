@@ -1,21 +1,22 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using Microsoft.Xna.Framework.Input;
 using System;
+using System.Windows.Forms;
 
 namespace TerrainGenerator
 {
     public struct Config
     {
-        public int widthTerrain;
-        public int heightTerrain;
-        public float noiseRange;
-        public Color lineColour;
-        public int graphicResolution;
-        public float cameraSpeed;
-        public Vector3 cameraStartingPosition;
-        public float visibility;
+        public Color   lineColour;
+        public float   noiseRange;
+        public int     heightTerrain;
+        public int     widthTerrain;
 
+        public float   cameraSpeed;
+        public Vector3 cameraStartingPosition;
+
+        public int     graphicResolution;
+        public float   visibility;
     }
 
     /// <summary>
@@ -30,6 +31,8 @@ namespace TerrainGenerator
     /// </summary>
     public class Game1 : Game
     {
+        public bool isClosed { private set; get; }
+
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
         GraphicsDevice device;
@@ -43,8 +46,8 @@ namespace TerrainGenerator
         Effect effect;
 
         // Terrain Size
-        int terrainWidth = 1000;
-        int terrainHeight = 1000;
+        //int terrainWidth = 1000;
+        //int terrainHeight = 1000;
         public Terrain terrain;
 
         /// <summary>
@@ -54,8 +57,9 @@ namespace TerrainGenerator
         {
             graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
+            isClosed = true;
 
-             // IsMouseVisible = true;
+            IsMouseVisible = true;
         }
 
         /// <summary>
@@ -74,12 +78,19 @@ namespace TerrainGenerator
             // Setup Resolution
             graphics.PreferredBackBufferWidth = 1024;
             graphics.PreferredBackBufferHeight = 768;
-            graphics.IsFullScreen = true;
+            //graphics.IsFullScreen = true;
             graphics.ApplyChanges();
             Window.Title = "World Generator";
 
-            base.Initialize();
+            isClosed = false;
+            (System.Windows.Forms.Control.FromHandle(Window.Handle) as Form).FormClosing += OnExiting;
 
+            base.Initialize();
+        }
+
+        protected override void OnExiting(object sender, EventArgs args)
+        {
+            isClosed = true;
         }
 
         /// <summary>
@@ -93,8 +104,7 @@ namespace TerrainGenerator
 
             effect = Content.Load<Effect>("effects");
 
-            // Terrain
-            terrain = new Terrain(this, device, terrainWidth, terrainHeight);
+            //terrain = new Terrain(this, 1000, 1000);
             Components.Add(terrain);
 
             SetUpCamera();
@@ -119,8 +129,8 @@ namespace TerrainGenerator
         /// <param name="gameTime"></param>
         protected override void Update(GameTime gameTime)
         {
-            if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed)
-                Exit();
+            //if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed)
+                //Exit();
             
             // Set the view as camera's view
             viewMatrix = camera.viewMatrix;

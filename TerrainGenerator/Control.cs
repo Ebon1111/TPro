@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Drawing;
 using System.Windows.Forms;
 
 namespace TerrainGenerator
@@ -12,7 +11,7 @@ namespace TerrainGenerator
     ///        Screen Resolution(int)
     ///        Camera Speed(float)
     ///        Camera Srating Position(float)
-     ///       Visibility(float)
+    ///       Visibility(float)
     /// Output: Generate required world
     /// Author: Franics
     /// Date: 2017/03/17
@@ -21,10 +20,14 @@ namespace TerrainGenerator
     /// </summary>
     public partial class Control : Form
     {
-        Game1 _game; // private member
-
+        Config _config;
+        Game1  _game; 
+        
         public Control()
         {
+            _config = new Config();
+            _game   = new Game1();
+
             InitializeComponent();
         }
 
@@ -32,22 +35,22 @@ namespace TerrainGenerator
         {
             using (var d = new ColorDialog())
                 if (d.ShowDialog() == DialogResult.OK)
-                    (sender as Button).BackColor = d.Color; // some fx 
+                    (sender as Button).BackColor = d.Color;
         }
 
         private void generate_Click(object sender, EventArgs e)
         {
-            try
+            _config.heightTerrain = (int)terrainHeight.Value;
+            _config.widthTerrain  = (int)terrainWidth.Value;
+
+            if (_game.isClosed)
             {
-                _game.Exit();
-                // access values directly!
-                //_game.terrain = new Terrain(   config here   ); // update with form numbers -> terrain struct 'config' as param?
+                (_game = new Game1()).terrain = new Terrain(_game, _config);
+                 _game.Run();
             }
-            catch
-            {
-                //(_game = new Game1()).Run(); // failed to update! Game window was closed -> run new with settings
-            }
-            (_game = new Game1()).Run();
+                
+            _game.terrain.Dispose();
+            _game.terrain = new Terrain(_game, _config);
         }
     }
 }

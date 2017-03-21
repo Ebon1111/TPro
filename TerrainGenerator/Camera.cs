@@ -234,7 +234,7 @@ namespace TerrainGenerator
                 deltaY = 0;
             }
 
-            Mouse.SetPosition(Game.GraphicsDevice.Viewport.Width / 2, Game.GraphicsDevice.Viewport.Height / 2);
+            //Mouse.SetPosition(Game.GraphicsDevice.Viewport.Width / 2, Game.GraphicsDevice.Viewport.Height / 2);
             prevMouseState = currentMouseState;
 
             base.Update(gameTime);
