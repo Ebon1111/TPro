@@ -16,25 +16,9 @@ namespace TerrainGenerator
     /// </summary>
     public class Terrain : GameComponent
     {
-        //GraphicsDevice device; we don't need this!
-
         VertexPositionColor[] vertices;
-        public VertexPositionColor[] Vertices
-        {
-            get
-            {
-                return vertices;
-            }
-        }
 
         int[] indices;
-        public int[] Indices
-        {
-            get
-            {
-                return indices;
-            }
-        }
 
         float[,] heightData;
         int terrainWidth;
@@ -51,7 +35,6 @@ namespace TerrainGenerator
         public Terrain(Game game, int terrainWidth, int terrainHeight) 
             : base(game)
         {
-            //this.device        = device;
             this.terrainWidth  = terrainWidth;
             this.terrainHeight = terrainHeight;
 
@@ -68,7 +51,6 @@ namespace TerrainGenerator
         public Terrain(Game game, Config config) 
             :base(game)
         {
-            //this.device   = device;
             terrainHeight = config.heightTerrain;
             terrainWidth  = config.widthTerrain;
             
