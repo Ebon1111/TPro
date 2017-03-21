@@ -82,6 +82,7 @@ namespace TerrainGenerator
         ///</summary>
         private void SetUpVertices()
         {
+            // Random rng = new Random();
             int counter = 0;
             CreateColour();
             vertices = new VertexPositionColor[terrainWidth * terrainHeight];
@@ -90,7 +91,9 @@ namespace TerrainGenerator
                 for (int y = 0; y < terrainHeight; y++)
                 {
                     vertices[x + y * terrainWidth].Position = new Vector3(x, heightData[x, y], -y);
-                    
+
+                    // vertices[x + y * terrainWidth].Color = new Color(rng.Next(0, 256), rng.Next(0, 256), rng.Next(0, 256));
+
                     vertices[x + y * terrainWidth].Color = colours[counter];
 
                     if (counter < (colours.Count - 1))
@@ -149,6 +152,21 @@ namespace TerrainGenerator
                 }
             }
         }
+        
+        /// <summary>
+        /// Draw terrain
+        /// </summary>
+        /// <param name="effect">Game Effect</param>
+        /// <param name="device">Graphics Device</param>
+        public void drawTerrain(Effect effect, GraphicsDevice device)
+        {
+            foreach (EffectPass pass in effect.CurrentTechnique.Passes)
+            {
+                pass.Apply();
+
+                device.DrawUserIndexedPrimitives(PrimitiveType.TriangleList, vertices, 0, vertices.Length, indices, 0, indices.Length / 3, VertexPositionColor.VertexDeclaration);
+            }
+        }
 
         /// <summary>
         /// Generate the default colour set
@@ -163,8 +181,8 @@ namespace TerrainGenerator
                 colours.Add(new Color(r--, g, b));
                 if (g > 0)
                     g--;
-                if (b > 255)
-                    b--;
+                //if (b > 255)
+                //    b--;
                     
             }
         }

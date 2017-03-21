@@ -59,7 +59,7 @@ namespace TerrainGenerator
             Content.RootDirectory = "Content";
             isClosed = true;
 
-            IsMouseVisible = true;
+            // IsMouseVisible = true;
         }
 
         /// <summary>
@@ -78,7 +78,7 @@ namespace TerrainGenerator
             // Setup Resolution
             graphics.PreferredBackBufferWidth = 1024;
             graphics.PreferredBackBufferHeight = 768;
-            //graphics.IsFullScreen = true;
+            graphics.IsFullScreen = true;
             graphics.ApplyChanges();
             Window.Title = "World Generator";
 
@@ -134,7 +134,10 @@ namespace TerrainGenerator
             
             // Set the view as camera's view
             viewMatrix = camera.viewMatrix;
-            
+
+            //if (!this.IsActive)
+            //    BeginPause(true);
+
             base.Update(gameTime);
         }
 
@@ -142,10 +145,10 @@ namespace TerrainGenerator
         /// Draw the game:
         ///     1) Draw the terrain
         /// </summary>
-        /// <param name="gameTime"></param>
+        /// <param name="gameTime">Game Time</param>
         protected override void Draw(GameTime gameTime)
         {
-            device.Clear(Color.Black);
+            device.Clear(Color.DarkSlateBlue);
 
             RasterizerState rs = new RasterizerState();
             rs.CullMode = CullMode.None;
@@ -158,24 +161,9 @@ namespace TerrainGenerator
             effect.Parameters["xProjection"].SetValue(projectionMatrix);
             effect.Parameters["xWorld"].SetValue(worldMatrix);
 
-            drawTerrain(terrain.Vertices, terrain.Indices);
+            terrain.drawTerrain(effect, device);
 
             base.Draw(gameTime);
-        }
-
-        /// <summary>
-        /// Draw terrain from vertices and indices
-        /// </summary>
-        /// <param name="vertices"></param>
-        /// <param name="indices"></param>
-        private void drawTerrain(VertexPositionColor[] vertices, int[] indices)
-        {
-            foreach (EffectPass pass in effect.CurrentTechnique.Passes)
-            {
-                pass.Apply();
-
-                device.DrawUserIndexedPrimitives(PrimitiveType.TriangleList, vertices, 0, vertices.Length, indices, 0, indices.Length / 3, VertexPositionColor.VertexDeclaration);
-            }
         }
     }
 }

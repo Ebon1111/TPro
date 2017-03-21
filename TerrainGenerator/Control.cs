@@ -38,6 +38,11 @@ namespace TerrainGenerator
                     (sender as Button).BackColor = d.Color;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void generate_Click(object sender, EventArgs e)
         {
             _config.heightTerrain = (int)terrainHeight.Value;
