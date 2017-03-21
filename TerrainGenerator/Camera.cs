@@ -5,6 +5,15 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace TerrainGenerator
 {
+    /// <summary>
+    /// Purpose: Provide view for the user
+    /// Input: Move the camera by keyboard
+    /// Output: Moveable camera object
+    /// Author: Ebon
+    /// Date: 2017/03/11
+    /// Updated by: Ebon
+    /// Date: 2017/03/20
+    /// </summary>
     class Camera : GameComponent
     {
         // Vector3 camTarget;
@@ -58,6 +67,13 @@ namespace TerrainGenerator
         private MouseState currentMouseState;
         private MouseState prevMouseState;
 
+        /// <summary>
+        /// Camera Constructor
+        /// </summary>
+        /// <param name="game">Current Game</param>
+        /// <param name="position">Initializing Location</param>
+        /// <param name="rotation">Initializing Rotation</param>
+        /// <param name="speed">Required Move Speed</param>
         public Camera(Game game, Vector3 position, Vector3 rotation, float speed)
             : base(game)
         {
@@ -74,6 +90,9 @@ namespace TerrainGenerator
             prevMouseState = Mouse.GetState();
         }
 
+        /// <summary>
+        /// Update camLookAt field for getting the correct view
+        /// </summary>
         private void UpdateLookAt()
         {
             // Build a rotation matrix
@@ -84,17 +103,31 @@ namespace TerrainGenerator
             camLookAt = camPosition + lookAtOffset;
         }
 
+        /// <summary>
+        /// Set the position and rotation
+        /// </summary>
+        /// <param name="pos"></param>
+        /// <param name="rot"></param>
         private void MoveTo(Vector3 pos, Vector3 rot)
         {
             Position = pos;
             Rotation = rot;
         }
 
+        /// <summary>
+        /// Move to location
+        /// </summary>
+        /// <param name="scale">the range of movement</param>
         private void Move(Vector3 scale)
         {
             MoveTo(PreviewMove(scale), Rotation);
         }
 
+        /// <summary>
+        /// Calculate the next position
+        /// </summary>
+        /// <param name="amount">the range of movement</param>
+        /// <returns>cameraPosition + movement</returns>
         private Vector3 PreviewMove(Vector3 amount)
         {
             // Create a rotate matrix
@@ -106,6 +139,10 @@ namespace TerrainGenerator
             return camPosition + movement;
         }
 
+        /// <summary>
+        /// Update the camera position
+        /// </summary>
+        /// <param name="gameTime">GameTime</param>
         public override void Update(GameTime gameTime)
         {
             float dt = (float)gameTime.ElapsedGameTime.TotalSeconds;
@@ -145,7 +182,7 @@ namespace TerrainGenerator
                 moveVector.Normalize();
                 // Add in smooth and speed
                 moveVector *= (dt * camSpeed);
-                // Move cam
+                // Move camera
                 Move(moveVector);
             }
             

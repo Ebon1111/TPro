@@ -8,6 +8,15 @@ using System.Threading.Tasks;
 
 namespace TerrainGenerator
 {
+    /// <summary>
+    /// Purpose: Generate Terrain
+    /// Input: Width, height, world, and graphic device
+    /// Output: Terrain
+    /// Author: Franics
+    /// Date: 2017/03/09
+    /// Updated by: Ebon
+    /// Date: 2017/03/20
+    /// </summary>
     public class Terrain : GameComponent
     {
         GraphicsDevice device;
@@ -36,6 +45,13 @@ namespace TerrainGenerator
 
         List<Color> colours = new List<Color>();
 
+        /// <summary>
+        /// Terrain Constructor
+        /// </summary>
+        /// <param name="game">Current Game</param>
+        /// <param name="device">Current Graphic Device</param>
+        /// <param name="terrainWidth">Width for Terrain</param>
+        /// <param name="terrainHeight">Height for Terrain</param>
         public Terrain(Game game, GraphicsDevice device, int terrainWidth, int terrainHeight) 
             : base(game)
         {
@@ -73,7 +89,7 @@ namespace TerrainGenerator
         }
 
         /// <summary>
-        /// 
+        /// Set up the indices position
         /// </summary>
         private void SetUpIndices()
         {
@@ -121,6 +137,9 @@ namespace TerrainGenerator
             }
         }
 
+        /// <summary>
+        /// Generate the default colour set
+        /// </summary>
         private void CreateColour()
         {
             int r = 255;

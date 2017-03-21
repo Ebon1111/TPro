@@ -6,7 +6,14 @@ using System;
 namespace TerrainGenerator
 {
     /// <summary>
-    /// This is the main type for your game.
+    /// Purpose: 1) Practice programming in c# with XNA library.
+    ///          2) Practice creating objects and 3D environment
+    /// Input: User can input values for generating the world
+    /// Output: Generate the required or default world
+    /// Author: Francis, Chandu, & Ebon
+    /// Date: 2017/03/02
+    /// Updated by: Ebon
+    /// Date: 2017/03/20
     /// </summary>
     public class Game1 : Game
     {
@@ -21,13 +28,15 @@ namespace TerrainGenerator
         Camera camera;
 
         Effect effect;
-        Texture2D texture;
 
         // Terrain Size
         int terrainWidth = 1000;
         int terrainHeight = 1000;
         public Terrain terrain;
 
+        /// <summary>
+        /// Game Constructor: initialize the graphics
+        /// </summary>
         public Game1()
         {
             graphics = new GraphicsDeviceManager(this);
@@ -36,6 +45,12 @@ namespace TerrainGenerator
              // IsMouseVisible = true;
         }
 
+        /// <summary>
+        /// Initialize the game:
+        ///     1) Initialize the camera, and add it in the Component
+        ///     2) Set up graphics
+        ///     3) Set up the title
+        /// </summary>
         protected override void Initialize()
         {
             // Setup 1st Camera
@@ -54,6 +69,9 @@ namespace TerrainGenerator
 
         }
 
+        /// <summary>
+        /// Initialize SpriteBatch and terrain, get GraphicDevice, load effect from content
+        /// </summary>
         protected override void LoadContent()
         {
             spriteBatch = new SpriteBatch(GraphicsDevice);
@@ -81,16 +99,27 @@ namespace TerrainGenerator
             projectionMatrix = camera.Projection;
         }
 
+        /// <summary>
+        /// Update the game: 
+        ///     1) set the view as camera's view
+        /// </summary>
+        /// <param name="gameTime"></param>
         protected override void Update(GameTime gameTime)
         {
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed)
                 Exit();
             
+            // Set the view as camera's view
             viewMatrix = camera.viewMatrix;
             
             base.Update(gameTime);
         }
 
+        /// <summary>
+        /// Draw the game:
+        ///     1) Draw the terrain
+        /// </summary>
+        /// <param name="gameTime"></param>
         protected override void Draw(GameTime gameTime)
         {
             device.Clear(Color.Black);
@@ -105,13 +134,17 @@ namespace TerrainGenerator
             effect.Parameters["xView"].SetValue(viewMatrix);
             effect.Parameters["xProjection"].SetValue(projectionMatrix);
             effect.Parameters["xWorld"].SetValue(worldMatrix);
-            effect.Parameters["xTexture"].SetValue(texture);
 
             drawTerrain(terrain.Vertices, terrain.Indices);
 
             base.Draw(gameTime);
         }
 
+        /// <summary>
+        /// Draw terrain from vertices and indices
+        /// </summary>
+        /// <param name="vertices"></param>
+        /// <param name="indices"></param>
         private void drawTerrain(VertexPositionColor[] vertices, int[] indices)
         {
             foreach (EffectPass pass in effect.CurrentTechnique.Passes)
