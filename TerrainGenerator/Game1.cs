@@ -33,7 +33,7 @@ namespace TerrainGenerator
             graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
 
-             IsMouseVisible = true;
+             // IsMouseVisible = true;
         }
 
         protected override void Initialize()
@@ -42,8 +42,6 @@ namespace TerrainGenerator
             camPosition = new Vector3(50f, 5f, -50f); // Camera Starting Position
             camera = new Camera(this, camPosition, Vector3.Zero, 10.0f);
             Components.Add(camera);
-
-            
 
             // Setup Resolution
             graphics.PreferredBackBufferWidth = 1024;

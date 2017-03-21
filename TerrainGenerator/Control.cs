@@ -24,13 +24,15 @@ namespace TerrainGenerator
         {
             try
             {
+                _game.Exit();
                 // access values directly!
                 //_game.terrain = new Terrain(   config here   ); // update with form numbers -> terrain struct 'config' as param?
             }
             catch
             {
-                (_game = new Game1()).Run(); // failed to update! Game window was closed -> run new with settings
+                //(_game = new Game1()).Run(); // failed to update! Game window was closed -> run new with settings
             }
+            (_game = new Game1()).Run();
         }
     }
 }
