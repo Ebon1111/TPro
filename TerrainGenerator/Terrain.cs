@@ -140,7 +140,7 @@ namespace TerrainGenerator
         /// </summary>
         /// <param name="effect">Game Effect</param>
         /// <param name="device">Graphics Device</param>
-        public void drawTerrain(Effect effect, GraphicsDevice device)
+        public void DrawTerrain(Effect effect, GraphicsDevice device)
         {
             foreach (EffectPass pass in effect.CurrentTechnique.Passes)
             {

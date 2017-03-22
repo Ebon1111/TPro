@@ -11,7 +11,7 @@ namespace TerrainGenerator
     ///        Screen Resolution(int)
     ///        Camera Speed(float)
     ///        Camera Srating Position(float)
-    ///       Visibility(float)
+    ///        Visibility(float)
     /// Output: Generate required world
     /// Author: Franics
     /// Date: 2017/03/17
@@ -31,6 +31,11 @@ namespace TerrainGenerator
             InitializeComponent();
         }
 
+        /// <summary>
+        /// When a colour is selected, change the background colour of colour button
+        /// </summary>
+        /// <param name="sender">Colour Button</param>
+        /// <param name="e">Clicked</param>
         private void btnColour_Click(object sender, EventArgs e)
         {
             using (var d = new ColorDialog())
@@ -39,10 +44,12 @@ namespace TerrainGenerator
         }
 
         /// <summary>
-        /// 
+        /// Create the world when the button is clicked.
+        /// If the world doesn't exist, create one
+        /// If the world exists, update the terrain object
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
+        /// <param name="sender">Generate World Button</param>
+        /// <param name="e">Clicked</param>
         private void generate_Click(object sender, EventArgs e)
         {
             _config.heightTerrain = (int)terrainHeight.Value;

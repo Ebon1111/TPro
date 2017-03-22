@@ -161,7 +161,7 @@ namespace TerrainGenerator
             effect.Parameters["xProjection"].SetValue(projectionMatrix);
             effect.Parameters["xWorld"].SetValue(worldMatrix);
 
-            terrain.drawTerrain(effect, device);
+            terrain.DrawTerrain(effect, device);
 
             base.Draw(gameTime);
         }
