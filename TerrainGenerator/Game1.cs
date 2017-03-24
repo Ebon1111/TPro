@@ -1,5 +1,6 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using Microsoft.Xna.Framework.Input;
 using System;
 using System.Windows.Forms;
 
@@ -7,16 +8,16 @@ namespace TerrainGenerator
 {
     public struct Config
     {
-        public Color   lineColour;
-        public float   noiseRange;
-        public int     heightTerrain;
-        public int     widthTerrain;
+        public Color lineColour;
+        public float noiseRange;
+        public int heightTerrain;
+        public int widthTerrain;
 
-        public float   cameraSpeed;
+        public float cameraSpeed;
         public Vector3 cameraStartingPosition;
 
-        public int     graphicResolution;
-        public float   visibility;
+        public int graphicResolution;
+        public float visibility;
     }
 
     /// <summary>
@@ -129,16 +130,26 @@ namespace TerrainGenerator
         /// <param name="gameTime"></param>
         protected override void Update(GameTime gameTime)
         {
-            //if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed)
-                //Exit();
-            
-            // Set the view as camera's view
-            viewMatrix = camera.viewMatrix;
+            // Press ESC to Exit the Game
+            if (Keyboard.GetState().IsKeyDown(Microsoft.Xna.Framework.Input.Keys.Escape))
+            {
+                terrain = null;
+                camera = null;
+                Exit();
 
-            //if (!this.IsActive)
-            //    BeginPause(true);
+            }
+            else
+            {
+                // Set the view as camera's view
+                viewMatrix = camera.viewMatrix;
 
-            base.Update(gameTime);
+                // Pause Function Testing
+                //if (!this.IsActive)
+                //    BeginPause(true);
+
+                base.Update(gameTime);
+            }
+
         }
 
         /// <summary>
@@ -148,7 +159,7 @@ namespace TerrainGenerator
         /// <param name="gameTime">Game Time</param>
         protected override void Draw(GameTime gameTime)
         {
-            device.Clear(Color.DarkSlateBlue);
+            device.Clear(Color.Black);
 
             RasterizerState rs = new RasterizerState();
             rs.CullMode = CullMode.None;

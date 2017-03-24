@@ -68,11 +68,13 @@ namespace TerrainGenerator
             int counter = 0;
             CreateColour();
             vertices = new VertexPositionColor[terrainWidth * terrainHeight];
+            // float hOffset = 0f;
+            float xOffset = 0f;
             for (int x = 0; x < terrainWidth; x++)
             {
                 for (int y = 0; y < terrainHeight; y++)
                 {
-                    vertices[x + y * terrainWidth].Position = new Vector3(x, heightData[x, y], -y);
+                    vertices[x + y * terrainWidth].Position = new Vector3(x + xOffset, heightData[x, y], -y);
 
                     // vertices[x + y * terrainWidth].Color = new Color(rng.Next(0, 256), rng.Next(0, 256), rng.Next(0, 256));
 
@@ -83,6 +85,8 @@ namespace TerrainGenerator
                     else
                         counter = 0;
                 }
+                xOffset += 0.2f;
+                // hOffset += 0.2f;
             }
         }
 
@@ -128,7 +132,7 @@ namespace TerrainGenerator
                     heightData[j, i] = new Func<float>(() =>
                     {
                         double mantissa = (rng.NextDouble());
-                        double exponent = Math.Pow(2.0, rng.Next(0, 1));
+                        double exponent = Math.Pow(2.0, rng.Next(0, 3));
                         return (float)(mantissa * exponent);
                     })();
                 }
@@ -155,18 +159,32 @@ namespace TerrainGenerator
         /// </summary>
         private void CreateColour()
         {
+            // Yellow Test Set
             int r = 255;
-            int g = 252;
-            int b = 111;
+            int g = 247;
+            int b = 176;
             while (r != 0)
             {
                 colours.Add(new Color(r--, g, b));
                 if (g > 0)
                     g--;
-                //if (b > 255)
-                //    b--;
-                    
+                if (b > 255)
+                    b--;
+
             }
+
+            // Green Test Set
+            //int r = 128;
+            //int g = 253;
+            //int b = 114;
+            //while (r != 0)
+            //{
+            //    colours.Add(new Color(r--, g, b));
+            //    if (g > 0)
+            //        g--;
+            //    if (b > 0)
+            //        b--;
+            //}
         }
     }
 }
