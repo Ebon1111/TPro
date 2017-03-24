@@ -130,7 +130,9 @@ namespace TerrainGenerator
             if (Keyboard.GetState().IsKeyDown(XNAInput.Keys.Escape))
             {
                 Paused         = !Paused;
-                IsMouseVisible = !IsMouseVisible;                
+                IsMouseVisible = !IsMouseVisible;
+
+                //if(!Paused) Ctroller.Focus();       
             }
 
             if (Paused) return;
