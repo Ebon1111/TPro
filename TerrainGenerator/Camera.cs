@@ -11,12 +11,15 @@ namespace TerrainGenerator
     /// Output: Moveable camera object
     /// Author: Ebon
     /// Date: 2017/03/11
+    /// Source: 
+    ///     [XNA] First-Person Camera Tutorial. Retrieved from https://www.youtube.com/watch?v=XkpZLzT5OV4
     /// Updated by: Ebon
     /// Date: 2017/03/20
     /// </summary>
     class Camera : GameComponent
     {
-        // Vector3 camTarget;
+        Game game;
+        // Vector3 camTarget; // For flight in the future
         Vector3 camPosition;
 
         public Matrix viewMatrix
@@ -77,6 +80,7 @@ namespace TerrainGenerator
         public Camera(Game game, Vector3 position, Vector3 rotation, float speed)
             : base(game)
         {
+            this.game = game;
             camSpeed = speed;
             Projection = Matrix.CreatePerspectiveFieldOfView(
                 MathHelper.PiOver4,
@@ -206,7 +210,7 @@ namespace TerrainGenerator
                 // Move camera
                 Move(moveVector);
             }
-            
+
             // Handle Mouse movement
             float deltaX;
             float deltaY;
@@ -234,7 +238,7 @@ namespace TerrainGenerator
                 deltaY = 0;
             }
 
-            //Mouse.SetPosition(Game.GraphicsDevice.Viewport.Width / 2, Game.GraphicsDevice.Viewport.Height / 2);
+            Mouse.SetPosition(Game.GraphicsDevice.Viewport.Width / 2, Game.GraphicsDevice.Viewport.Height / 2);
             prevMouseState = currentMouseState;
 
             base.Update(gameTime);

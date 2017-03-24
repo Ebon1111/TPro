@@ -16,25 +16,9 @@ namespace TerrainGenerator
     /// </summary>
     public class Terrain : GameComponent
     {
-        //GraphicsDevice device; we don't need this!
-
         VertexPositionColor[] vertices;
-        public VertexPositionColor[] Vertices
-        {
-            get
-            {
-                return vertices;
-            }
-        }
 
         int[] indices;
-        public int[] Indices
-        {
-            get
-            {
-                return indices;
-            }
-        }
 
         float[,] heightData;
         int terrainWidth;
@@ -51,7 +35,6 @@ namespace TerrainGenerator
         public Terrain(Game game, int terrainWidth, int terrainHeight) 
             : base(game)
         {
-            //this.device        = device;
             this.terrainWidth  = terrainWidth;
             this.terrainHeight = terrainHeight;
 
@@ -68,9 +51,8 @@ namespace TerrainGenerator
         public Terrain(Game game, Config config) 
             :base(game)
         {
-            //this.device   = device;
-            terrainHeight = config.terrainHeight;
-            terrainWidth  = config.terrainWidth;
+            terrainHeight = config.heightTerrain;
+            terrainWidth  = config.widthTerrain;
             
             LoadHeightData();
             SetUpVertices();
@@ -82,15 +64,20 @@ namespace TerrainGenerator
         ///</summary>
         private void SetUpVertices()
         {
+            // Random rng = new Random();
             int counter = 0;
             CreateColour();
             vertices = new VertexPositionColor[terrainWidth * terrainHeight];
+            // float hOffset = 0f;
+            float xOffset = 0f;
             for (int x = 0; x < terrainWidth; x++)
             {
                 for (int y = 0; y < terrainHeight; y++)
                 {
-                    vertices[x + y * terrainWidth].Position = new Vector3(x, heightData[x, y], -y);
-                    
+                    vertices[x + y * terrainWidth].Position = new Vector3(x + xOffset, heightData[x, y], -y);
+
+                    // vertices[x + y * terrainWidth].Color = new Color(rng.Next(0, 256), rng.Next(0, 256), rng.Next(0, 256));
+
                     vertices[x + y * terrainWidth].Color = colours[counter];
 
                     if (counter < (colours.Count - 1))
@@ -98,6 +85,8 @@ namespace TerrainGenerator
                     else
                         counter = 0;
                 }
+                xOffset += 0.2f;
+                // hOffset += 0.2f;
             }
         }
 
@@ -143,10 +132,25 @@ namespace TerrainGenerator
                     heightData[j, i] = new Func<float>(() =>
                     {
                         double mantissa = (rng.NextDouble());
-                        double exponent = Math.Pow(2.0, rng.Next(0, 1));
+                        double exponent = Math.Pow(2.0, rng.Next(0, 3));
                         return (float)(mantissa * exponent);
                     })();
                 }
+            }
+        }
+        
+        /// <summary>
+        /// Draw terrain
+        /// </summary>
+        /// <param name="effect">Game Effect</param>
+        /// <param name="device">Graphics Device</param>
+        public void DrawTerrain(Effect effect, GraphicsDevice device)
+        {
+            foreach (EffectPass pass in effect.CurrentTechnique.Passes)
+            {
+                pass.Apply();
+
+                device.DrawUserIndexedPrimitives(PrimitiveType.TriangleList, vertices, 0, vertices.Length, indices, 0, indices.Length / 3, VertexPositionColor.VertexDeclaration);
             }
         }
 
@@ -155,9 +159,10 @@ namespace TerrainGenerator
         /// </summary>
         private void CreateColour()
         {
+            // Yellow Test Set
             int r = 255;
-            int g = 252;
-            int b = 111;
+            int g = 247;
+            int b = 176;
             while (r != 0)
             {
                 colours.Add(new Color(r--, g, b));
@@ -165,8 +170,21 @@ namespace TerrainGenerator
                     g--;
                 if (b > 255)
                     b--;
-                    
+
             }
+
+            // Green Test Set
+            //int r = 128;
+            //int g = 253;
+            //int b = 114;
+            //while (r != 0)
+            //{
+            //    colours.Add(new Color(r--, g, b));
+            //    if (g > 0)
+            //        g--;
+            //    if (b > 0)
+            //        b--;
+            //}
         }
     }
 }

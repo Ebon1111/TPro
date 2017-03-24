@@ -1,21 +1,24 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using Microsoft.Xna.Framework.Input;
+using System;
 using System.Windows.Forms;
 
 namespace TerrainGenerator
 {
+    // Struct For Control Box to Input Values
     public struct Config
     {
-        public Color   lineColour;
-        public float   noiseRange;
-        public int     terrainHeight;
-        public int     terrainWidth;
+        public Color lineColour;
+        public float noiseRange;
+        public int heightTerrain;
+        public int widthTerrain;
 
-        public float   cameraSpeed;
-        public Vector3 cameraStart;
+        public float cameraSpeed;
+        public Vector3 cameraStartingPosition;
 
-        public int     graphicResolution;
-        public float   visibility;
+        public int graphicResolution;
+        public float visibility;
     }
 
     /// <summary>
@@ -30,28 +33,35 @@ namespace TerrainGenerator
     /// </summary>
     public class Game1 : Game
     {
-        GraphicsDevice        device;
-        Effect                effect;
-        GraphicsDeviceManager graphics;
-        SpriteBatch           spriteBatch;
+        public bool isClosed { private set; get; }
 
-        Camera                camera;
-        Vector3               camPosition;
-        Matrix                projectionMatrix;
-        Matrix                viewMatrix;
-        
-        public Terrain        GameTerrain;
-        public bool           IsClosed { private set; get; }
+        GraphicsDeviceManager graphics;
+        SpriteBatch spriteBatch;
+        GraphicsDevice device;
+        Matrix projectionMatrix;
+
+        // Camera
+        Vector3 camPosition;
+        Matrix viewMatrix;
+        Camera camera;
+
+        Effect effect;
+
+        // Terrain Size
+        //int terrainWidth = 1000;
+        //int terrainHeight = 1000;
+        public Terrain terrain;
 
         /// <summary>
         /// Game Constructor: initialize the graphics
         /// </summary>
         public Game1()
         {
-            IsClosed              = true;
+            graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
-            graphics              = new GraphicsDeviceManager(this);
-            IsMouseVisible        = true;
+            isClosed = true;
+
+            // IsMouseVisible = true;
         }
 
         /// <summary>
@@ -62,28 +72,27 @@ namespace TerrainGenerator
         /// </summary>
         protected override void Initialize()
         {
-            IsClosed                           = false;
-            Components.Add(
-                camera = new Camera(this,
-                    camPosition = new Vector3(50f, 5f, -50f), Vector3.Zero, 10.0f));
+            // Setup 1st Camera
+            camPosition = new Vector3(50f, 5f, -50f); // Camera Starting Position
+            camera = new Camera(this, camPosition, Vector3.Zero, 10.0f);
+            Components.Add(camera);
 
-            //graphics.IsFullScreen              = true;
-            graphics.PreferredBackBufferWidth  = 1024;
+            // Setup Resolution
+            graphics.PreferredBackBufferWidth = 1024;
             graphics.PreferredBackBufferHeight = 768;
+            graphics.IsFullScreen = true;
             graphics.ApplyChanges();
-
-            (System.Windows.Forms.Control.FromHandle(Window.Handle) as Form).FormClosing += OnExit;
-
             Window.Title = "World Generator";
+
+            isClosed = false;
+            (System.Windows.Forms.Control.FromHandle(Window.Handle) as Form).FormClosing += OnExiting;
 
             base.Initialize();
         }
 
-        protected void OnExit(object sender, FormClosingEventArgs args)
+        protected override void OnExiting(object sender, EventArgs args)
         {
-            IsClosed = true;
-
-            base.OnExiting(sender, args);
+            isClosed = true;
         }
 
         /// <summary>
@@ -91,9 +100,15 @@ namespace TerrainGenerator
         /// </summary>
         protected override void LoadContent()
         {
-            effect      = Content.Load<Effect>("effects");
-            spriteBatch = new SpriteBatch(device = graphics.GraphicsDevice);
-            
+            spriteBatch = new SpriteBatch(GraphicsDevice);
+
+            device = graphics.GraphicsDevice;
+
+            effect = Content.Load<Effect>("effects");
+
+            //terrain = new Terrain(this, 1000, 1000);
+            Components.Add(terrain);
+
             SetUpCamera();
         }
 
@@ -115,53 +130,52 @@ namespace TerrainGenerator
         /// </summary>
         /// <param name="gameTime"></param>
         protected override void Update(GameTime gameTime)
-        {              
-            viewMatrix = camera.viewMatrix;
-            
-            base.Update(gameTime);
+        {
+            // Press ESC to Exit the Game
+            if (Keyboard.GetState().IsKeyDown(Microsoft.Xna.Framework.Input.Keys.Escape))
+            {
+                terrain = null;
+                camera = null;
+                Exit();
+
+            }
+            else
+            {
+                // Set the view as camera's view
+                viewMatrix = camera.viewMatrix;
+
+                // Pause Function Testing
+                //if (!this.IsActive)
+                //    BeginPause(true);
+
+                base.Update(gameTime);
+            }
+
         }
 
         /// <summary>
         /// Draw the game:
         ///     1) Draw the terrain
         /// </summary>
-        /// <param name="gameTime"></param>
+        /// <param name="gameTime">Game Time</param>
         protected override void Draw(GameTime gameTime)
         {
             device.Clear(Color.Black);
 
-            var rs = new RasterizerState();
-
+            RasterizerState rs = new RasterizerState();
             rs.CullMode = CullMode.None;
             // rs.FillMode = FillMode.WireFrame;
             device.RasterizerState = rs;
 
             Matrix worldMatrix = Matrix.Identity;
-
             effect.CurrentTechnique = effect.Techniques["ColoredNoShading"];
-
             effect.Parameters["xView"].SetValue(viewMatrix);
             effect.Parameters["xProjection"].SetValue(projectionMatrix);
             effect.Parameters["xWorld"].SetValue(worldMatrix);
 
-            drawTerrain(GameTerrain.Vertices, GameTerrain.Indices);
+            terrain.DrawTerrain(effect, device);
 
             base.Draw(gameTime);
-        }
-
-        /// <summary>
-        /// Draw terrain from vertices and indices
-        /// </summary>
-        /// <param name="vertices"></param>
-        /// <param name="indices"></param>
-        private void drawTerrain(VertexPositionColor[] vertices, int[] indices)
-        {
-            foreach (EffectPass pass in effect.CurrentTechnique.Passes)
-            {
-                pass.Apply();
-
-                device.DrawUserIndexedPrimitives(PrimitiveType.TriangleList, vertices, 0, vertices.Length, indices, 0, indices.Length / 3, VertexPositionColor.VertexDeclaration);
-            }
         }
     }
 }
