@@ -47,6 +47,8 @@ namespace TerrainGenerator
 
         Effect effect;
 
+        bool Paused;
+
         // Terrain Size
         //int terrainWidth = 1000;
         //int terrainHeight = 1000;
@@ -131,29 +133,16 @@ namespace TerrainGenerator
         /// <param name="gameTime"></param>
         protected override void Update(GameTime gameTime)
         {
-            // Press ESC to Exit the Game
             if (Keyboard.GetState().IsKeyDown(Microsoft.Xna.Framework.Input.Keys.Escape))
             {
-                terrain = null;
-                camera = null;
-                IsMouseVisible = true;
-                this.Exit(); // Will cause the form freeze -- bug
-                // Exit();
-            }
-            else
-            {
-                // Sometimes, NullReference will occur -- bug
-
-                // Set the view as camera's view
-                viewMatrix = camera.viewMatrix;
-
-                // Pause Function Testing
-                //if (!this.IsActive)
-                //    BeginPause(true);
-
-                base.Update(gameTime);
+                Paused         = !Paused;
+                IsMouseVisible = !IsMouseVisible;
             }
 
+            if (Paused) return;
+
+            viewMatrix = camera.viewMatrix;
+            base.Update(gameTime);
         }
 
         /// <summary>
