@@ -136,6 +136,7 @@ namespace TerrainGenerator
             {
                 terrain = null;
                 camera = null;
+                IsMouseVisible = true;
                 Exit();
 
             }

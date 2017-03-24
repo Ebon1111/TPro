@@ -21,12 +21,12 @@ namespace TerrainGenerator
     public partial class Control : Form
     {
         Config config;
-        Game1  game; 
-        
+        Game1 game;
+
         public Control()
         {
             config = new Config();
-            game   = new Game1();
+            game = new Game1();
 
             InitializeComponent();
         }
@@ -53,16 +53,16 @@ namespace TerrainGenerator
         private void generate_Click(object sender, EventArgs e)
         {
             config.heightTerrain = (int)terrainHeight.Value;
-            config.widthTerrain  = (int)terrainWidth.Value;
+            config.widthTerrain = (int)terrainWidth.Value;
 
             if (game.isClosed)
             {
-                 game.Dispose(); 
+                game.Dispose();
                 (game = new Game1()).terrain = new Terrain(game, config);
-                 game.Run();
+                game.Run();
             }
-                
-            game.terrain.Dispose(); 
+
+            game.terrain.Dispose();
             game.terrain = new Terrain(game, config);
         }
     }
