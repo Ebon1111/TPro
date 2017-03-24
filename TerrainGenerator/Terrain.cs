@@ -69,8 +69,8 @@ namespace TerrainGenerator
             :base(game)
         {
             //this.device   = device;
-            terrainHeight = config.heightTerrain;
-            terrainWidth  = config.widthTerrain;
+            terrainHeight = config.terrainHeight;
+            terrainWidth  = config.terrainWidth;
             
             LoadHeightData();
             SetUpVertices();
