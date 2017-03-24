@@ -91,6 +91,7 @@ namespace TerrainGenerator
             // Set camera position and rotation;
             MoveTo(position, rotation);
 
+            // Update Mouse State
             prevMouseState = Mouse.GetState();
         }
 
