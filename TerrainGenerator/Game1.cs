@@ -37,33 +37,36 @@ namespace TerrainGenerator
     public class Game1 : Game
     {
         GraphicsDevice        device;
+        Effect                effect;
         GraphicsDeviceManager graphics;
         SpriteBatch           spriteBatch;
 
-        Camera  camera;
-        Vector3 camPosition;
-        Matrix  viewMatrix;
-        Matrix  projectionMatrix;
-        
+        Camera                camera;
+        Vector3               camPosition;
+        Matrix                projectionMatrix;
+        Matrix                viewMatrix;
 
-        Effect effect;
+        bool                  Paused;
+        public bool           isClosed { private set; get; }
 
-        bool        Paused;
-        public bool isClosed { private set; get; }
-
-        public Control Ctroller;
-        public Terrain GameTerrain;
+        public Control        Ctroller;
+        public Terrain        GameTerrain;
 
         /// <summary>
         /// Game Constructor: initialize the graphics
         /// </summary>
-        public Game1(Terrain terrain): base()
+        public Game1()
         {
             Content.RootDirectory = "Content";
             graphics              = new GraphicsDeviceManager(this);
             isClosed              = true;
 
             (WinFormCtrl.FromHandle(Window.Handle) as Form).FormClosing += OnExiting;
+        }
+
+        public Game1(Terrain terrain): base()
+        {
+            GameTerrain = terrain;
         }
 
         /// <summary>

@@ -60,8 +60,7 @@ namespace TerrainGenerator
             if (game.isClosed)
             {
                 game.Dispose();
-               (game = new Game1()).GameTerrain = new Terrain(game, config);
-                game.Ctroller = this;
+               (game = new Game1(new Terrain(game, config))).Ctroller = this;
                 game.Run();
             }
 
