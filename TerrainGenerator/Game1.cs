@@ -137,11 +137,13 @@ namespace TerrainGenerator
                 terrain = null;
                 camera = null;
                 IsMouseVisible = true;
-                Exit();
-
+                this.Exit(); // Will cause the form freeze -- bug
+                // Exit();
             }
             else
             {
+                // Sometimes, NullReference will occur -- bug
+
                 // Set the view as camera's view
                 viewMatrix = camera.viewMatrix;
 
