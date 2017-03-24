@@ -103,15 +103,15 @@ namespace TerrainGenerator
         /// <param name="rotation">Initializing Rotation</param>
         public Camera(Game game, Config config, Vector3 rotation) : base(game)
         {
-            camSpeed = config.cameraSpeed;
+            camSpeed = config.CameraSpeed;
             Projection = Matrix.CreatePerspectiveFieldOfView(
                 MathHelper.PiOver4,
                 Game.GraphicsDevice.Viewport.AspectRatio,
                 1.0f,
-                config.visibility); // Visibility of Distance
+                config.ViewDistance); // Visibility of Distance
 
             // Set camera position and rotation;
-            MoveTo(config.cameraStartingPosition, rotation);
+            MoveTo(config.CameraStartingPosition, rotation);
 
             prevMouseState = Mouse.GetState();
         }

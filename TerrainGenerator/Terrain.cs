@@ -51,8 +51,8 @@ namespace TerrainGenerator
         public Terrain(Game game, Config config) 
             :base(game)
         {
-            terrainHeight = config.heightTerrain;
-            terrainWidth  = config.widthTerrain;
+            terrainHeight = config.TerrainHeight;
+            terrainWidth  = config.TerrainWidth;
             
             LoadHeightData();
             SetUpVertices();

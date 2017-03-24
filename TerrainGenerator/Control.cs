@@ -26,7 +26,7 @@ namespace TerrainGenerator
         public Control()
         {
             config = new Config();
-           (game = new Game1()).Ctroller = this;
+           (game   = new Game1()).Ctroller = this;
 
             InitializeComponent();
         }
@@ -52,14 +52,13 @@ namespace TerrainGenerator
         /// <param name="e">Clicked</param>
         private void generate_Click(object sender, EventArgs e)
         {
-            config.heightTerrain = (int)terrainHeight.Value;
-            config.widthTerrain = (int)terrainWidth.Value;
+            config.TerrainHeight = (int)terrainHeight.Value;
+            config.TerrainWidth  = (int)terrainWidth.Value;
 
-            if (game.isClosed)
+            if (game.IsClosed)
             {
                 game.Dispose();
-                (game = new Game1()).GameTerrain = new Terrain(game, config);
-                //(game = new Game1(new Terrain(game, config))).Ctroller = this;
+               (game = new Game1(new Terrain(game, config))).Ctroller = this;
                 game.Run();
             }
 

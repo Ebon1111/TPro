@@ -12,16 +12,16 @@ namespace TerrainGenerator
     // Struct For Control Box to Input Values
     public struct Config
     {
-        public Color lineColour;
-        public float noiseRange;
-        public int heightTerrain;
-        public int widthTerrain;
+        public Color   WireColour;
+        public float   NoiseRange;
+        public int     TerrainHeight;
+        public int     TerrainWidth;
 
-        public float cameraSpeed;
-        public Vector3 cameraStartingPosition;
+        public float   CameraSpeed;
+        public Vector3 CameraStartingPosition;
+        public float   ViewDistance;
 
-        public int graphicResolution;
-        public float visibility;
+        public int     GraphicResolution;
     }
 
     /// <summary>
@@ -46,11 +46,14 @@ namespace TerrainGenerator
         Matrix                projectionMatrix;
         Matrix                viewMatrix;
 
-        bool                  Paused;
-        public bool           isClosed { private set; get; }
+        bool                  paused;
+        KeyboardState         prev;
+        public bool           IsClosed { private set; get; }
 
         public Control        Ctroller;
         public Terrain        GameTerrain;
+
+        
 
         /// <summary>
         /// Game Constructor: initialize the graphics
@@ -59,12 +62,12 @@ namespace TerrainGenerator
         {
             Content.RootDirectory = "Content";
             graphics              = new GraphicsDeviceManager(this);
-            isClosed              = true;
+            IsClosed              = true;
 
             (WinFormCtrl.FromHandle(Window.Handle) as Form).FormClosing += OnExiting;
         }
 
-        public Game1(Terrain terrain): base()
+        public Game1(Terrain terrain): this()
         {
             GameTerrain = terrain;
         }
@@ -86,7 +89,8 @@ namespace TerrainGenerator
             graphics.PreferredBackBufferHeight = 768;
             graphics.IsFullScreen              = true;
             graphics.ApplyChanges();
-            isClosed                           = false;
+
+            IsClosed                           = false;
             Window.Title                       = "World Generator";
             
             base.Initialize();
@@ -94,7 +98,8 @@ namespace TerrainGenerator
 
         protected override void OnExiting(object sender, EventArgs args)
         {
-            isClosed = true;
+            IsClosed       = true;
+            IsMouseVisible = true;
         }
 
         /// <summary>
@@ -127,15 +132,16 @@ namespace TerrainGenerator
         /// <param name="gameTime"></param>
         protected override void Update(GameTime gameTime)
         {
-            if (Keyboard.GetState().IsKeyDown(XNAInput.Keys.Escape))
+            if (Keyboard.GetState().IsKeyUp(XNAInput.Keys.Escape) && prev.IsKeyDown(XNAInput.Keys.Escape))
             {
-                Paused         = !Paused;
+                paused         = !paused;
                 IsMouseVisible = !IsMouseVisible;
 
-                //if(!Paused) Ctroller.Focus();       
-            }
+                if (paused) Ctroller.TopMost = true;                
 
-            if (Paused) return;
+            } prev = Keyboard.GetState();
+
+            if (paused) return;
 
             viewMatrix = camera.viewMatrix;
             base.Update(gameTime);
