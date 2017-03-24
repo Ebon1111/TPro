@@ -111,7 +111,7 @@ namespace TerrainGenerator
                 config.visibility); // Visibility of Distance
 
             // Set camera position and rotation;
-            MoveTo(config.cameraStart, rotation);
+            MoveTo(config.cameraStartingPosition, rotation);
 
             prevMouseState = Mouse.GetState();
         }

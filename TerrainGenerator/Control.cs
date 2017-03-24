@@ -52,18 +52,18 @@ namespace TerrainGenerator
         /// <param name="e">Clicked</param>
         private void generate_Click(object sender, EventArgs e)
         {
-            config.terrainHeight = (int)terrainHeight.Value;
-            config.terrainWidth  = (int)terrainWidth.Value;
+            config.heightTerrain = (int)terrainHeight.Value;
+            config.widthTerrain  = (int)terrainWidth.Value;
 
-            if (game.IsClosed)
+            if (game.isClosed)
             {
                  game.Dispose(); 
-                (game = new Game1()).GameTerrain = new Terrain(game, config);
+                (game = new Game1()).terrain = new Terrain(game, config);
                  game.Run();
             }
                 
-            game.GameTerrain.Dispose(); 
-            game.GameTerrain = new Terrain(game, config);
+            game.terrain.Dispose(); 
+            game.terrain = new Terrain(game, config);
         }
     }
 }
