@@ -6,6 +6,7 @@ using System.Windows.Forms;
 
 namespace TerrainGenerator
 {
+    // Struct For Control Box to Input Values
     public struct Config
     {
         public Color lineColour;
