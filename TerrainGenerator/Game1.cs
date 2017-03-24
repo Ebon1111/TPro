@@ -4,6 +4,9 @@ using Microsoft.Xna.Framework.Input;
 using System;
 using System.Windows.Forms;
 
+using WinFormCtrl = System.Windows.Forms.Control;
+using XNAInput    = Microsoft.Xna.Framework.Input;
+
 namespace TerrainGenerator
 {
     // Struct For Control Box to Input Values
@@ -33,37 +36,34 @@ namespace TerrainGenerator
     /// </summary>
     public class Game1 : Game
     {
-        public bool isClosed { private set; get; }
-
+        GraphicsDevice        device;
         GraphicsDeviceManager graphics;
-        SpriteBatch spriteBatch;
-        GraphicsDevice device;
-        Matrix projectionMatrix;
+        SpriteBatch           spriteBatch;
 
-        // Camera
+        Camera  camera;
         Vector3 camPosition;
-        Matrix viewMatrix;
-        Camera camera;
+        Matrix  viewMatrix;
+        Matrix  projectionMatrix;
+        
 
         Effect effect;
 
-        bool Paused;
+        bool        Paused;
+        public bool isClosed { private set; get; }
 
-        // Terrain Size
-        //int terrainWidth = 1000;
-        //int terrainHeight = 1000;
-        public Terrain terrain;
+        public Control Ctroller;
+        public Terrain GameTerrain;
 
         /// <summary>
         /// Game Constructor: initialize the graphics
         /// </summary>
-        public Game1()
+        public Game1(Terrain terrain): base()
         {
-            graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
-            isClosed = true;
+            graphics              = new GraphicsDeviceManager(this);
+            isClosed              = true;
 
-            // IsMouseVisible = true;
+            (WinFormCtrl.FromHandle(Window.Handle) as Form).FormClosing += OnExiting;
         }
 
         /// <summary>
@@ -73,22 +73,19 @@ namespace TerrainGenerator
         ///     3) Set up the title
         /// </summary>
         protected override void Initialize()
-        {
-            // Setup 1st Camera
-            camPosition = new Vector3(50f, 5f, -50f); // Camera Starting Position
-            camera = new Camera(this, camPosition, Vector3.Zero, 10.0f);
-            Components.Add(camera);
+        {            
+            Components.Add(
+                camera = new Camera(this,
+                    camPosition = new Vector3(50f, 5f, -50f), Vector3.Zero, 10.0f));
 
-            // Setup Resolution
-            graphics.PreferredBackBufferWidth = 1024;
+            
+            graphics.PreferredBackBufferWidth  = 1024;
             graphics.PreferredBackBufferHeight = 768;
-            graphics.IsFullScreen = true;
+            graphics.IsFullScreen              = true;
             graphics.ApplyChanges();
-            Window.Title = "World Generator";
-
-            isClosed = false;
-            (System.Windows.Forms.Control.FromHandle(Window.Handle) as Form).FormClosing += OnExiting;
-
+            isClosed                           = false;
+            Window.Title                       = "World Generator";
+            
             base.Initialize();
         }
 
@@ -102,14 +99,8 @@ namespace TerrainGenerator
         /// </summary>
         protected override void LoadContent()
         {
-            spriteBatch = new SpriteBatch(GraphicsDevice);
-
-            device = graphics.GraphicsDevice;
-
-            effect = Content.Load<Effect>("effects");
-
-            //terrain = new Terrain(this, 1000, 1000);
-            Components.Add(terrain);
+            spriteBatch = new SpriteBatch(device = graphics.GraphicsDevice);
+            effect      = Content.Load<Effect>("effects");
 
             SetUpCamera();
         }
@@ -133,10 +124,10 @@ namespace TerrainGenerator
         /// <param name="gameTime"></param>
         protected override void Update(GameTime gameTime)
         {
-            if (Keyboard.GetState().IsKeyDown(Microsoft.Xna.Framework.Input.Keys.Escape))
+            if (Keyboard.GetState().IsKeyDown(XNAInput.Keys.Escape))
             {
                 Paused         = !Paused;
-                IsMouseVisible = !IsMouseVisible;
+                IsMouseVisible = !IsMouseVisible;                
             }
 
             if (Paused) return;
@@ -154,18 +145,16 @@ namespace TerrainGenerator
         {
             device.Clear(Color.Black);
 
-            RasterizerState rs = new RasterizerState();
-            rs.CullMode = CullMode.None;
-            // rs.FillMode = FillMode.WireFrame;
-            device.RasterizerState = rs;
-
-            Matrix worldMatrix = Matrix.Identity;
+            RasterizerState rs      = new RasterizerState();
+            rs.CullMode             = CullMode.None; // rs.FillMode = FillMode.WireFrame;
+            device.RasterizerState  = rs;
             effect.CurrentTechnique = effect.Techniques["ColoredNoShading"];
+
             effect.Parameters["xView"].SetValue(viewMatrix);
             effect.Parameters["xProjection"].SetValue(projectionMatrix);
-            effect.Parameters["xWorld"].SetValue(worldMatrix);
+            effect.Parameters["xWorld"].SetValue(Matrix.Identity);
 
-            terrain.DrawTerrain(effect, device);
+            GameTerrain.DrawTerrain(effect, device);
 
             base.Draw(gameTime);
         }

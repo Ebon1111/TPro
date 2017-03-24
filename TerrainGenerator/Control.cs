@@ -26,7 +26,9 @@ namespace TerrainGenerator
         public Control()
         {
             config = new Config();
-            game = new Game1();
+            game   = new Game1();
+
+            game.Ctroller = this;
 
             InitializeComponent();
         }
@@ -58,12 +60,13 @@ namespace TerrainGenerator
             if (game.isClosed)
             {
                 game.Dispose();
-                (game = new Game1()).terrain = new Terrain(game, config);
+               (game = new Game1()).GameTerrain = new Terrain(game, config);
+                game.Ctroller = this;
                 game.Run();
             }
 
-            game.terrain.Dispose();
-            game.terrain = new Terrain(game, config);
+            game.GameTerrain.Dispose();
+            game.GameTerrain = new Terrain(game, config);
         }
     }
 }
