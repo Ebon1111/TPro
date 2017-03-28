@@ -50,7 +50,7 @@ namespace TerrainGenerator
         KeyboardState         prev;
         public bool           IsClosed { private set; get; }
 
-        public Control        Ctroller;
+        public Control        Controller;
         public Terrain        GameTerrain;
 
         
@@ -137,7 +137,7 @@ namespace TerrainGenerator
                 paused         = !paused;
                 IsMouseVisible = !IsMouseVisible;
 
-                if (paused) Ctroller.TopMost = true;                
+                if (paused) Controller.TopMost = true;
 
             } prev = Keyboard.GetState();
 

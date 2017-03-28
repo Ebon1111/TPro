@@ -26,7 +26,7 @@ namespace TerrainGenerator
         public Control()
         {
             config = new Config();
-           (game   = new Game1()).Ctroller = this;
+           (game   = new Game1()).Controller = this;
 
             InitializeComponent();
         }
@@ -58,7 +58,7 @@ namespace TerrainGenerator
             if (game.IsClosed)
             {
                 game.Dispose();
-               (game = new Game1(new Terrain(game, config))).Ctroller = this;
+               (game = new Game1(new Terrain(game, config))).Controller = this;
                 game.Run();
             }
 
