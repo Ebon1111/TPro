@@ -53,16 +53,15 @@ namespace TerrainGenerator
         public Control        Controller;
         public Terrain        GameTerrain;
 
-        
+
 
         /// <summary>
         /// Game Constructor: initialize the graphics
         /// </summary>
         public Game1()
         {
-            Content.RootDirectory = "Content";
-            graphics              = new GraphicsDeviceManager(this);
-            IsClosed              = true;
+            graphics = new GraphicsDeviceManager(this);
+            IsClosed = true;
 
             (WinFormCtrl.FromHandle(Window.Handle) as Form).FormClosing += OnExiting;
         }
@@ -79,7 +78,7 @@ namespace TerrainGenerator
         ///     3) Set up the title
         /// </summary>
         protected override void Initialize()
-        {            
+        {
             Components.Add(
                 camera = new Camera(this,
                     camPosition = new Vector3(50f, 5f, -50f), Vector3.Zero, 10.0f));
@@ -107,9 +106,11 @@ namespace TerrainGenerator
         /// </summary>
         protected override void LoadContent()
         {
-            spriteBatch = new SpriteBatch(device = graphics.GraphicsDevice);
-            effect      = Content.Load<Effect>("effects");
+            Content.RootDirectory = "Content";
 
+            effect      = Content.Load<Effect>("effects");
+            spriteBatch = new SpriteBatch(device = graphics.GraphicsDevice);
+            
             SetUpCamera();
         }
 

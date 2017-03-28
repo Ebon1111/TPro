@@ -26,7 +26,7 @@ namespace TerrainGenerator
         public Control()
         {
             config = new Config();
-           (game   = new Game1()).Controller = this;
+            game   = new Game1();
 
             InitializeComponent();
         }
