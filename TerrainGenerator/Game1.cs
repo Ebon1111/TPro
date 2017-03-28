@@ -53,22 +53,19 @@ namespace TerrainGenerator
         public Control        Controller;
         public Terrain        GameTerrain;
 
-
-
         /// <summary>
         /// Game Constructor: initialize the graphics
         /// </summary>
         public Game1()
         {
-            graphics = new GraphicsDeviceManager(this);
             IsClosed = true;
-
-            (WinFormCtrl.FromHandle(Window.Handle) as Form).FormClosing += OnExiting;
         }
 
         public Game1(Terrain terrain): this()
         {
             GameTerrain = terrain;
+
+            graphics    = new GraphicsDeviceManager(this);
         }
 
         /// <summary>
@@ -79,10 +76,11 @@ namespace TerrainGenerator
         /// </summary>
         protected override void Initialize()
         {
+           (WinFormCtrl.FromHandle(Window.Handle) as Form).FormClosing += OnExiting;
+
             Components.Add(
                 camera = new Camera(this,
                     camPosition = new Vector3(50f, 5f, -50f), Vector3.Zero, 10.0f));
-
             
             graphics.PreferredBackBufferWidth  = 1024;
             graphics.PreferredBackBufferHeight = 768;
