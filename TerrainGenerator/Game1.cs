@@ -95,8 +95,7 @@ namespace TerrainGenerator
 
         protected override void OnExiting(object sender, EventArgs args)
         {
-            IsClosed       = true;
-            IsMouseVisible = true;
+            IsMouseVisible = IsClosed = true;
         }
 
         /// <summary>
@@ -106,22 +105,14 @@ namespace TerrainGenerator
         {
             Content.RootDirectory = "Content";
 
-            effect      = Content.Load<Effect>("effects");
-            spriteBatch = new SpriteBatch(device = graphics.GraphicsDevice);
-            
-            SetUpCamera();
+            effect           = Content.Load<Effect>("effects");
+            spriteBatch      = new SpriteBatch(device = graphics.GraphicsDevice);
+
+            projectionMatrix = camera.Projection;
         }
 
         protected override void UnloadContent()
         {
-        }
-
-        /// <summary>
-        /// Pass the camera's projection to game
-        /// </summary>
-        private void SetUpCamera()
-        {
-            projectionMatrix = camera.Projection;
         }
 
         /// <summary>

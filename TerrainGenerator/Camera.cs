@@ -18,9 +18,9 @@ namespace TerrainGenerator
     /// </summary>
     class Camera : GameComponent
     {
-        Game game;
         // Vector3 camTarget; // For flight in the future
         Vector3 camPosition;
+        Vector3 camOrigin;
 
         public Matrix viewMatrix
         {
@@ -80,7 +80,6 @@ namespace TerrainGenerator
         public Camera(Game game, Vector3 position, Vector3 rotation, float speed)
             : base(game)
         {
-            this.game = game;
             camSpeed = speed;
             Projection = Matrix.CreatePerspectiveFieldOfView(
                 MathHelper.PiOver4,
@@ -90,7 +89,7 @@ namespace TerrainGenerator
 
             // Set camera position and rotation;
             MoveTo(position, rotation);
-
+            camOrigin = position;
             // Update Mouse State
             prevMouseState = Mouse.GetState();
         }
@@ -211,6 +210,8 @@ namespace TerrainGenerator
                 // Move camera
                 Move(moveVector);
             }
+            if (ks.IsKeyDown(Keys.Back))
+                MoveTo(camOrigin, Rotation);
 
             // Handle Mouse movement
             float deltaX;
