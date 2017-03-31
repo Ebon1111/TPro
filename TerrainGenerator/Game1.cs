@@ -52,6 +52,7 @@ namespace TerrainGenerator
 
         public Control        Controller;
         public Terrain        GameTerrain;
+        public Terrain        sea;
 
         /// <summary>
         /// Game Constructor: initialize the graphics
@@ -60,7 +61,7 @@ namespace TerrainGenerator
         {
             IsClosed = true;
         }
-
+        
         public Game1(Terrain terrain): this()
         {
             GameTerrain = terrain;
@@ -77,11 +78,11 @@ namespace TerrainGenerator
         protected override void Initialize()
         {
            (WinFormCtrl.FromHandle(Window.Handle) as Form).FormClosing += OnExiting;
-
+            
             Components.Add(
                 camera = new Camera(this,
                     camPosition = new Vector3(50f, 5f, -50f), Vector3.Zero, 10.0f));
-            
+
             graphics.PreferredBackBufferWidth  = 1024;
             graphics.PreferredBackBufferHeight = 768;
             graphics.IsFullScreen              = true;
@@ -156,7 +157,7 @@ namespace TerrainGenerator
             effect.Parameters["xWorld"].SetValue(Matrix.Identity);
 
             GameTerrain.DrawTerrain(effect, device);
-
+            sea.DrawTerrain(effect, device);
             base.Draw(gameTime);
         }
     }

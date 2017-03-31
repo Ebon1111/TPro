@@ -24,7 +24,10 @@ namespace TerrainGenerator
         int terrainWidth;
         int terrainHeight;
 
+        string type = null;
+
         List<Color> colours = new List<Color>();
+        List<Color> seaColour = new List<Color>();
 
         /// <summary>
         /// Terrain Constructor
@@ -32,10 +35,10 @@ namespace TerrainGenerator
         /// <param name="game">Current Game</param>
         /// <param name="terrainWidth">Width for Terrain</param>
         /// <param name="terrainHeight">Height for Terrain</param>
-        public Terrain(Game game, int terrainWidth, int terrainHeight) 
+        public Terrain(Game game, int terrainWidth, int terrainHeight)
             : base(game)
         {
-            this.terrainWidth  = terrainWidth;
+            this.terrainWidth = terrainWidth;
             this.terrainHeight = terrainHeight;
 
             LoadHeightData();
@@ -48,14 +51,26 @@ namespace TerrainGenerator
         /// </summary>
         /// <param name="game">Current Game</param>
         /// <param name="config">Control Box Values</param>
-        public Terrain(Game game, Config config) 
-            :base(game)
+        public Terrain(Game game, Config config)
+            : base(game)
         {
             terrainHeight = config.TerrainHeight;
-            terrainWidth  = config.TerrainWidth;
-            
+            terrainWidth = config.TerrainWidth;
+
             LoadHeightData();
             SetUpVertices();
+            SetUpIndices();
+        }
+
+        public Terrain(Game game, Config config, string type)
+            : base(game)
+        {
+            terrainHeight = config.TerrainHeight / 2;
+            terrainWidth = config.TerrainWidth / 2;
+            this.type = type;
+
+            LoadHeightData();
+            SetUpSeaVertices();
             SetUpIndices();
         }
 
@@ -69,12 +84,12 @@ namespace TerrainGenerator
             CreateColour();
             vertices = new VertexPositionColor[terrainWidth * terrainHeight];
             // float hOffset = 0f;
-            float xOffset = 0f;
+            //float xOffset = 0f;
             for (int x = 0; x < terrainWidth; x++)
             {
                 for (int y = 0; y < terrainHeight; y++)
                 {
-                    vertices[x + y * terrainWidth].Position = new Vector3(x + xOffset, heightData[x, y], -y);
+                    vertices[x + y * terrainWidth].Position = new Vector3(x, heightData[x, y], -y);
 
                     // vertices[x + y * terrainWidth].Color = new Color(rng.Next(0, 256), rng.Next(0, 256), rng.Next(0, 256));
 
@@ -85,7 +100,35 @@ namespace TerrainGenerator
                     else
                         counter = 0;
                 }
-                xOffset += 0.2f;
+                //xOffset += 0.2f;
+                // hOffset += 0.2f;
+            }
+        }
+
+        private void SetUpSeaVertices()
+        {
+            // Random rng = new Random();
+            int counter = 0;
+            GenerateSeaColour();
+            vertices = new VertexPositionColor[terrainWidth * terrainHeight];
+            // float hOffset = 0f;
+            // float xOffset = 0f;
+            for (int x = 0; x < terrainWidth; x++)
+            {
+                for (int y = 0; y < terrainHeight; y++)
+                {
+                    vertices[x + y * terrainWidth].Position = new Vector3(x, 0.5f, -y);
+
+                    // vertices[x + y * terrainWidth].Color = new Color(rng.Next(0, 256), rng.Next(0, 256), rng.Next(0, 256));
+
+                    vertices[x + y * terrainWidth].Color = seaColour[counter];
+
+                    if (counter < (colours.Count - 1))
+                        counter++;
+                    else
+                        counter = 0;
+                }
+                // xOffset += 0.2f;
                 // hOffset += 0.2f;
             }
         }
@@ -101,10 +144,10 @@ namespace TerrainGenerator
             {
                 for (int x = 0; x < terrainWidth - 1; x++)
                 {
-                    int lowerLeft  = x + y * terrainWidth;
+                    int lowerLeft = x + y * terrainWidth;
                     int lowerRight = (x + 1) + y * terrainWidth;
-                    int topLeft    = x + (y + 1) * terrainWidth;
-                    int topRight   = (x + 1) + (y + 1) * terrainWidth;
+                    int topLeft = x + (y + 1) * terrainWidth;
+                    int topRight = (x + 1) + (y + 1) * terrainWidth;
 
                     indices[counter++] = topLeft;
                     indices[counter++] = lowerRight;
@@ -138,7 +181,7 @@ namespace TerrainGenerator
                 }
             }
         }
-        
+
         /// <summary>
         /// Draw terrain
         /// </summary>
@@ -166,10 +209,15 @@ namespace TerrainGenerator
             while (r != 0)
             {
                 colours.Add(new Color(r--, g, b));
-                if (g > 0)
+                if (g > 10)
                     g--;
-                if (b > 255)
+                else if (g < 247)
+                    g++;
+
+                if (b > 0)
                     b--;
+                else if (b < 176)
+                    b++;
 
             }
 
@@ -185,6 +233,33 @@ namespace TerrainGenerator
             //    if (b > 0)
             //        b--;
             //}
+        }
+
+        private void GenerateSeaColour()
+        {
+            int r = 110;
+            int g = 132;
+            int b = 255;
+            while (g <= 255)
+            {
+                seaColour.Add(new Color(r, g++, b));
+                if (r > 0)
+                    r--;
+                else
+                    r++;
+                //if (b < 255)
+                //    b--;
+            }
+            while (g >= 0)
+            {
+                seaColour.Add(new Color(r, g--, b));
+                if (r < 250)
+                    r++;
+                else
+                    r--;
+                //if (b < 255)
+                //    b--;
+            }
         }
     }
 }

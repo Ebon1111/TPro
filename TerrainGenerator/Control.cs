@@ -59,11 +59,13 @@ namespace TerrainGenerator
             {
                 game.Dispose();
                (game = new Game1(new Terrain(game, config))).Controller = this;
+                game.sea = new Terrain(game, config, "Sea");
                 game.Run();
             }
 
             game.GameTerrain.Dispose();
             game.GameTerrain = new Terrain(game, config);
+            game.sea = new Terrain(game, config, "Sea");
         }
     }
 }
