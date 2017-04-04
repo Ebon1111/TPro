@@ -178,7 +178,8 @@ namespace TerrainGenerator
             Vector3 moveVector = Vector3.Zero;
             if (ks.IsKeyDown(Keys.W))
             {
-                moveVector.Z = 1;
+                //if(!overZ )
+                    moveVector.Z = 1;
             }
             if (ks.IsKeyDown(Keys.S))
             {

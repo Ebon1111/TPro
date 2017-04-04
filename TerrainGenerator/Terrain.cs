@@ -1,5 +1,6 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using Simplex;
 using System;
 using System.Collections.Generic;
 
@@ -79,7 +80,7 @@ namespace TerrainGenerator
         ///</summary>
         private void SetUpVertices()
         {
-            // Random rng = new Random();
+            //Random rng = new Random();
             int counter = 0;
             CreateColour();
             vertices = new VertexPositionColor[terrainWidth * terrainHeight];
@@ -91,23 +92,41 @@ namespace TerrainGenerator
                 {
                     vertices[x + y * terrainWidth].Position = new Vector3(x, heightData[x, y], -y);
 
-                    // vertices[x + y * terrainWidth].Color = new Color(rng.Next(0, 256), rng.Next(0, 256), rng.Next(0, 256));
+                    //vertices[x + y * terrainWidth].Color = new Color(rng.Next(0, 256), rng.Next(0, 256), rng.Next(0, 256));
 
-                    vertices[x + y * terrainWidth].Color = colours[counter];
+                    //vertices[x + y * terrainWidth].Color = colours[counter];
 
-                    if (counter < (colours.Count - 1))
-                        counter++;
-                    else
-                        counter = 0;
+                    vertices[x + y * terrainWidth].Color = getSingleColor(heightData[x,y]);
+                    //if (counter < (colours.Count - 1))
+                    //    counter++;
+                    //else
+                    //    counter = 0;
                 }
                 //xOffset += 0.2f;
                 // hOffset += 0.2f;
             }
         }
 
+        private Color getSingleColor(float y)
+        {
+            if (y < 1.2f)
+            {
+                return new Color(0, 100, 0);
+            }
+            else if(y < 1.5f){
+                return new Color(34, 139, 34);
+
+            }
+            else if(y < 1.8f)
+            {
+                return new Color(50, 205, 50);
+            }
+            else return new Color(255, 255, 255);
+        }
+
         private void SetUpSeaVertices()
         {
-            // Random rng = new Random();
+            //Random rng = new Random();
             int counter = 0;
             GenerateSeaColour();
             vertices = new VertexPositionColor[terrainWidth * terrainHeight];
@@ -117,9 +136,9 @@ namespace TerrainGenerator
             {
                 for (int y = 0; y < terrainHeight; y++)
                 {
-                    vertices[x + y * terrainWidth].Position = new Vector3(x, 0.5f, -y);
+                    vertices[x + y * terrainWidth].Position = new Vector3(x, 0.8f, -y);
 
-                    // vertices[x + y * terrainWidth].Color = new Color(rng.Next(0, 256), rng.Next(0, 256), rng.Next(0, 256));
+                    //vertices[x + y * terrainWidth].Color = new Color(rng.Next(0, 256), rng.Next(0, 256), rng.Next(0, 256));
 
                     vertices[x + y * terrainWidth].Color = seaColour[counter];
 
@@ -168,16 +187,24 @@ namespace TerrainGenerator
             Random rng = new Random();
             heightData = new float[terrainWidth, terrainHeight];
 
+            float frequency = 20.0f / (float)terrainWidth;
+            float[,] noises = Noise.Calc2D(terrainWidth, terrainHeight, frequency);
             for (int i = 0; i < terrainHeight; i++)
             {
+                //float[] noises = Noise.Calc1D(terrainWidth, frequency);
                 for (int j = 0; j < terrainWidth; j++)
                 {
-                    heightData[j, i] = new Func<float>(() =>
-                    {
-                        double mantissa = (rng.NextDouble());
-                        double exponent = Math.Pow(2.0, rng.Next(0, 3));
-                        return (float)(mantissa * exponent);
-                    })();
+                   heightData[j, i] = noises[j,i]/100;
+                    //heightData[j, i] = new Func<float>(() =>
+                    //{
+                    //    double mantissa = (rng.NextDouble());
+                    //    double exponent = Math.Pow(2.0, rng.Next(0, 3));
+
+                    //    float result =  (float)(mantissa + exponent + frequency);
+                    //    Console.WriteLine(result);
+                    //    return result;
+                    //})();
+                    //heightData[j, i] = (heightData[j, i] + 1) / 2;
                 }
             }
         }
@@ -208,16 +235,18 @@ namespace TerrainGenerator
             int b = 176;
             while (r != 0)
             {
-                colours.Add(new Color(r--, g, b));
-                if (g > 10)
-                    g--;
-                else if (g < 247)
-                    g++;
 
-                if (b > 0)
-                    b--;
-                else if (b < 176)
-                    b++;
+                colours.Add(new Color(r--, g, b));
+
+                //if (g > 10)
+                //    g--;
+                //else if (g < 247)
+                //    g++;
+
+                //if (b > 0)
+                //    b--;
+                //else if (b < 176)
+                //    b++;
 
             }
 
