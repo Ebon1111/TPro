@@ -24,6 +24,7 @@ namespace TerrainGenerator
         float[,] heightData;
         int terrainWidth;
         int terrainHeight;
+        int terrainLength;
 
         string type = null;
 
@@ -36,11 +37,12 @@ namespace TerrainGenerator
         /// <param name="game">Current Game</param>
         /// <param name="terrainWidth">Width for Terrain</param>
         /// <param name="terrainHeight">Height for Terrain</param>
-        public Terrain(Game game, int terrainWidth, int terrainHeight)
+        public Terrain(Game game, int terrainWidth, int terrainLength, int terrainHeight)
             : base(game)
         {
             this.terrainWidth = terrainWidth;
             this.terrainHeight = terrainHeight;
+            this.terrainLength = terrainLength;
 
             LoadHeightData();
             SetUpVertices();
@@ -57,6 +59,8 @@ namespace TerrainGenerator
         {
             terrainHeight = config.TerrainHeight;
             terrainWidth = config.TerrainWidth;
+            terrainLength = config.TerrainHeight;
+            //terrainLength = config.TerrainLength;
 
             LoadHeightData();
             SetUpVertices();
@@ -68,6 +72,8 @@ namespace TerrainGenerator
         {
             terrainHeight = config.TerrainHeight / 2;
             terrainWidth = config.TerrainWidth / 2;
+            terrainLength = terrainHeight;
+            //terrainLength = config.TerrainLength / 2;
             this.type = type;
 
             LoadHeightData();
@@ -83,12 +89,12 @@ namespace TerrainGenerator
             //Random rng = new Random();
             //int counter = 0;
             //CreateColour();
-            vertices = new VertexPositionColor[terrainWidth * terrainHeight];
+            vertices = new VertexPositionColor[terrainWidth * terrainLength];
             // float hOffset = 0f;
             //float xOffset = 0f;
             for (int x = 0; x < terrainWidth; x++)
             {
-                for (int y = 0; y < terrainHeight; y++)
+                for (int y = 0; y < terrainLength; y++)
                 {
                     vertices[x + y * terrainWidth].Position = new Vector3(x, heightData[x, y], -y);
 
@@ -133,12 +139,12 @@ namespace TerrainGenerator
             //Random rng = new Random();
             int counter = 0;
             GenerateSeaColour();
-            vertices = new VertexPositionColor[terrainWidth * terrainHeight];
+            vertices = new VertexPositionColor[terrainWidth * terrainLength];
             // float hOffset = 0f;
             // float xOffset = 0f;
             for (int x = 0; x < terrainWidth; x++)
             {
-                for (int y = 0; y < terrainHeight; y++)
+                for (int y = 0; y < terrainLength; y++)
                 {
                     vertices[x + y * terrainWidth].Position = new Vector3(x, 0.8f, -y);
 
@@ -161,9 +167,9 @@ namespace TerrainGenerator
         /// </summary>
         private void SetUpIndices()
         {
-            indices = new int[(terrainWidth - 1) * (terrainHeight - 1) * 6];
+            indices = new int[(terrainWidth - 1) * (terrainLength - 1) * 6];
             int counter = 0;
-            for (int y = 0; y < terrainHeight - 1; y++)
+            for (int y = 0; y < terrainLength - 1; y++)
             {
                 for (int x = 0; x < terrainWidth - 1; x++)
                 {
@@ -189,12 +195,12 @@ namespace TerrainGenerator
         private void LoadHeightData()
         {
             Random rng = new Random();
-            heightData = new float[terrainWidth, terrainHeight];
+            heightData = new float[terrainWidth, terrainLength];
             float fOff = 0.2f;
             float hOff = 0.02f;
             float frequency = 3.0f / (float)terrainWidth + fOff;
-            float[,] noises = Noise.Calc2D(terrainWidth, terrainHeight, frequency);
-            for (int i = 0; i < terrainHeight; i++)
+            float[,] noises = Noise.Calc2D(terrainWidth, terrainLength, frequency);
+            for (int i = 0; i < terrainLength; i++)
             {
                 //float[] noises = Noise.Calc1D(terrainWidth, frequency);
                 for (int j = 0; j < terrainWidth; j++)

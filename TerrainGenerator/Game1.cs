@@ -17,6 +17,7 @@ namespace TerrainGenerator
         public float   NoiseRange;
         public int     TerrainHeight;
         public int     TerrainWidth;
+        public int     TerrainLength;
 
         public float   CameraSpeed;
         public Vector3 CameraStartingPosition;
