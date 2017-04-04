@@ -109,15 +109,19 @@ namespace TerrainGenerator
 
         private Color getSingleColor(float y)
         {
-            if (y < 1.2f)
+            if (y < 1.3f)
+            {
+                return new Color(139, 69, 19);
+            }
+            else if (y < 1.5f)
             {
                 return new Color(0, 100, 0);
             }
-            else if(y < 1.5f){
+            else if(y < 1.8f){
                 return new Color(34, 139, 34);
 
             }
-            else if(y < 1.8f)
+            else if(y < 2.2f)
             {
                 return new Color(50, 205, 50);
             }
@@ -188,7 +192,7 @@ namespace TerrainGenerator
             heightData = new float[terrainWidth, terrainHeight];
             float fOff = 0.2f;
             float hOff = 0.02f;
-            float frequency = 5.0f / (float)terrainWidth + fOff;
+            float frequency = 3.0f / (float)terrainWidth + fOff;
             float[,] noises = Noise.Calc2D(terrainWidth, terrainHeight, frequency);
             for (int i = 0; i < terrainHeight; i++)
             {
@@ -293,6 +297,7 @@ namespace TerrainGenerator
                 //if (b < 255)
                 //    b--;
             }
+
         }
     }
 }
