@@ -186,15 +186,16 @@ namespace TerrainGenerator
         {
             Random rng = new Random();
             heightData = new float[terrainWidth, terrainHeight];
-
-            float frequency = 20.0f / (float)terrainWidth;
+            float fOff = 0.2f;
+            float hOff = 0.02f;
+            float frequency = 5.0f / (float)terrainWidth + fOff;
             float[,] noises = Noise.Calc2D(terrainWidth, terrainHeight, frequency);
             for (int i = 0; i < terrainHeight; i++)
             {
                 //float[] noises = Noise.Calc1D(terrainWidth, frequency);
                 for (int j = 0; j < terrainWidth; j++)
                 {
-                   heightData[j, i] = noises[j,i]/100;
+                   heightData[j, i] = noises[j,i]/100 + hOff;
                     //heightData[j, i] = new Func<float>(() =>
                     //{
                     //    double mantissa = (rng.NextDouble());
@@ -205,7 +206,10 @@ namespace TerrainGenerator
                     //    return result;
                     //})();
                     //heightData[j, i] = (heightData[j, i] + 1) / 2;
+                    
                 }
+                fOff += 0.1f;
+                hOff += 0.01f;
             }
         }
 

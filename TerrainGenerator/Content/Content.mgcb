@@ -31,3 +31,9 @@
 /processorParam:TextureFormat=Color
 /build:heightmap.bmp
 
+#begin song.mp3
+/importer:Mp3Importer
+/processor:SongProcessor
+/processorParam:Quality=Best
+/build:song.mp3
+

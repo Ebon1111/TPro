@@ -1,11 +1,12 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using Microsoft.Xna.Framework.Media;
 using System;
 using System.Windows.Forms;
 
 using WinFormCtrl = System.Windows.Forms.Control;
-using XNAInput    = Microsoft.Xna.Framework.Input;
+using XNAInput = Microsoft.Xna.Framework.Input;
 
 namespace TerrainGenerator
 {
@@ -53,6 +54,8 @@ namespace TerrainGenerator
         public Control        Controller;
         public Terrain        GameTerrain;
         public Terrain        sea;
+
+        Song bgMusic;
 
         /// <summary>
         /// Game Constructor: initialize the graphics
@@ -107,9 +110,12 @@ namespace TerrainGenerator
             Content.RootDirectory = "Content";
 
             effect           = Content.Load<Effect>("effects");
+            bgMusic          = Content.Load<Song>("song");
             spriteBatch      = new SpriteBatch(device = graphics.GraphicsDevice);
-
             projectionMatrix = camera.Projection;
+
+            MediaPlayer.IsRepeating = true;
+            MediaPlayer.Play(bgMusic);
         }
 
         protected override void UnloadContent()
