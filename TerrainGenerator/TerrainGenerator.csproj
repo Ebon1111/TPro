@@ -81,7 +81,7 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\..\..\..\..\..\..\SimplexNoise-master\SimplexNoise\SimplexNoise.csproj">
+    <ProjectReference Include="..\SimplexNoise\SimplexNoise.csproj">
       <Project>{733B3143-822A-41B7-A021-9BF7AE84C2D5}</Project>
       <Name>SimplexNoise</Name>
     </ProjectReference>
