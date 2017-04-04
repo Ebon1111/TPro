@@ -81,8 +81,8 @@ namespace TerrainGenerator
         private void SetUpVertices()
         {
             //Random rng = new Random();
-            int counter = 0;
-            CreateColour();
+            //int counter = 0;
+            //CreateColour();
             vertices = new VertexPositionColor[terrainWidth * terrainHeight];
             // float hOffset = 0f;
             //float xOffset = 0f;
