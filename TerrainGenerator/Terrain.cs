@@ -28,6 +28,7 @@ namespace TerrainGenerator
 
         string type = null;
 
+        List<Color> darkGreens = new List<Color>();
         List<Color> colours = new List<Color>();
         List<Color> seaColour = new List<Color>();
 
@@ -70,8 +71,8 @@ namespace TerrainGenerator
         public Terrain(Game game, Config config, string type)
             : base(game)
         {
-            terrainHeight = config.TerrainHeight / 2;
-            terrainWidth = config.TerrainWidth / 2;
+            terrainHeight = config.TerrainHeight ;
+            terrainWidth = config.TerrainWidth;
             terrainLength = terrainHeight;
             //terrainLength = config.TerrainLength / 2;
             this.type = type;
@@ -88,7 +89,8 @@ namespace TerrainGenerator
         {
             //Random rng = new Random();
             //int counter = 0;
-            //CreateColour();
+            CreateColour();
+            Random rnd = new Random();
             vertices = new VertexPositionColor[terrainWidth * terrainLength];
             // float hOffset = 0f;
             //float xOffset = 0f;
@@ -101,8 +103,9 @@ namespace TerrainGenerator
                     //vertices[x + y * terrainWidth].Color = new Color(rng.Next(0, 256), rng.Next(0, 256), rng.Next(0, 256));
 
                     //vertices[x + y * terrainWidth].Color = colours[counter];
+                    int i = rnd.Next(1, darkGreens.Count);
 
-                    vertices[x + y * terrainWidth].Color = getSingleColor(heightData[x,y]);
+                    vertices[x + y * terrainWidth].Color = getSingleColor(heightData[x,y],i);
                     //if (counter < (colours.Count - 1))
                     //    counter++;
                     //else
@@ -113,23 +116,25 @@ namespace TerrainGenerator
             }
         }
 
-        private Color getSingleColor(float y)
+        private Color getSingleColor(float y,int i)
         {
-            if (y < 1.3f)
+            
+            if (y < 1.6f)
             {
-                return new Color(139, 69, 19);
-            }
-            else if (y < 1.5f)
-            {
-                return new Color(0, 100, 0);
-            }
-            else if(y < 1.8f){
-                return new Color(34, 139, 34);
+                
+                return darkGreens[i]; //dark green
 
             }
-            else if(y < 2.2f)
+            //else if (y < 1.5f)
+            //{
+            //    return new Color(34, 139, 34); //green
+            //}
+            else if(y < 2.0f){
+                return new Color(50, 205, 50);//light green
+            }
+            else if(y < 2.4f)
             {
-                return new Color(50, 205, 50);
+                return new Color(139, 69, 19);//brown
             }
             else return new Color(255, 255, 255);
         }
@@ -142,6 +147,7 @@ namespace TerrainGenerator
             vertices = new VertexPositionColor[terrainWidth * terrainLength];
             // float hOffset = 0f;
             // float xOffset = 0f;
+            Random rnd = new Random();
             for (int x = 0; x < terrainWidth; x++)
             {
                 for (int y = 0; y < terrainLength; y++)
@@ -149,13 +155,10 @@ namespace TerrainGenerator
                     vertices[x + y * terrainWidth].Position = new Vector3(x, 0.8f, -y);
 
                     //vertices[x + y * terrainWidth].Color = new Color(rng.Next(0, 256), rng.Next(0, 256), rng.Next(0, 256));
+                    int i = rnd.Next(1, seaColour.Count);
+                    vertices[x + y * terrainWidth].Color = seaColour[i];
 
-                    vertices[x + y * terrainWidth].Color = seaColour[counter];
-
-                    if (counter < (colours.Count - 1))
-                        counter++;
-                    else
-                        counter = 0;
+                   
                 }
                 // xOffset += 0.2f;
                 // hOffset += 0.2f;
@@ -198,14 +201,14 @@ namespace TerrainGenerator
             heightData = new float[terrainWidth, terrainLength];
             float fOff = 0.2f;
             float hOff = 0.02f;
-            float frequency = 3.0f / (float)terrainWidth + fOff;
+            float frequency = 1.0f/ (float)terrainWidth + fOff;
             float[,] noises = Noise.Calc2D(terrainWidth, terrainLength, frequency);
             for (int i = 0; i < terrainLength; i++)
             {
                 //float[] noises = Noise.Calc1D(terrainWidth, frequency);
                 for (int j = 0; j < terrainWidth; j++)
                 {
-                   heightData[j, i] = noises[j,i]/100 + hOff;
+                   heightData[i,j] = noises[i,j]/100 + hOff;
                     //heightData[j, i] = new Func<float>(() =>
                     //{
                     //    double mantissa = (rng.NextDouble());
@@ -219,7 +222,7 @@ namespace TerrainGenerator
                     
                 }
                 fOff += 0.1f;
-                hOff += 0.01f;
+               // hOff += 0.01f;
             }
         }
 
@@ -243,66 +246,40 @@ namespace TerrainGenerator
         /// </summary>
         private void CreateColour()
         {
-            // Yellow Test Set
-            int r = 255;
-            int g = 247;
-            int b = 176;
-            while (r != 0)
-            {
-
-                colours.Add(new Color(r--, g, b));
-
-                //if (g > 10)
-                //    g--;
-                //else if (g < 247)
-                //    g++;
-
-                //if (b > 0)
-                //    b--;
-                //else if (b < 176)
-                //    b++;
+          //  Color mainDGreen = new Color(0, 100, 0);
+            int r = 0;
+            int g = 50;
+            int b = 0;
+            while(g<120){
+                darkGreens.Add(new Color(r, g, b));
+                if(r > (g - 20) && b > (g - 20))
+                {
+                    r = 0;
+                    b = 0;
+                    g = g + 5;
+                }
+                r = r + 5;
+                b = b + 5;
 
             }
-
-            // Green Test Set
-            //int r = 128;
-            //int g = 253;
-            //int b = 114;
-            //while (r != 0)
-            //{
-            //    colours.Add(new Color(r--, g, b));
-            //    if (g > 0)
-            //        g--;
-            //    if (b > 0)
-            //        b--;
-            //}
+            Console.WriteLine("Size of darkGreens List is" + darkGreens.Count);
         }
 
         private void GenerateSeaColour()
         {
-            int r = 110;
-            int g = 132;
-            int b = 255;
-            while (g <= 255)
+            int r = 0;
+            int g = 0;
+            int b = 150;
+
+            while (b < 255)
             {
-                seaColour.Add(new Color(r, g++, b));
-                if (r > 0)
-                    r--;
-                else
-                    r++;
-                //if (b < 255)
-                //    b--;
+                seaColour.Add(new Color(r, g, b));
+
+                b = b + 5;
+                r = r + 5;
+                g = g + 5;
             }
-            while (g >= 0)
-            {
-                seaColour.Add(new Color(r, g--, b));
-                if (r < 250)
-                    r++;
-                else
-                    r--;
-                //if (b < 255)
-                //    b--;
-            }
+            
 
         }
     }
