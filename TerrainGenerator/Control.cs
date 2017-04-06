@@ -22,11 +22,12 @@ namespace TerrainGenerator
     {
         Config config;
         Game1 game;
+        private static int generateCount = 0;
 
         public Control()
         {
             config = new Config();
-            game   = new Game1();
+            game = new Game1();
 
             InitializeComponent();
         }
@@ -52,13 +53,14 @@ namespace TerrainGenerator
         /// <param name="e">Clicked</param>
         private void generate_Click(object sender, EventArgs e)
         {
+            generateCount++;
             config.TerrainHeight = (int)terrainHeight.Value;
-            config.TerrainWidth  = (int)terrainWidth.Value;
+            config.TerrainWidth = (int)terrainWidth.Value;
 
             if (game.IsClosed)
             {
                 game.Dispose();
-               (game = new Game1(new Terrain(game, config))).Controller = this;
+                (game = new Game1(new Terrain(game, config))).Controller = this;
                 game.sea = new Terrain(game, config, "Sea");
                 game.Run();
             }
@@ -66,6 +68,12 @@ namespace TerrainGenerator
             game.GameTerrain.Dispose();
             game.GameTerrain = new Terrain(game, config);
             game.sea = new Terrain(game, config, "Sea");
+
+            // Ester Egg: Flip the world
+            if (generateCount == 5)
+            {
+                Game1.isFlipped = true;
+            }
         }
     }
 }

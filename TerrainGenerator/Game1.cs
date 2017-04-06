@@ -13,17 +13,17 @@ namespace TerrainGenerator
     // Struct For Control Box to Input Values
     public struct Config
     {
-        public Color   WireColour;
-        public float   NoiseRange;
-        public int     TerrainHeight;
-        public int     TerrainWidth;
-        public int     TerrainLength;
+        public Color WireColour;
+        public float NoiseRange;
+        public int TerrainHeight;
+        public int TerrainWidth;
+        public int TerrainLength;
 
-        public float   CameraSpeed;
+        public float CameraSpeed;
         public Vector3 CameraStartingPosition;
-        public float   ViewDistance;
+        public float ViewDistance;
 
-        public int     GraphicResolution;
+        public int GraphicResolution;
     }
 
     /// <summary>
@@ -38,23 +38,25 @@ namespace TerrainGenerator
     /// </summary>
     public class Game1 : Game
     {
-        GraphicsDevice        device;
-        Effect                effect;
+        public static bool isFlipped = false;
+        GraphicsDevice device;
+        Effect effect;
         GraphicsDeviceManager graphics;
-        SpriteBatch           spriteBatch;
+        SpriteBatch spriteBatch;
 
-        Camera                camera;
-        Vector3               camPosition;
-        Matrix                projectionMatrix;
-        Matrix                viewMatrix;
+        Camera camera;
+        Vector3 camPosition;
+        float camSpeed = 30.0f;
+        Matrix projectionMatrix;
+        Matrix viewMatrix;
 
-        bool                  paused;
-        KeyboardState         prev;
-        public bool           IsClosed { private set; get; }
+        bool paused;
+        KeyboardState prev;
+        public bool IsClosed { private set; get; }
 
-        public Control        Controller;
-        public Terrain        GameTerrain;
-        public Terrain        sea;
+        public Control Controller;
+        public Terrain GameTerrain;
+        public Terrain sea;
 
         Song bgMusic;
 
@@ -65,12 +67,12 @@ namespace TerrainGenerator
         {
             IsClosed = true;
         }
-        
-        public Game1(Terrain terrain): this()
+
+        public Game1(Terrain terrain) : this()
         {
             GameTerrain = terrain;
 
-            graphics    = new GraphicsDeviceManager(this);
+            graphics = new GraphicsDeviceManager(this);
         }
 
         /// <summary>
@@ -81,20 +83,20 @@ namespace TerrainGenerator
         /// </summary>
         protected override void Initialize()
         {
-           (WinFormCtrl.FromHandle(Window.Handle) as Form).FormClosing += OnExiting;
-            
+            (WinFormCtrl.FromHandle(Window.Handle) as Form).FormClosing += OnExiting;
+
             //Components.Add(
             //    camera = new Camera(this,
             //        camPosition = new Vector3(50f, 5f, -50f), Vector3.Zero, 10.0f));
 
-            graphics.PreferredBackBufferWidth  = 1024;
+            graphics.PreferredBackBufferWidth = 1024;
             graphics.PreferredBackBufferHeight = 768;
-            graphics.IsFullScreen              = true;
+            graphics.IsFullScreen = true;
             graphics.ApplyChanges();
 
-            IsClosed                           = false;
-            Window.Title                       = "World Generator";
-            
+            IsClosed = false;
+            Window.Title = "World Generator";
+
             base.Initialize();
         }
 
@@ -110,13 +112,19 @@ namespace TerrainGenerator
         {
             Content.RootDirectory = "Content";
 
-            effect           = Content.Load<Effect>("effects");
-            bgMusic          = Content.Load<Song>("song");
-            spriteBatch      = new SpriteBatch(device = graphics.GraphicsDevice);
-
-            Components.Add(
-               camera = new Camera(this,
-                   camPosition = new Vector3(50f, GameTerrain.MaxHeight + 20f, -50f), Vector3.Zero, 10.0f));
+            effect = Content.Load<Effect>("effects");
+            bgMusic = Content.Load<Song>("song");
+            spriteBatch = new SpriteBatch(device = graphics.GraphicsDevice);
+            if (isFlipped)
+            {
+                Components.Add(
+                  camera = new Camera(this,
+                      camPosition = new Vector3(50f, -5f, -50f), Vector3.Zero, camSpeed));
+            }
+            else
+                Components.Add(
+                   camera = new Camera(this,
+                       camPosition = new Vector3(50f, GameTerrain.MaxHeight + 20f, -50f), Vector3.Zero, camSpeed));
             projectionMatrix = camera.Projection;
 
             MediaPlayer.IsRepeating = true;
@@ -136,12 +144,13 @@ namespace TerrainGenerator
         {
             if (Keyboard.GetState().IsKeyUp(XNAInput.Keys.Escape) && prev.IsKeyDown(XNAInput.Keys.Escape))
             {
-                paused         = !paused;
+                paused = !paused;
                 IsMouseVisible = !IsMouseVisible;
 
                 if (paused) Controller.TopMost = true;
 
-            } prev = Keyboard.GetState();
+            }
+            prev = Keyboard.GetState();
 
             if (paused) return;
 
@@ -158,10 +167,10 @@ namespace TerrainGenerator
         {
             device.Clear(Color.SkyBlue);
 
-            RasterizerState rs      = new RasterizerState();
-            rs.CullMode             = CullMode.None; 
+            RasterizerState rs = new RasterizerState();
+            rs.CullMode = CullMode.None;
             // rs.FillMode = FillMode.WireFrame;
-            device.RasterizerState  = rs;
+            device.RasterizerState = rs;
             effect.CurrentTechnique = effect.Techniques["ColoredNoShading"];
 
             effect.Parameters["xView"].SetValue(viewMatrix);

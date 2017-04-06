@@ -35,7 +35,7 @@ namespace TerrainGenerator
         Vector3 camRotation;
         float camSpeed;
         Vector3 camLookAt;
-        
+
         public Vector3 Position
         {
             get
@@ -187,49 +187,38 @@ namespace TerrainGenerator
             Vector3 moveVector = Vector3.Zero;
             if (ks.IsKeyDown(Keys.W))
             {
-                if (Position.Y < (terrainMaxHeight + 20f))
-                {
-                    moveVector.Y = 1;
-                }
                 moveVector.Z = 1;
             }
             if (ks.IsKeyDown(Keys.S))
             {
-                if (Position.Y < (terrainMaxHeight + 20f))
-                {
-                    moveVector.Y = 1;
-                }
                 moveVector.Z = -1;
             }
             if (ks.IsKeyDown(Keys.A))
             {
-                if (Position.Y < (terrainMaxHeight + 20f))
-                {
-                    moveVector.Y = 1;
-                }
                 moveVector.X = 1;
             }
             if (ks.IsKeyDown(Keys.D))
             {
-                if (Position.Y < (terrainMaxHeight + 20f))
-                {
-                    moveVector.Y = 1;
-                }
                 moveVector.X = -1;
             }
             if (ks.IsKeyDown(Keys.Space))
             {
-                moveVector.Y = 1;
+                if (!Game1.isFlipped)
+                    moveVector.Y = 1;
+                else if (Game1.isFlipped && (Position.Y < -5.0f))
+                    moveVector.Y = 1;
+                    
             }
             if (ks.IsKeyDown(Keys.X))
             {
-                if ((Position.Y - 1f) > (terrainMaxHeight + 20f))
+                if (!Game1.isFlipped && (Position.Y - 1f) > (terrainMaxHeight + 20f))
+                    moveVector.Y = -1;
+                else if (Game1.isFlipped && (Position.Y - 1f) < 20f)
                     moveVector.Y = -1;
             }
             if (moveVector != Vector3.Zero)
             {
-                // normalize the vector
-                // so that we don't move faster diagonally
+                // normalize the vector; so that we don't move faster diagonally
                 moveVector.Normalize();
                 // Add in smooth and speed
                 moveVector *= (dt * camSpeed);
