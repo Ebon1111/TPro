@@ -83,9 +83,9 @@ namespace TerrainGenerator
         {
            (WinFormCtrl.FromHandle(Window.Handle) as Form).FormClosing += OnExiting;
             
-            Components.Add(
-                camera = new Camera(this,
-                    camPosition = new Vector3(50f, 5f, -50f), Vector3.Zero, 10.0f));
+            //Components.Add(
+            //    camera = new Camera(this,
+            //        camPosition = new Vector3(50f, 5f, -50f), Vector3.Zero, 10.0f));
 
             graphics.PreferredBackBufferWidth  = 1024;
             graphics.PreferredBackBufferHeight = 768;
@@ -113,6 +113,10 @@ namespace TerrainGenerator
             effect           = Content.Load<Effect>("effects");
             bgMusic          = Content.Load<Song>("song");
             spriteBatch      = new SpriteBatch(device = graphics.GraphicsDevice);
+
+            Components.Add(
+               camera = new Camera(this,
+                   camPosition = new Vector3(50f, GameTerrain.MaxHeight + 20f, -50f), Vector3.Zero, 10.0f));
             projectionMatrix = camera.Projection;
 
             MediaPlayer.IsRepeating = true;

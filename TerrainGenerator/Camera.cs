@@ -18,6 +18,8 @@ namespace TerrainGenerator
     /// </summary>
     class Camera : GameComponent
     {
+        Game1 game;
+
         // Vector3 camTarget; // For flight in the future
         Vector3 camPosition;
         Vector3 camOrigin;
@@ -33,6 +35,7 @@ namespace TerrainGenerator
         Vector3 camRotation;
         float camSpeed;
         Vector3 camLookAt;
+        
         public Vector3 Position
         {
             get
@@ -70,6 +73,8 @@ namespace TerrainGenerator
         private MouseState currentMouseState;
         private MouseState prevMouseState;
 
+        private float terrainMaxHeight;
+
         /// <summary>
         /// Camera Constructor
         /// </summary>
@@ -100,8 +105,9 @@ namespace TerrainGenerator
         /// <param name="game">Current Game</param>
         /// <param name="config">Control Box Values</param>
         /// <param name="rotation">Initializing Rotation</param>
-        public Camera(Game game, Config config, Vector3 rotation) : base(game)
+        public Camera(Game1 game, Config config, Vector3 rotation) : base(game)
         {
+            this.game = game;
             camSpeed = config.CameraSpeed;
             Projection = Matrix.CreatePerspectiveFieldOfView(
                 MathHelper.PiOver4,
@@ -113,6 +119,9 @@ namespace TerrainGenerator
             MoveTo(config.CameraStartingPosition, rotation);
 
             prevMouseState = Mouse.GetState();
+
+            // Find the terrain below
+            terrainMaxHeight = game.GameTerrain.MaxHeight;
         }
 
         /// <summary>
@@ -178,19 +187,34 @@ namespace TerrainGenerator
             Vector3 moveVector = Vector3.Zero;
             if (ks.IsKeyDown(Keys.W))
             {
-                //if(!overZ )
-                    moveVector.Z = 1;
+                if (Position.Y < (terrainMaxHeight + 20f))
+                {
+                    moveVector.Y = 1;
+                }
+                moveVector.Z = 1;
             }
             if (ks.IsKeyDown(Keys.S))
             {
+                if (Position.Y < (terrainMaxHeight + 20f))
+                {
+                    moveVector.Y = 1;
+                }
                 moveVector.Z = -1;
             }
             if (ks.IsKeyDown(Keys.A))
             {
+                if (Position.Y < (terrainMaxHeight + 20f))
+                {
+                    moveVector.Y = 1;
+                }
                 moveVector.X = 1;
             }
             if (ks.IsKeyDown(Keys.D))
             {
+                if (Position.Y < (terrainMaxHeight + 20f))
+                {
+                    moveVector.Y = 1;
+                }
                 moveVector.X = -1;
             }
             if (ks.IsKeyDown(Keys.Space))
@@ -199,7 +223,8 @@ namespace TerrainGenerator
             }
             if (ks.IsKeyDown(Keys.X))
             {
-                moveVector.Y = -1;
+                if ((Position.Y - 1f) > (terrainMaxHeight + 20f))
+                    moveVector.Y = -1;
             }
             if (moveVector != Vector3.Zero)
             {

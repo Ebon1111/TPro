@@ -18,6 +18,7 @@ namespace TerrainGenerator
     public class Terrain : GameComponent
     {
         VertexPositionColor[] vertices;
+        public float MaxHeight = -999f;
 
         int[] indices;
 
@@ -205,7 +206,9 @@ namespace TerrainGenerator
                 //float[] noises = Noise.Calc1D(terrainWidth, frequency);
                 for (int j = 0; j < terrainWidth; j++)
                 {
-                   heightData[j, i] = noises[j,i]/100 + hOff;
+                    heightData[j, i] = noises[j,i]/100 + hOff;
+                    if (heightData[j, i] > MaxHeight)
+                        MaxHeight = heightData[j, i];
                     //heightData[j, i] = new Func<float>(() =>
                     //{
                     //    double mantissa = (rng.NextDouble());
