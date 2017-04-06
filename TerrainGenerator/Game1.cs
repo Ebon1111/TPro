@@ -156,7 +156,7 @@ namespace TerrainGenerator
         /// <param name="gameTime">Game Time</param>
         protected override void Draw(GameTime gameTime)
         {
-            device.Clear(Color.Black);
+            device.Clear(Color.SkyBlue);
 
             RasterizerState rs      = new RasterizerState();
             rs.CullMode             = CullMode.None; 
