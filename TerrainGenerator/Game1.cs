@@ -23,7 +23,8 @@ namespace TerrainGenerator
         public Vector3 CameraStartingPosition;
         public float ViewDistance;
 
-        public int GraphicResolution;
+        public int GraphicResolutionX;
+        public int GraphicResolutionY;
     }
 
     /// <summary>
@@ -42,11 +43,15 @@ namespace TerrainGenerator
         GraphicsDevice device;
         Effect effect;
         GraphicsDeviceManager graphics;
+        int graphicResolutionX;
+        int graphicResolutionY;
         SpriteBatch spriteBatch;
+
+        //Texture2D obj;
 
         Camera camera;
         Vector3 camPosition;
-        float camSpeed = 30.0f;
+        float camSpeed;
         Matrix projectionMatrix;
         Matrix viewMatrix;
 
@@ -89,13 +94,19 @@ namespace TerrainGenerator
             //    camera = new Camera(this,
             //        camPosition = new Vector3(50f, 5f, -50f), Vector3.Zero, 10.0f));
 
-            graphics.PreferredBackBufferWidth = 1024;
-            graphics.PreferredBackBufferHeight = 768;
+            //graphics.PreferredBackBufferWidth = 1024;
+            //graphics.PreferredBackBufferHeight = 768;
+            graphicResolutionX = 2048;
+            graphicResolutionY = 1536;
+            graphics.PreferredBackBufferWidth = graphicResolutionX;
+            graphics.PreferredBackBufferHeight = graphicResolutionY;
             graphics.IsFullScreen = true;
             graphics.ApplyChanges();
 
             IsClosed = false;
             Window.Title = "World Generator";
+
+            camSpeed = 30.0f;
 
             base.Initialize();
         }
@@ -114,6 +125,7 @@ namespace TerrainGenerator
 
             effect = Content.Load<Effect>("effects");
             bgMusic = Content.Load<Song>("song");
+            //obj = Content.Load<Texture2D>("Test Bunny Poring.gif");
             spriteBatch = new SpriteBatch(device = graphics.GraphicsDevice);
             if (isFlipped)
             {

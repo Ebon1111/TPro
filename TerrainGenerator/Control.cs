@@ -56,7 +56,7 @@ namespace TerrainGenerator
             generateCount++;
             config.TerrainHeight = (int)terrainHeight.Value;
             config.TerrainWidth = (int)terrainWidth.Value;
-
+            
             if (game.IsClosed)
             {
                 game.Dispose();

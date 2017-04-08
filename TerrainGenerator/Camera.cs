@@ -12,7 +12,8 @@ namespace TerrainGenerator
     /// Author: Ebon
     /// Date: 2017/03/11
     /// Source: 
-    ///     [XNA] First-Person Camera Tutorial. Retrieved from https://www.youtube.com/watch?v=XkpZLzT5OV4
+    ///     [XNA] First-Person Camera Tutorial. 
+    ///     Retrieved from https://www.youtube.com/watch?v=XkpZLzT5OV4
     /// Updated by: Ebon
     /// Date: 2017/03/20
     /// </summary>

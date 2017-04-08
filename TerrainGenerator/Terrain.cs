@@ -14,6 +14,9 @@ namespace TerrainGenerator
     /// Date: 2017/03/09
     /// Updated by: Ebon
     /// Date: 2017/03/20
+    /// Source:
+    ///     Generating Random Fractal Terrain. 
+    ///     Retrieved from http://www.gameprogrammer.com/fractal.html
     /// </summary>
     public class Terrain : GameComponent
     {
@@ -26,6 +29,8 @@ namespace TerrainGenerator
         int terrainWidth;
         int terrainHeight;
         int terrainLength;
+
+        float noiseRange;
 
         string type = null;
 
@@ -63,6 +68,8 @@ namespace TerrainGenerator
             terrainWidth = config.TerrainWidth;
             terrainLength = config.TerrainHeight;
             //terrainLength = config.TerrainLength;
+
+            noiseRange = 1.0f;
 
             LoadHeightData();
             SetUpVertices();
@@ -202,7 +209,7 @@ namespace TerrainGenerator
             heightData = new float[terrainWidth, terrainLength];
             float fOff = 0.2f;
             float hOff = 0.02f;
-            float frequency = 1.0f/ (float)terrainWidth + fOff;
+            float frequency = noiseRange / (float)terrainWidth + fOff;
             float[,] noises = Noise.Calc2D(terrainWidth, terrainLength, frequency);
             for (int i = 0; i < terrainLength; i++)
             {
