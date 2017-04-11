@@ -57,9 +57,9 @@ namespace TerrainGenerator
             config.TerrainLength = (int)   terrainLength.Value;
             config.TerrainWidth  = (int)   terrainWidth.Value;
             config.NoiseRange    = (float) terrainNoise.Value;
-            config.CameraSpeed   = (float) cameraSpeed.Value;
-            config.ViewDistance  = (float) visibility.Value;
-            
+            config.CameraSpeed = (float)cameraSpeed.Value;
+            config.ViewDistance = (float)visibility.Value;
+
             if (game.IsClosed)
             {
                 game.Dispose();
@@ -67,6 +67,7 @@ namespace TerrainGenerator
                 game.Sea = new Terrain(game, config, "Sea");
                 game.Run();
             }
+
             game.GameTerrain.Dispose();
             game.Sea.Dispose();
 

@@ -92,7 +92,7 @@ namespace TerrainGenerator
             graphicResolutionY = 1536;
             graphics.PreferredBackBufferWidth  = graphicResolutionX;
             graphics.PreferredBackBufferHeight = graphicResolutionY;
-            graphics.IsFullScreen = true;
+            graphics.IsFullScreen = false;
             graphics.ApplyChanges(); 
 
             IsClosed = false;
@@ -114,7 +114,7 @@ namespace TerrainGenerator
             Content.RootDirectory = "Content";
 
             effect  = Content.Load<Effect>("effects");
-            bgMusic = Content.Load<Song>("song");
+            bgMusic = Content.Load<Song>("main");
 
             spriteBatch = new SpriteBatch(device = graphics.GraphicsDevice);
 
