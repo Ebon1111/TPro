@@ -21,13 +21,13 @@ namespace TerrainGenerator
     public partial class Control : Form
     {
         Config config;
-        Game1 game;
+        Game1  game;
         private static int generateCount = 0;
 
         public Control()
         {
             config = new Config();
-            game = new Game1();
+            game   = new Game1();
 
             InitializeComponent();
         }
@@ -55,25 +55,24 @@ namespace TerrainGenerator
         {
             generateCount++;
             config.TerrainHeight = (int)terrainHeight.Value;
-            config.TerrainWidth = (int)terrainWidth.Value;
+            config.TerrainWidth  = (int)terrainWidth.Value;
             
             if (game.IsClosed)
             {
                 game.Dispose();
-                (game = new Game1(new Terrain(game, config))).Controller = this;
-                game.sea = new Terrain(game, config, "Sea");
+               (game = new Game1(new Terrain(game, config))).Controller = this;
+                game.Sea = new Terrain(game, config, "Sea");
                 game.Run();
             }
 
             game.GameTerrain.Dispose();
             game.GameTerrain = new Terrain(game, config);
-            game.sea = new Terrain(game, config, "Sea");
+            game.Sea = new Terrain(game, config, "Sea");
+           (game.Cam as Camera).camSpeed = (float) cameraSpeed.Value;
 
-            // Ester Egg: Flip the world
+            // Easter Egg: Flip the world
             if (generateCount == 5)
-            {
                 Game1.isFlipped = true;
-            }
         }
     }
 }

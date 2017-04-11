@@ -59,9 +59,10 @@ namespace TerrainGenerator
         KeyboardState prev;
         public bool IsClosed { private set; get; }
 
+        public object  Cam { get { return camera; } set { camera = (Camera) value; } }
         public Control Controller;
         public Terrain GameTerrain;
-        public Terrain sea;
+        public Terrain Sea;
 
         Song bgMusic;
 
@@ -190,7 +191,7 @@ namespace TerrainGenerator
             effect.Parameters["xWorld"].SetValue(Matrix.Identity);
 
             GameTerrain.DrawTerrain(effect, device);
-            sea.DrawTerrain(effect, device);
+            Sea.DrawTerrain(effect, device);
             base.Draw(gameTime);
         }
     }

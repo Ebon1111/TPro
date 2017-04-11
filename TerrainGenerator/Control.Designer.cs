@@ -68,28 +68,28 @@
             0,
             0,
             65536});
-            this.cameraSpeed.Location = new System.Drawing.Point(12, 61);
-            this.cameraSpeed.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.cameraSpeed.Location = new System.Drawing.Point(8, 39);
+            this.cameraSpeed.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.cameraSpeed.Name = "cameraSpeed";
-            this.cameraSpeed.Size = new System.Drawing.Size(120, 31);
+            this.cameraSpeed.Size = new System.Drawing.Size(80, 22);
             this.cameraSpeed.TabIndex = 0;
             // 
             // lbCamSpeed
             // 
             this.lbCamSpeed.AutoSize = true;
-            this.lbCamSpeed.Location = new System.Drawing.Point(12, 31);
-            this.lbCamSpeed.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
+            this.lbCamSpeed.Location = new System.Drawing.Point(8, 20);
+            this.lbCamSpeed.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lbCamSpeed.Name = "lbCamSpeed";
-            this.lbCamSpeed.Size = new System.Drawing.Size(71, 25);
+            this.lbCamSpeed.Size = new System.Drawing.Size(47, 17);
             this.lbCamSpeed.TabIndex = 1;
             this.lbCamSpeed.Text = "speed";
             // 
             // btnGenerate
             // 
-            this.btnGenerate.Location = new System.Drawing.Point(24, 736);
-            this.btnGenerate.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.btnGenerate.Location = new System.Drawing.Point(16, 471);
+            this.btnGenerate.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.btnGenerate.Name = "btnGenerate";
-            this.btnGenerate.Size = new System.Drawing.Size(324, 46);
+            this.btnGenerate.Size = new System.Drawing.Size(216, 29);
             this.btnGenerate.TabIndex = 2;
             this.btnGenerate.Text = "Generate World";
             this.btnGenerate.UseVisualStyleBackColor = true;
@@ -104,21 +104,21 @@
             this.gbTerrainControls.Controls.Add(this.terrainHeight);
             this.gbTerrainControls.Controls.Add(this.lbTerrainHeight);
             this.gbTerrainControls.Controls.Add(this.lbTerrainNoise);
-            this.gbTerrainControls.Location = new System.Drawing.Point(204, 23);
-            this.gbTerrainControls.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.gbTerrainControls.Location = new System.Drawing.Point(136, 15);
+            this.gbTerrainControls.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.gbTerrainControls.Name = "gbTerrainControls";
-            this.gbTerrainControls.Padding = new System.Windows.Forms.Padding(6, 6, 6, 6);
-            this.gbTerrainControls.Size = new System.Drawing.Size(144, 319);
+            this.gbTerrainControls.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.gbTerrainControls.Size = new System.Drawing.Size(96, 204);
             this.gbTerrainControls.TabIndex = 3;
             this.gbTerrainControls.TabStop = false;
             this.gbTerrainControls.Text = "Terrain";
             // 
             // baseColour
             // 
-            this.baseColour.Location = new System.Drawing.Point(12, 261);
-            this.baseColour.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.baseColour.Location = new System.Drawing.Point(8, 167);
+            this.baseColour.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.baseColour.Name = "baseColour";
-            this.baseColour.Size = new System.Drawing.Size(120, 42);
+            this.baseColour.Size = new System.Drawing.Size(80, 27);
             this.baseColour.TabIndex = 11;
             this.baseColour.Text = "Base";
             this.baseColour.UseVisualStyleBackColor = true;
@@ -126,8 +126,8 @@
             // 
             // terrainWidth
             // 
-            this.terrainWidth.Location = new System.Drawing.Point(12, 136);
-            this.terrainWidth.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.terrainWidth.Location = new System.Drawing.Point(8, 87);
+            this.terrainWidth.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.terrainWidth.Maximum = new decimal(new int[] {
             1000,
             0,
@@ -139,7 +139,7 @@
             0,
             0});
             this.terrainWidth.Name = "terrainWidth";
-            this.terrainWidth.Size = new System.Drawing.Size(120, 31);
+            this.terrainWidth.Size = new System.Drawing.Size(80, 22);
             this.terrainWidth.TabIndex = 6;
             this.terrainWidth.Value = new decimal(new int[] {
             100,
@@ -150,10 +150,10 @@
             // lbTerrainWidth
             // 
             this.lbTerrainWidth.AutoSize = true;
-            this.lbTerrainWidth.Location = new System.Drawing.Point(12, 106);
-            this.lbTerrainWidth.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
+            this.lbTerrainWidth.Location = new System.Drawing.Point(8, 68);
+            this.lbTerrainWidth.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lbTerrainWidth.Name = "lbTerrainWidth";
-            this.lbTerrainWidth.Size = new System.Drawing.Size(62, 25);
+            this.lbTerrainWidth.Size = new System.Drawing.Size(40, 17);
             this.lbTerrainWidth.TabIndex = 5;
             this.lbTerrainWidth.Text = "width";
             // 
@@ -165,16 +165,16 @@
             0,
             0,
             65536});
-            this.terrainNoise.Location = new System.Drawing.Point(12, 211);
-            this.terrainNoise.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.terrainNoise.Location = new System.Drawing.Point(8, 135);
+            this.terrainNoise.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.terrainNoise.Name = "terrainNoise";
-            this.terrainNoise.Size = new System.Drawing.Size(120, 31);
+            this.terrainNoise.Size = new System.Drawing.Size(80, 22);
             this.terrainNoise.TabIndex = 4;
             // 
             // terrainHeight
             // 
-            this.terrainHeight.Location = new System.Drawing.Point(12, 61);
-            this.terrainHeight.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.terrainHeight.Location = new System.Drawing.Point(8, 39);
+            this.terrainHeight.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.terrainHeight.Maximum = new decimal(new int[] {
             1000,
             0,
@@ -186,7 +186,7 @@
             0,
             0});
             this.terrainHeight.Name = "terrainHeight";
-            this.terrainHeight.Size = new System.Drawing.Size(120, 31);
+            this.terrainHeight.Size = new System.Drawing.Size(80, 22);
             this.terrainHeight.TabIndex = 3;
             this.terrainHeight.Value = new decimal(new int[] {
             100,
@@ -197,20 +197,20 @@
             // lbTerrainHeight
             // 
             this.lbTerrainHeight.AutoSize = true;
-            this.lbTerrainHeight.Location = new System.Drawing.Point(12, 31);
-            this.lbTerrainHeight.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
+            this.lbTerrainHeight.Location = new System.Drawing.Point(8, 20);
+            this.lbTerrainHeight.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lbTerrainHeight.Name = "lbTerrainHeight";
-            this.lbTerrainHeight.Size = new System.Drawing.Size(71, 25);
+            this.lbTerrainHeight.Size = new System.Drawing.Size(47, 17);
             this.lbTerrainHeight.TabIndex = 0;
             this.lbTerrainHeight.Text = "height";
             // 
             // lbTerrainNoise
             // 
             this.lbTerrainNoise.AutoSize = true;
-            this.lbTerrainNoise.Location = new System.Drawing.Point(12, 181);
-            this.lbTerrainNoise.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
+            this.lbTerrainNoise.Location = new System.Drawing.Point(8, 116);
+            this.lbTerrainNoise.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lbTerrainNoise.Name = "lbTerrainNoise";
-            this.lbTerrainNoise.Size = new System.Drawing.Size(64, 25);
+            this.lbTerrainNoise.Size = new System.Drawing.Size(42, 17);
             this.lbTerrainNoise.TabIndex = 1;
             this.lbTerrainNoise.Text = "noise";
             // 
@@ -218,11 +218,11 @@
             // 
             this.gbCameraControls.Controls.Add(this.lbCamSpeed);
             this.gbCameraControls.Controls.Add(this.cameraSpeed);
-            this.gbCameraControls.Location = new System.Drawing.Point(30, 23);
-            this.gbCameraControls.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.gbCameraControls.Location = new System.Drawing.Point(20, 15);
+            this.gbCameraControls.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.gbCameraControls.Name = "gbCameraControls";
-            this.gbCameraControls.Padding = new System.Windows.Forms.Padding(6, 6, 6, 6);
-            this.gbCameraControls.Size = new System.Drawing.Size(144, 319);
+            this.gbCameraControls.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.gbCameraControls.Size = new System.Drawing.Size(96, 204);
             this.gbCameraControls.TabIndex = 0;
             this.gbCameraControls.TabStop = false;
             this.gbCameraControls.Text = "Camera";
@@ -232,11 +232,11 @@
             this.gbViewControls.Controls.Add(this.lbViewVisibility);
             this.gbViewControls.Controls.Add(this.visibility);
             this.gbViewControls.Controls.Add(this.gbResolutionControls);
-            this.gbViewControls.Location = new System.Drawing.Point(24, 354);
-            this.gbViewControls.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.gbViewControls.Location = new System.Drawing.Point(16, 227);
+            this.gbViewControls.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.gbViewControls.Name = "gbViewControls";
-            this.gbViewControls.Padding = new System.Windows.Forms.Padding(6, 6, 6, 6);
-            this.gbViewControls.Size = new System.Drawing.Size(324, 371);
+            this.gbViewControls.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.gbViewControls.Size = new System.Drawing.Size(216, 237);
             this.gbViewControls.TabIndex = 0;
             this.gbViewControls.TabStop = false;
             this.gbViewControls.Text = "View";
@@ -244,10 +244,10 @@
             // lbViewVisibility
             // 
             this.lbViewVisibility.AutoSize = true;
-            this.lbViewVisibility.Location = new System.Drawing.Point(18, 48);
-            this.lbViewVisibility.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
+            this.lbViewVisibility.Location = new System.Drawing.Point(12, 31);
+            this.lbViewVisibility.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lbViewVisibility.Name = "lbViewVisibility";
-            this.lbViewVisibility.Size = new System.Drawing.Size(88, 25);
+            this.lbViewVisibility.Size = new System.Drawing.Size(56, 17);
             this.lbViewVisibility.TabIndex = 3;
             this.lbViewVisibility.Text = "visibility";
             // 
@@ -259,10 +259,10 @@
             0,
             0,
             65536});
-            this.visibility.Location = new System.Drawing.Point(18, 79);
-            this.visibility.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.visibility.Location = new System.Drawing.Point(12, 51);
+            this.visibility.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.visibility.Name = "visibility";
-            this.visibility.Size = new System.Drawing.Size(120, 31);
+            this.visibility.Size = new System.Drawing.Size(80, 22);
             this.visibility.TabIndex = 2;
             // 
             // gbResolutionControls
@@ -270,56 +270,56 @@
             this.gbResolutionControls.Controls.Add(this.resX);
             this.gbResolutionControls.Controls.Add(this.resY);
             this.gbResolutionControls.Controls.Add(this.lbResolutionX);
-            this.gbResolutionControls.Location = new System.Drawing.Point(12, 260);
-            this.gbResolutionControls.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.gbResolutionControls.Location = new System.Drawing.Point(8, 166);
+            this.gbResolutionControls.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.gbResolutionControls.Name = "gbResolutionControls";
-            this.gbResolutionControls.Padding = new System.Windows.Forms.Padding(6, 6, 6, 6);
-            this.gbResolutionControls.Size = new System.Drawing.Size(300, 100);
+            this.gbResolutionControls.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.gbResolutionControls.Size = new System.Drawing.Size(200, 64);
             this.gbResolutionControls.TabIndex = 10;
             this.gbResolutionControls.TabStop = false;
             this.gbResolutionControls.Text = "resolution";
             // 
             // resX
             // 
-            this.resX.Location = new System.Drawing.Point(12, 36);
-            this.resX.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.resX.Location = new System.Drawing.Point(8, 23);
+            this.resX.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.resX.Name = "resX";
-            this.resX.Size = new System.Drawing.Size(114, 31);
+            this.resX.Size = new System.Drawing.Size(76, 22);
             this.resX.TabIndex = 7;
             // 
             // resY
             // 
-            this.resY.Location = new System.Drawing.Point(174, 36);
-            this.resY.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.resY.Location = new System.Drawing.Point(116, 23);
+            this.resY.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.resY.Name = "resY";
-            this.resY.Size = new System.Drawing.Size(114, 31);
+            this.resY.Size = new System.Drawing.Size(76, 22);
             this.resY.TabIndex = 8;
             // 
             // lbResolutionX
             // 
             this.lbResolutionX.AutoSize = true;
-            this.lbResolutionX.Location = new System.Drawing.Point(138, 40);
-            this.lbResolutionX.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
+            this.lbResolutionX.Location = new System.Drawing.Point(92, 26);
+            this.lbResolutionX.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lbResolutionX.Name = "lbResolutionX";
-            this.lbResolutionX.Size = new System.Drawing.Size(23, 25);
+            this.lbResolutionX.Size = new System.Drawing.Size(14, 17);
             this.lbResolutionX.TabIndex = 9;
             this.lbResolutionX.Text = "x";
             // 
             // Control
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(12F, 25F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Control;
-            this.ClientSize = new System.Drawing.Size(374, 836);
+            this.ClientSize = new System.Drawing.Size(249, 535);
             this.Controls.Add(this.gbCameraControls);
             this.Controls.Add(this.gbViewControls);
             this.Controls.Add(this.gbTerrainControls);
             this.Controls.Add(this.btnGenerate);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
-            this.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.MaximizeBox = false;
             this.MinimizeBox = false;
-            this.MinimumSize = new System.Drawing.Size(352, 740);
+            this.MinimumSize = new System.Drawing.Size(241, 491);
             this.Name = "Control";
             this.ShowIcon = false;
             this.Text = "WGenerator v1";

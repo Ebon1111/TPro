@@ -19,8 +19,6 @@ namespace TerrainGenerator
     /// </summary>
     class Camera : GameComponent
     {
-        Game1 game;
-
         // Vector3 camTarget; // For flight in the future
         Vector3 camPosition;
         Vector3 camOrigin;
@@ -33,8 +31,8 @@ namespace TerrainGenerator
             }
         }
 
+        public float camSpeed;
         Vector3 camRotation;
-        float camSpeed;
         Vector3 camLookAt;
 
         public Vector3 Position
@@ -108,7 +106,6 @@ namespace TerrainGenerator
         /// <param name="rotation">Initializing Rotation</param>
         public Camera(Game1 game, Config config, Vector3 rotation) : base(game)
         {
-            this.game = game;
             camSpeed = config.CameraSpeed;
             Projection = Matrix.CreatePerspectiveFieldOfView(
                 MathHelper.PiOver4,
@@ -123,6 +120,11 @@ namespace TerrainGenerator
 
             // Find the terrain below
             terrainMaxHeight = game.GameTerrain.MaxHeight;
+        }
+
+        public Camera(Game1 game, decimal cameraSpeed): base(game)
+        {
+            camSpeed = (float) cameraSpeed;
         }
 
         /// <summary>

@@ -151,7 +151,6 @@ namespace TerrainGenerator
         private void SetUpSeaVertices()
         {
             //Random rng = new Random();
-            int counter = 0;
             GenerateSeaColour();
             vertices = new VertexPositionColor[terrainWidth * terrainLength];
             // float hOffset = 0f;
