@@ -122,11 +122,6 @@ namespace TerrainGenerator
             terrainMaxHeight = game.GameTerrain.MaxHeight;
         }
 
-        public Camera(Game1 game, decimal cameraSpeed): base(game)
-        {
-            camSpeed = (float) cameraSpeed;
-        }
-
         /// <summary>
         /// Update camLookAt field for getting the correct view
         /// </summary>
