@@ -78,11 +78,6 @@ namespace TerrainGenerator
             }
         }
 
-        public Matrix Projection
-        {
-            get; set;
-        }
-
         // Mouse
         private Vector3 mouseRotationBuffer;
         private MouseState currentMouseState;
@@ -101,30 +96,6 @@ namespace TerrainGenerator
             MoveTo(camOrigin = new Vector3(50f, (flipped) ? -5f : (game as Game1).GameTerrain.MaxHeight + 20f, -50f), Vector3.Zero);
             // Update Mouse State
             prevMouseState = Mouse.GetState();            
-        }
-
-        /// <summary>
-        /// Using control-box to create cemara
-        /// </summary>
-        /// <param name="game">Current Game</param>
-        /// <param name="config">Control Box Values</param>
-        /// <param name="rotation">Initializing Rotation</param>
-        public Camera(Game1 game, Config config, Vector3 rotation) : base(game)
-        {
-            CameraSpeed = config.CameraSpeed;
-            Projection = Matrix.CreatePerspectiveFieldOfView(
-                MathHelper.PiOver4,
-                Game.GraphicsDevice.Viewport.AspectRatio,
-                1.0f,
-                config.ViewDistance); // Visibility of Distance
-
-            // Set camera position and rotation;
-            MoveTo(config.CameraStartingPosition, rotation);
-
-            prevMouseState = Mouse.GetState();
-
-            // Find the terrain below
-            terrainMaxHeight = game.GameTerrain.MaxHeight;
         }
 
         /// <summary>

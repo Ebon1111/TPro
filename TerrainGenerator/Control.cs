@@ -23,7 +23,7 @@ namespace TerrainGenerator
         Config config;
         Game1  game;
 
-        private static int generateCount = 0;
+        private static int generateCount;
 
         public Control()
         {
@@ -77,8 +77,8 @@ namespace TerrainGenerator
            (game.CameraObject as Camera).ViewDistance = (float) visibility.Value;
 
             // Easter Egg: Flip the world
-            //if (++generateCount == 5)
-            //    Game1.isFlipped = true;
+            if (++generateCount == 5)
+                Game1.isFlipped = true;
         }
     }
 }

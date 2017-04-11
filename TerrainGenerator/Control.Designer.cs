@@ -32,7 +32,6 @@
             this.lbCamSpeed = new System.Windows.Forms.Label();
             this.btnGenerate = new System.Windows.Forms.Button();
             this.gbTerrainControls = new System.Windows.Forms.GroupBox();
-            this.baseColour = new System.Windows.Forms.Button();
             this.terrainWidth = new System.Windows.Forms.NumericUpDown();
             this.lbTerrainWidth = new System.Windows.Forms.Label();
             this.terrainNoise = new System.Windows.Forms.NumericUpDown();
@@ -43,10 +42,6 @@
             this.gbViewControls = new System.Windows.Forms.GroupBox();
             this.lbViewVisibility = new System.Windows.Forms.Label();
             this.visibility = new System.Windows.Forms.NumericUpDown();
-            this.gbResolutionControls = new System.Windows.Forms.GroupBox();
-            this.resX = new System.Windows.Forms.NumericUpDown();
-            this.resY = new System.Windows.Forms.NumericUpDown();
-            this.lbResolutionX = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.cameraSpeed)).BeginInit();
             this.gbTerrainControls.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.terrainWidth)).BeginInit();
@@ -55,9 +50,6 @@
             this.gbCameraControls.SuspendLayout();
             this.gbViewControls.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.visibility)).BeginInit();
-            this.gbResolutionControls.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.resX)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.resY)).BeginInit();
             this.SuspendLayout();
             // 
             // cameraSpeed
@@ -68,7 +60,7 @@
             0,
             0,
             65536});
-            this.cameraSpeed.Location = new System.Drawing.Point(8, 39);
+            this.cameraSpeed.Location = new System.Drawing.Point(11, 41);
             this.cameraSpeed.Margin = new System.Windows.Forms.Padding(4);
             this.cameraSpeed.Name = "cameraSpeed";
             this.cameraSpeed.Size = new System.Drawing.Size(80, 22);
@@ -91,10 +83,10 @@
             // 
             // btnGenerate
             // 
-            this.btnGenerate.Location = new System.Drawing.Point(16, 471);
+            this.btnGenerate.Location = new System.Drawing.Point(20, 207);
             this.btnGenerate.Margin = new System.Windows.Forms.Padding(4);
             this.btnGenerate.Name = "btnGenerate";
-            this.btnGenerate.Size = new System.Drawing.Size(216, 29);
+            this.btnGenerate.Size = new System.Drawing.Size(212, 29);
             this.btnGenerate.TabIndex = 2;
             this.btnGenerate.Text = "Generate World";
             this.btnGenerate.UseVisualStyleBackColor = true;
@@ -102,7 +94,6 @@
             // 
             // gbTerrainControls
             // 
-            this.gbTerrainControls.Controls.Add(this.baseColour);
             this.gbTerrainControls.Controls.Add(this.terrainWidth);
             this.gbTerrainControls.Controls.Add(this.lbTerrainWidth);
             this.gbTerrainControls.Controls.Add(this.terrainNoise);
@@ -113,21 +104,10 @@
             this.gbTerrainControls.Margin = new System.Windows.Forms.Padding(4);
             this.gbTerrainControls.Name = "gbTerrainControls";
             this.gbTerrainControls.Padding = new System.Windows.Forms.Padding(4);
-            this.gbTerrainControls.Size = new System.Drawing.Size(96, 204);
+            this.gbTerrainControls.Size = new System.Drawing.Size(96, 184);
             this.gbTerrainControls.TabIndex = 3;
             this.gbTerrainControls.TabStop = false;
             this.gbTerrainControls.Text = "Terrain";
-            // 
-            // baseColour
-            // 
-            this.baseColour.Location = new System.Drawing.Point(8, 167);
-            this.baseColour.Margin = new System.Windows.Forms.Padding(4);
-            this.baseColour.Name = "baseColour";
-            this.baseColour.Size = new System.Drawing.Size(80, 27);
-            this.baseColour.TabIndex = 11;
-            this.baseColour.Text = "Base";
-            this.baseColour.UseVisualStyleBackColor = true;
-            this.baseColour.Click += new System.EventHandler(this.btnColour_Click);
             // 
             // terrainWidth
             // 
@@ -227,7 +207,7 @@
             this.gbCameraControls.Margin = new System.Windows.Forms.Padding(4);
             this.gbCameraControls.Name = "gbCameraControls";
             this.gbCameraControls.Padding = new System.Windows.Forms.Padding(4);
-            this.gbCameraControls.Size = new System.Drawing.Size(96, 204);
+            this.gbCameraControls.Size = new System.Drawing.Size(100, 88);
             this.gbCameraControls.TabIndex = 0;
             this.gbCameraControls.TabStop = false;
             this.gbCameraControls.Text = "Camera";
@@ -236,12 +216,11 @@
             // 
             this.gbViewControls.Controls.Add(this.lbViewVisibility);
             this.gbViewControls.Controls.Add(this.visibility);
-            this.gbViewControls.Controls.Add(this.gbResolutionControls);
-            this.gbViewControls.Location = new System.Drawing.Point(16, 227);
+            this.gbViewControls.Location = new System.Drawing.Point(20, 111);
             this.gbViewControls.Margin = new System.Windows.Forms.Padding(4);
             this.gbViewControls.Name = "gbViewControls";
             this.gbViewControls.Padding = new System.Windows.Forms.Padding(4);
-            this.gbViewControls.Size = new System.Drawing.Size(216, 237);
+            this.gbViewControls.Size = new System.Drawing.Size(100, 88);
             this.gbViewControls.TabIndex = 0;
             this.gbViewControls.TabStop = false;
             this.gbViewControls.Text = "View";
@@ -249,7 +228,7 @@
             // lbViewVisibility
             // 
             this.lbViewVisibility.AutoSize = true;
-            this.lbViewVisibility.Location = new System.Drawing.Point(12, 31);
+            this.lbViewVisibility.Location = new System.Drawing.Point(8, 19);
             this.lbViewVisibility.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lbViewVisibility.Name = "lbViewVisibility";
             this.lbViewVisibility.Size = new System.Drawing.Size(56, 17);
@@ -264,7 +243,7 @@
             0,
             0,
             65536});
-            this.visibility.Location = new System.Drawing.Point(12, 51);
+            this.visibility.Location = new System.Drawing.Point(11, 40);
             this.visibility.Margin = new System.Windows.Forms.Padding(4);
             this.visibility.Minimum = new decimal(new int[] {
             11,
@@ -280,52 +259,12 @@
             0,
             0});
             // 
-            // gbResolutionControls
-            // 
-            this.gbResolutionControls.Controls.Add(this.resX);
-            this.gbResolutionControls.Controls.Add(this.resY);
-            this.gbResolutionControls.Controls.Add(this.lbResolutionX);
-            this.gbResolutionControls.Location = new System.Drawing.Point(8, 166);
-            this.gbResolutionControls.Margin = new System.Windows.Forms.Padding(4);
-            this.gbResolutionControls.Name = "gbResolutionControls";
-            this.gbResolutionControls.Padding = new System.Windows.Forms.Padding(4);
-            this.gbResolutionControls.Size = new System.Drawing.Size(200, 64);
-            this.gbResolutionControls.TabIndex = 10;
-            this.gbResolutionControls.TabStop = false;
-            this.gbResolutionControls.Text = "resolution";
-            // 
-            // resX
-            // 
-            this.resX.Location = new System.Drawing.Point(8, 23);
-            this.resX.Margin = new System.Windows.Forms.Padding(4);
-            this.resX.Name = "resX";
-            this.resX.Size = new System.Drawing.Size(76, 22);
-            this.resX.TabIndex = 7;
-            // 
-            // resY
-            // 
-            this.resY.Location = new System.Drawing.Point(116, 23);
-            this.resY.Margin = new System.Windows.Forms.Padding(4);
-            this.resY.Name = "resY";
-            this.resY.Size = new System.Drawing.Size(76, 22);
-            this.resY.TabIndex = 8;
-            // 
-            // lbResolutionX
-            // 
-            this.lbResolutionX.AutoSize = true;
-            this.lbResolutionX.Location = new System.Drawing.Point(92, 26);
-            this.lbResolutionX.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.lbResolutionX.Name = "lbResolutionX";
-            this.lbResolutionX.Size = new System.Drawing.Size(14, 17);
-            this.lbResolutionX.TabIndex = 9;
-            this.lbResolutionX.Text = "x";
-            // 
             // Control
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Control;
-            this.ClientSize = new System.Drawing.Size(249, 535);
+            this.ClientSize = new System.Drawing.Size(249, 285);
             this.Controls.Add(this.gbCameraControls);
             this.Controls.Add(this.gbViewControls);
             this.Controls.Add(this.gbTerrainControls);
@@ -334,7 +273,6 @@
             this.Margin = new System.Windows.Forms.Padding(4);
             this.MaximizeBox = false;
             this.MinimizeBox = false;
-            this.MinimumSize = new System.Drawing.Size(241, 491);
             this.Name = "Control";
             this.ShowIcon = false;
             this.Text = "WGenerator v1";
@@ -349,10 +287,6 @@
             this.gbViewControls.ResumeLayout(false);
             this.gbViewControls.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.visibility)).EndInit();
-            this.gbResolutionControls.ResumeLayout(false);
-            this.gbResolutionControls.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.resX)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.resY)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -368,14 +302,9 @@
         private System.Windows.Forms.Label lbTerrainNoise;
         private System.Windows.Forms.NumericUpDown terrainNoise;
         private System.Windows.Forms.NumericUpDown terrainHeight;
-        private System.Windows.Forms.Label lbResolutionX;
-        private System.Windows.Forms.NumericUpDown resY;
-        private System.Windows.Forms.NumericUpDown resX;
-        private System.Windows.Forms.GroupBox gbResolutionControls;
         private System.Windows.Forms.Label lbViewVisibility;
         private System.Windows.Forms.NumericUpDown visibility;
         private System.Windows.Forms.NumericUpDown terrainWidth;
         private System.Windows.Forms.Label lbTerrainWidth;
-        private System.Windows.Forms.Button baseColour;
     }
 }
