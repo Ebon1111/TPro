@@ -92,7 +92,7 @@ namespace TerrainGenerator
             graphicResolutionY = 1536;
             graphics.PreferredBackBufferWidth  = graphicResolutionX;
             graphics.PreferredBackBufferHeight = graphicResolutionY;
-            graphics.IsFullScreen = false;
+            graphics.IsFullScreen = true;
             graphics.ApplyChanges(); 
 
             IsClosed = false;
