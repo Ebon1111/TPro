@@ -36,23 +36,24 @@ namespace TerrainGenerator
     /// </summary>
     public class Game1 : Game
     {
-        public static bool isFlipped = false;
-        GraphicsDevice device;
-        Effect effect;
+        GraphicsDevice        device;
         GraphicsDeviceManager graphics;
-        int graphicResolutionX;
-        int graphicResolutionY;
-        SpriteBatch spriteBatch;
+        Effect                effect;
+        SpriteBatch           spriteBatch;
 
-        //Texture2D obj;
+        int graphicResolutionX, graphicResolutionY;
 
         Camera camera;
-        public Matrix projectionMatrix;
         Matrix viewMatrix;
 
-        bool paused;
+        public Matrix projectionMatrix;
+
+        bool          paused;
         KeyboardState prev;
-        public bool IsClosed { private set; get; }
+
+        public bool        IsClosed { private set; get; }
+        public static bool isFlipped = false;
+
 
         public object  CameraObject { get { return camera; } set { camera = (Camera) value; } }
         public Control Controller;
@@ -87,12 +88,6 @@ namespace TerrainGenerator
         {
             (WinFormCtrl.FromHandle(Window.Handle) as Form).FormClosing += OnExiting;
 
-            //Components.Add(
-            //    camera = new Camera(this,
-            //        camPosition = new Vector3(50f, 5f, -50f), Vector3.Zero, 10.0f));
-
-            //graphics.PreferredBackBufferWidth = 1024;
-            //graphics.PreferredBackBufferHeight = 768;
             graphicResolutionX = 2048;
             graphicResolutionY = 1536;
             graphics.PreferredBackBufferWidth  = graphicResolutionX;
@@ -122,8 +117,6 @@ namespace TerrainGenerator
             bgMusic = Content.Load<Song>("song");
 
             spriteBatch = new SpriteBatch(device = graphics.GraphicsDevice);
-
-            //obj = Content.Load<Texture2D>("Test Bunny Poring.gif");
 
             Components.Add(camera = new Camera(this, mainConfig, isFlipped));
 

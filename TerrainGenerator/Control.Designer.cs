@@ -264,7 +264,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.AppWorkspace;
-            this.ClientSize = new System.Drawing.Size(249, 285);
+            this.ClientSize = new System.Drawing.Size(249, 270);
             this.Controls.Add(this.gbCameraControls);
             this.Controls.Add(this.gbViewControls);
             this.Controls.Add(this.gbTerrainControls);
@@ -272,7 +272,9 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.Margin = new System.Windows.Forms.Padding(4);
             this.MaximizeBox = false;
+            this.MaximumSize = new System.Drawing.Size(267, 317);
             this.MinimizeBox = false;
+            this.MinimumSize = new System.Drawing.Size(267, 317);
             this.Name = "Control";
             this.ShowIcon = false;
             this.Text = "WGenerator v1";
