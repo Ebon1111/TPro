@@ -54,7 +54,7 @@ namespace TerrainGenerator
         /// <param name="e">Clicked</param>
         private void generate_Click(object sender, EventArgs e)
         {
-            config.TerrainHeight = (int)   terrainHeight.Value;
+            config.TerrainLength = (int)   terrainLength.Value;
             config.TerrainWidth  = (int)   terrainWidth.Value;
             config.NoiseRange    = (float) terrainNoise.Value;
             config.CameraSpeed   = (float) cameraSpeed.Value;

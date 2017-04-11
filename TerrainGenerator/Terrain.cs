@@ -67,7 +67,7 @@ namespace TerrainGenerator
         {
             terrainHeight = config.TerrainHeight;
             terrainWidth  = config.TerrainWidth;
-            terrainLength = config.TerrainHeight;
+            terrainLength = config.TerrainLength;
             noiseRange    = config.NoiseRange;
           
             LoadHeightData();
@@ -78,9 +78,9 @@ namespace TerrainGenerator
         public Terrain(Game game, Config config, string type)
             : base(game)
         {
-            terrainHeight = config.TerrainHeight ;
+            terrainHeight = config.TerrainHeight;
             terrainWidth  = config.TerrainWidth;
-            terrainLength = terrainHeight;
+            terrainLength = config.TerrainLength;
             //terrainLength = config.TerrainLength / 2;
             this.type = type;
 

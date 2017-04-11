@@ -35,8 +35,8 @@
             this.terrainWidth = new System.Windows.Forms.NumericUpDown();
             this.lbTerrainWidth = new System.Windows.Forms.Label();
             this.terrainNoise = new System.Windows.Forms.NumericUpDown();
-            this.terrainHeight = new System.Windows.Forms.NumericUpDown();
-            this.lbTerrainHeight = new System.Windows.Forms.Label();
+            this.terrainLength = new System.Windows.Forms.NumericUpDown();
+            this.lbTerrainLength = new System.Windows.Forms.Label();
             this.lbTerrainNoise = new System.Windows.Forms.Label();
             this.gbCameraControls = new System.Windows.Forms.GroupBox();
             this.gbViewControls = new System.Windows.Forms.GroupBox();
@@ -46,7 +46,7 @@
             this.gbTerrainControls.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.terrainWidth)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.terrainNoise)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.terrainHeight)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.terrainLength)).BeginInit();
             this.gbCameraControls.SuspendLayout();
             this.gbViewControls.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.visibility)).BeginInit();
@@ -62,6 +62,11 @@
             65536});
             this.cameraSpeed.Location = new System.Drawing.Point(11, 41);
             this.cameraSpeed.Margin = new System.Windows.Forms.Padding(4);
+            this.cameraSpeed.Maximum = new decimal(new int[] {
+            200,
+            0,
+            0,
+            0});
             this.cameraSpeed.Name = "cameraSpeed";
             this.cameraSpeed.Size = new System.Drawing.Size(80, 22);
             this.cameraSpeed.TabIndex = 0;
@@ -97,8 +102,8 @@
             this.gbTerrainControls.Controls.Add(this.terrainWidth);
             this.gbTerrainControls.Controls.Add(this.lbTerrainWidth);
             this.gbTerrainControls.Controls.Add(this.terrainNoise);
-            this.gbTerrainControls.Controls.Add(this.terrainHeight);
-            this.gbTerrainControls.Controls.Add(this.lbTerrainHeight);
+            this.gbTerrainControls.Controls.Add(this.terrainLength);
+            this.gbTerrainControls.Controls.Add(this.lbTerrainLength);
             this.gbTerrainControls.Controls.Add(this.lbTerrainNoise);
             this.gbTerrainControls.Location = new System.Drawing.Point(136, 15);
             this.gbTerrainControls.Margin = new System.Windows.Forms.Padding(4);
@@ -114,7 +119,7 @@
             this.terrainWidth.Location = new System.Drawing.Point(8, 87);
             this.terrainWidth.Margin = new System.Windows.Forms.Padding(4);
             this.terrainWidth.Maximum = new decimal(new int[] {
-            1000,
+            1200,
             0,
             0,
             0});
@@ -155,39 +160,44 @@
             this.terrainNoise.Name = "terrainNoise";
             this.terrainNoise.Size = new System.Drawing.Size(80, 22);
             this.terrainNoise.TabIndex = 4;
-            // 
-            // terrainHeight
-            // 
-            this.terrainHeight.Location = new System.Drawing.Point(8, 39);
-            this.terrainHeight.Margin = new System.Windows.Forms.Padding(4);
-            this.terrainHeight.Maximum = new decimal(new int[] {
-            1000,
+            this.terrainNoise.Value = new decimal(new int[] {
+            20,
             0,
             0,
             0});
-            this.terrainHeight.Minimum = new decimal(new int[] {
+            // 
+            // terrainLength
+            // 
+            this.terrainLength.Location = new System.Drawing.Point(8, 39);
+            this.terrainLength.Margin = new System.Windows.Forms.Padding(4);
+            this.terrainLength.Maximum = new decimal(new int[] {
+            1200,
+            0,
+            0,
+            0});
+            this.terrainLength.Minimum = new decimal(new int[] {
             100,
             0,
             0,
             0});
-            this.terrainHeight.Name = "terrainHeight";
-            this.terrainHeight.Size = new System.Drawing.Size(80, 22);
-            this.terrainHeight.TabIndex = 3;
-            this.terrainHeight.Value = new decimal(new int[] {
+            this.terrainLength.Name = "terrainLength";
+            this.terrainLength.Size = new System.Drawing.Size(80, 22);
+            this.terrainLength.TabIndex = 3;
+            this.terrainLength.Value = new decimal(new int[] {
             100,
             0,
             0,
             0});
             // 
-            // lbTerrainHeight
+            // lbTerrainLength
             // 
-            this.lbTerrainHeight.AutoSize = true;
-            this.lbTerrainHeight.Location = new System.Drawing.Point(8, 20);
-            this.lbTerrainHeight.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.lbTerrainHeight.Name = "lbTerrainHeight";
-            this.lbTerrainHeight.Size = new System.Drawing.Size(47, 17);
-            this.lbTerrainHeight.TabIndex = 0;
-            this.lbTerrainHeight.Text = "height";
+            this.lbTerrainLength.AutoSize = true;
+            this.lbTerrainLength.Location = new System.Drawing.Point(8, 20);
+            this.lbTerrainLength.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lbTerrainLength.Name = "lbTerrainLength";
+            this.lbTerrainLength.Size = new System.Drawing.Size(47, 17);
+            this.lbTerrainLength.TabIndex = 0;
+            this.lbTerrainLength.Text = "length";
             // 
             // lbTerrainNoise
             // 
@@ -245,11 +255,16 @@
             65536});
             this.visibility.Location = new System.Drawing.Point(11, 40);
             this.visibility.Margin = new System.Windows.Forms.Padding(4);
+            this.visibility.Maximum = new decimal(new int[] {
+            1410065407,
+            2,
+            0,
+            0});
             this.visibility.Minimum = new decimal(new int[] {
-            11,
+            50,
             0,
             0,
-            65536});
+            0});
             this.visibility.Name = "visibility";
             this.visibility.Size = new System.Drawing.Size(80, 22);
             this.visibility.TabIndex = 2;
@@ -283,7 +298,7 @@
             this.gbTerrainControls.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.terrainWidth)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.terrainNoise)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.terrainHeight)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.terrainLength)).EndInit();
             this.gbCameraControls.ResumeLayout(false);
             this.gbCameraControls.PerformLayout();
             this.gbViewControls.ResumeLayout(false);
@@ -300,10 +315,10 @@
         private System.Windows.Forms.GroupBox gbTerrainControls;
         private System.Windows.Forms.GroupBox gbCameraControls;
         private System.Windows.Forms.GroupBox gbViewControls;
-        private System.Windows.Forms.Label lbTerrainHeight;
+        private System.Windows.Forms.Label lbTerrainLength;
         private System.Windows.Forms.Label lbTerrainNoise;
         private System.Windows.Forms.NumericUpDown terrainNoise;
-        private System.Windows.Forms.NumericUpDown terrainHeight;
+        private System.Windows.Forms.NumericUpDown terrainLength;
         private System.Windows.Forms.Label lbViewVisibility;
         private System.Windows.Forms.NumericUpDown visibility;
         private System.Windows.Forms.NumericUpDown terrainWidth;
