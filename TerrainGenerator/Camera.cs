@@ -31,7 +31,9 @@ namespace TerrainGenerator
             }
         }
 
-        public float camSpeed;
+        public float CameraSpeed;
+        public float ViewDistance;
+
         Vector3 camRotation;
         Vector3 camLookAt;
 
@@ -84,7 +86,7 @@ namespace TerrainGenerator
         public Camera(Game game, Vector3 position, Vector3 rotation, float speed)
             : base(game)
         {
-            camSpeed = speed;
+            CameraSpeed = speed;
             Projection = Matrix.CreatePerspectiveFieldOfView(
                 MathHelper.PiOver4,
                 Game.GraphicsDevice.Viewport.AspectRatio,
@@ -106,7 +108,7 @@ namespace TerrainGenerator
         /// <param name="rotation">Initializing Rotation</param>
         public Camera(Game1 game, Config config, Vector3 rotation) : base(game)
         {
-            camSpeed = config.CameraSpeed;
+            CameraSpeed = config.CameraSpeed;
             Projection = Matrix.CreatePerspectiveFieldOfView(
                 MathHelper.PiOver4,
                 Game.GraphicsDevice.Viewport.AspectRatio,
@@ -219,7 +221,7 @@ namespace TerrainGenerator
                 // normalize the vector; so that we don't move faster diagonally
                 moveVector.Normalize();
                 // Add in smooth and speed
-                moveVector *= (dt * camSpeed);
+                moveVector *= (dt * CameraSpeed);
                 // Move camera
                 Move(moveVector);
             }

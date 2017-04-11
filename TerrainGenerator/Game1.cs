@@ -59,7 +59,7 @@ namespace TerrainGenerator
         KeyboardState prev;
         public bool IsClosed { private set; get; }
 
-        public object  Cam { get { return camera; } set { camera = (Camera) value; } }
+        public object  CameraObject { get { return camera; } set { camera = (Camera) value; } }
         public Control Controller;
         public Terrain GameTerrain;
         public Terrain Sea;
@@ -107,8 +107,6 @@ namespace TerrainGenerator
             IsClosed = false;
             Window.Title = "World Generator";
 
-            camSpeed = 30.0f;
-
             base.Initialize();
         }
 
@@ -124,10 +122,12 @@ namespace TerrainGenerator
         {
             Content.RootDirectory = "Content";
 
-            effect = Content.Load<Effect>("effects");
+            effect  = Content.Load<Effect>("effects");
             bgMusic = Content.Load<Song>("song");
-            //obj = Content.Load<Texture2D>("Test Bunny Poring.gif");
             spriteBatch = new SpriteBatch(device = graphics.GraphicsDevice);
+
+            //obj = Content.Load<Texture2D>("Test Bunny Poring.gif");
+
             if (isFlipped)
             {
                 Components.Add(
@@ -157,11 +157,10 @@ namespace TerrainGenerator
         {
             if (Keyboard.GetState().IsKeyUp(XNAInput.Keys.Escape) && prev.IsKeyDown(XNAInput.Keys.Escape))
             {
-                paused = !paused;
+                paused         = !paused;
                 IsMouseVisible = !IsMouseVisible;
 
                 if (paused) Controller.TopMost = true;
-
             }
             prev = Keyboard.GetState();
 

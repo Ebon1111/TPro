@@ -22,6 +22,7 @@ namespace TerrainGenerator
     {
         Config config;
         Game1  game;
+
         private static int generateCount = 0;
 
         public Control()
@@ -53,9 +54,9 @@ namespace TerrainGenerator
         /// <param name="e">Clicked</param>
         private void generate_Click(object sender, EventArgs e)
         {
-            generateCount++;
-            config.TerrainHeight = (int)terrainHeight.Value;
-            config.TerrainWidth  = (int)terrainWidth.Value;
+            config.TerrainHeight = (int)   terrainHeight.Value;
+            config.TerrainWidth  = (int)   terrainWidth.Value;
+            config.NoiseRange    = (float) terrainNoise.Value;
             
             if (game.IsClosed)
             {
@@ -64,14 +65,17 @@ namespace TerrainGenerator
                 game.Sea = new Terrain(game, config, "Sea");
                 game.Run();
             }
-
             game.GameTerrain.Dispose();
+            game.Sea.Dispose();
+
             game.GameTerrain = new Terrain(game, config);
             game.Sea = new Terrain(game, config, "Sea");
-           (game.Cam as Camera).camSpeed = (float) cameraSpeed.Value;
+
+           (game.CameraObject as Camera).CameraSpeed  = (float) cameraSpeed.Value;
+           (game.CameraObject as Camera).ViewDistance = (float) visibility.Value;
 
             // Easter Egg: Flip the world
-            if (generateCount == 5)
+            if (++generateCount == 5)
                 Game1.isFlipped = true;
         }
     }

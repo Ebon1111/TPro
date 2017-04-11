@@ -36,8 +36,8 @@ namespace TerrainGenerator
         string type = null;
 
         List<Color> darkGreens = new List<Color>();
-        List<Color> colours = new List<Color>();
-        List<Color> seaColour = new List<Color>();
+        List<Color> colours    = new List<Color>();
+        List<Color> seaColour  = new List<Color>();
 
         /// <summary>
         /// Terrain Constructor
@@ -48,7 +48,7 @@ namespace TerrainGenerator
         public Terrain(Game game, int terrainWidth, int terrainLength, int terrainHeight)
             : base(game)
         {
-            this.terrainWidth = terrainWidth;
+            this.terrainWidth  = terrainWidth;
             this.terrainHeight = terrainHeight;
             this.terrainLength = terrainLength;
 
@@ -66,12 +66,10 @@ namespace TerrainGenerator
             : base(game)
         {
             terrainHeight = config.TerrainHeight;
-            terrainWidth = config.TerrainWidth;
+            terrainWidth  = config.TerrainWidth;
             terrainLength = config.TerrainHeight;
-            //terrainLength = config.TerrainLength;
-
-            noiseRange = 1.0f;
-
+            noiseRange    = config.NoiseRange;
+          
             LoadHeightData();
             SetUpVertices();
             SetUpIndices();
@@ -81,7 +79,7 @@ namespace TerrainGenerator
             : base(game)
         {
             terrainHeight = config.TerrainHeight ;
-            terrainWidth = config.TerrainWidth;
+            terrainWidth  = config.TerrainWidth;
             terrainLength = terrainHeight;
             //terrainLength = config.TerrainLength / 2;
             this.type = type;
@@ -209,7 +207,7 @@ namespace TerrainGenerator
             heightData = new float[terrainWidth, terrainLength];
             float fOff = 0.2f;
             float hOff = 0.02f;
-            float frequency = noiseRange / (float)terrainWidth + fOff;
+            float frequency = noiseRange / terrainWidth + fOff;
             float[,] noises = Noise.Calc2D(terrainWidth, terrainLength, frequency);
             for (int i = 0; i < terrainLength; i++)
             {
