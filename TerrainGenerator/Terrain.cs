@@ -30,6 +30,7 @@ namespace TerrainGenerator
         int terrainHeight;
         int terrainLength;
 
+        // Frequency; for control box
         float noiseRange;
 
         string type = null;
