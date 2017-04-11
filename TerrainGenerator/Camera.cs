@@ -32,7 +32,21 @@ namespace TerrainGenerator
         }
 
         public float CameraSpeed;
-        public float ViewDistance;
+        public float ViewDistance
+        {
+            get
+            {
+                return ViewDistance;
+            }
+            set
+            {
+                Projection = Matrix.CreatePerspectiveFieldOfView(
+                MathHelper.PiOver4,
+                Game.GraphicsDevice.Viewport.AspectRatio,
+                1.0f,
+                value);
+            }
+        }
 
         Vector3 camRotation;
         Vector3 camLookAt;
@@ -65,8 +79,7 @@ namespace TerrainGenerator
 
         public Matrix Projection
         {
-            get;
-            set;
+            get; set;
         }
 
         // Mouse

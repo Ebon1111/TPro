@@ -99,10 +99,10 @@ namespace TerrainGenerator
             //graphics.PreferredBackBufferHeight = 768;
             graphicResolutionX = 2048;
             graphicResolutionY = 1536;
-            graphics.PreferredBackBufferWidth = graphicResolutionX;
+            graphics.PreferredBackBufferWidth  = graphicResolutionX;
             graphics.PreferredBackBufferHeight = graphicResolutionY;
             graphics.IsFullScreen = true;
-            graphics.ApplyChanges();
+            graphics.ApplyChanges(); 
 
             IsClosed = false;
             Window.Title = "World Generator";
