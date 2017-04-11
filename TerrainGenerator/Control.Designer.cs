@@ -275,10 +275,10 @@
             this.visibility.Size = new System.Drawing.Size(80, 22);
             this.visibility.TabIndex = 2;
             this.visibility.Value = new decimal(new int[] {
-            11,
+            100,
             0,
             0,
-            65536});
+            0});
             // 
             // gbResolutionControls
             // 

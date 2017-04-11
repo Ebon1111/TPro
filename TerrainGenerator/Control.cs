@@ -57,26 +57,28 @@ namespace TerrainGenerator
             config.TerrainHeight = (int)   terrainHeight.Value;
             config.TerrainWidth  = (int)   terrainWidth.Value;
             config.NoiseRange    = (float) terrainNoise.Value;
+            config.CameraSpeed   = (float) cameraSpeed.Value;
+            config.ViewDistance  = (float) visibility.Value;
             
             if (game.IsClosed)
             {
                 game.Dispose();
-               (game = new Game1(new Terrain(game, config))).Controller = this;
+               (game = new Game1(config)).Controller = this;
                 game.Sea = new Terrain(game, config, "Sea");
                 game.Run();
             }
             game.GameTerrain.Dispose();
             game.Sea.Dispose();
 
-            game.GameTerrain = new Terrain(game, config);
-            game.Sea = new Terrain(game, config, "Sea");
-
+            game.GameTerrain  = new Terrain(game, config);
+            game.Sea          = new Terrain(game, config, "Sea");
+            
            (game.CameraObject as Camera).CameraSpeed  = (float) cameraSpeed.Value;
            (game.CameraObject as Camera).ViewDistance = (float) visibility.Value;
 
             // Easter Egg: Flip the world
-            if (++generateCount == 5)
-                Game1.isFlipped = true;
+            //if (++generateCount == 5)
+            //    Game1.isFlipped = true;
         }
     }
 }

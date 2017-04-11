@@ -22,9 +22,6 @@ namespace TerrainGenerator
         public float CameraSpeed;
         public Vector3 CameraStartingPosition;
         public float ViewDistance;
-
-        public int GraphicResolutionX;
-        public int GraphicResolutionY;
     }
 
     /// <summary>
@@ -50,9 +47,7 @@ namespace TerrainGenerator
         //Texture2D obj;
 
         Camera camera;
-        Vector3 camPosition;
-        float camSpeed;
-        Matrix projectionMatrix;
+        public Matrix projectionMatrix;
         Matrix viewMatrix;
 
         bool paused;
@@ -66,6 +61,8 @@ namespace TerrainGenerator
 
         Song bgMusic;
 
+        private Config mainConfig;
+
         /// <summary>
         /// Game Constructor: initialize the graphics
         /// </summary>
@@ -74,11 +71,10 @@ namespace TerrainGenerator
             IsClosed = true;
         }
 
-        public Game1(Terrain terrain) : this()
+        public Game1(Config config) : this()
         {
-            GameTerrain = terrain;
-
-            graphics = new GraphicsDeviceManager(this);
+            GameTerrain = new Terrain(this, mainConfig = config);
+            graphics    = new GraphicsDeviceManager(this);                
         }
 
         /// <summary>
@@ -124,21 +120,12 @@ namespace TerrainGenerator
 
             effect  = Content.Load<Effect>("effects");
             bgMusic = Content.Load<Song>("song");
+
             spriteBatch = new SpriteBatch(device = graphics.GraphicsDevice);
 
             //obj = Content.Load<Texture2D>("Test Bunny Poring.gif");
 
-            if (isFlipped)
-            {
-                Components.Add(
-                  camera = new Camera(this,
-                      camPosition = new Vector3(50f, -5f, -50f), Vector3.Zero, camSpeed));
-            }
-            else
-                Components.Add(
-                   camera = new Camera(this,
-                       camPosition = new Vector3(50f, GameTerrain.MaxHeight + 20f, -50f), Vector3.Zero, camSpeed));
-            projectionMatrix = camera.Projection;
+            Components.Add(camera = new Camera(this, mainConfig, isFlipped));
 
             MediaPlayer.IsRepeating = true;
             MediaPlayer.Play(bgMusic);

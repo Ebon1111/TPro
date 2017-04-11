@@ -20,6 +20,7 @@ namespace TerrainGenerator
     class Camera : GameComponent
     {
         // Vector3 camTarget; // For flight in the future
+        Game    game;
         Vector3 camPosition;
         Vector3 camOrigin;
 
@@ -40,7 +41,7 @@ namespace TerrainGenerator
             }
             set
             {
-                Projection = Matrix.CreatePerspectiveFieldOfView(
+                (game as Game1).projectionMatrix = Matrix.CreatePerspectiveFieldOfView(
                 MathHelper.PiOver4,
                 Game.GraphicsDevice.Viewport.AspectRatio,
                 1.0f,
@@ -89,28 +90,17 @@ namespace TerrainGenerator
 
         private float terrainMaxHeight;
 
-        /// <summary>
-        /// Camera Constructor
-        /// </summary>
-        /// <param name="game">Current Game</param>
-        /// <param name="position">Initializing Location</param>
-        /// <param name="rotation">Initializing Rotation</param>
-        /// <param name="speed">Required Move Speed</param>
-        public Camera(Game game, Vector3 position, Vector3 rotation, float speed)
+        public Camera(Game game, Config config, bool flipped)
             : base(game)
         {
-            CameraSpeed = speed;
-            Projection = Matrix.CreatePerspectiveFieldOfView(
-                MathHelper.PiOver4,
-                Game.GraphicsDevice.Viewport.AspectRatio,
-                1.0f,
-                100.0f); // Visibility of Distance
+            this.game = game;
 
-            // Set camera position and rotation;
-            MoveTo(position, rotation);
-            camOrigin = position;
+            CameraSpeed  = config.CameraSpeed;
+            ViewDistance = config.ViewDistance;
+
+            MoveTo(camOrigin = new Vector3(50f, (flipped) ? -5f : (game as Game1).GameTerrain.MaxHeight + 20f, -50f), Vector3.Zero);
             // Update Mouse State
-            prevMouseState = Mouse.GetState();
+            prevMouseState = Mouse.GetState();            
         }
 
         /// <summary>
