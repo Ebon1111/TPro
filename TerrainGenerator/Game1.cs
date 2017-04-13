@@ -171,7 +171,7 @@ namespace TerrainGenerator
 
             RasterizerState rs = new RasterizerState();
             rs.CullMode = CullMode.None;
-            // rs.FillMode = FillMode.WireFrame;
+            //rs.FillMode = FillMode.WireFrame;
             device.RasterizerState = rs;
             effect.CurrentTechnique = effect.Techniques["ColoredNoShading"];
 

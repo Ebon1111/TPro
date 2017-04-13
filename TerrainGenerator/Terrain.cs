@@ -94,7 +94,6 @@ namespace TerrainGenerator
             terrainHeight = config.TerrainHeight;
             terrainWidth  = config.TerrainWidth;
             terrainLength = config.TerrainLength;
-            //terrainLength = config.TerrainLength / 2;
             this.type = type;
 
             chosenColor = config.ChosenShade;
@@ -115,8 +114,6 @@ namespace TerrainGenerator
         ///</summary>
         private void SetUpVertices()
         {
-            //Random rng = new Random();
-            //int counter = 0;
             CreateColour(chosenColor, mainShades);
             CreateColour(secondaryColor, secondShades);
             Random rnd = new Random();
@@ -129,17 +126,9 @@ namespace TerrainGenerator
                 {
                     vertices[x + y * terrainWidth].Position = new Vector3(x, heightData[x, y], -y);
 
-                    //vertices[x + y * terrainWidth].Color = new Color(rng.Next(0, 256), rng.Next(0, 256), rng.Next(0, 256));
-
-                    //vertices[x + y * terrainWidth].Color = colours[counter];
                     int i = rnd.Next(0, mainShades.Count);
-                    //vertices[x + y * terrainWidth].TextureCoordinate = new Vector2(x,heightData[x,y]);
 
                     vertices[x + y * terrainWidth].Color = getSingleColor(heightData[x, y], i);
-                    //if (counter < (colours.Count - 1))
-                    //    counter++;
-                    //else
-                    //    counter = 0;
                 }
                 xOffset += 0.2f;
                 hOffset += 0.2f;
@@ -156,13 +145,6 @@ namespace TerrainGenerator
                 return mainShades[i]; //dark green
 
             }
-            //else if (y < 1.5f)
-            //{
-            //    return new Color(34, 139, 34); //green
-            //}
-            //else if(y < 2.3f){
-            //    return new Color(50, 205, 50);//light green
-            //}
             else if (y < 2.6f)
             {
                 int x = rnd.Next(0, secondShades.Count);
@@ -231,8 +213,6 @@ namespace TerrainGenerator
 
         private void SetUpSeaVertices()
         {
-            //Random rng = new Random();
-            int counter = 0;
             GenerateSeaColour(waterColor);
             vertices = new VertexPositionColor[terrainWidth * terrainLength];
             // float hOffset = 0f;
@@ -244,7 +224,6 @@ namespace TerrainGenerator
                 {
                     vertices[x + y * terrainWidth].Position = new Vector3(x, 0.8f, -y);
 
-                    //vertices[x + y * terrainWidth].Color = new Color(rng.Next(0, 256), rng.Next(0, 256), rng.Next(0, 256));
                     int i = rnd.Next(0, seaColour.Count);
                     vertices[x + y * terrainWidth].Color = seaColour[i];
 
@@ -290,28 +269,17 @@ namespace TerrainGenerator
             Random rng = new Random();
             heightData = new float[terrainWidth, terrainLength];
             float fOff = 0.2f;
-            float hOff = 0.02f;
+            //float hOff = 0.02f;
             Console.WriteLine("Noise range " + noiseRange);
             float frequency = noiseRange / terrainWidth;
             float[,] noises = Noise.Calc2D(terrainWidth, terrainLength, frequency);
             for (int i = 0; i < terrainLength; i++)
             {
-                //float[] noises = Noise.Calc1D(terrainWidth, frequency);
                 for (int j = 0; j < terrainWidth; j++)
                 {
                     heightData[j, i] = noises[j, i] / 75 + fOff;
                     if (heightData[j, i] > MaxHeight)
                         MaxHeight = heightData[j, i];
-                    //heightData[j, i] = new Func<float>(() =>
-                    //{
-                    //    double mantissa = (rng.NextDouble());
-                    //    double exponent = Math.Pow(2.0, rng.Next(0, 3));
-
-                    //    float result =  (float)(mantissa + exponent + frequency);
-                    //    Console.WriteLine(result);
-                    //    return result;
-                    //})();
-                    //heightData[j, i] = (heightData[j, i] + 1) / 2;
 
                 }
                 // fOff += 0.1f;
