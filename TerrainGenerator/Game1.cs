@@ -104,6 +104,7 @@ namespace TerrainGenerator
 
         protected override void OnExiting(object sender, EventArgs args)
         {
+            MediaPlayer.Stop();
             IsMouseVisible = IsClosed = true;
         }
 
@@ -114,13 +115,14 @@ namespace TerrainGenerator
         {
             Content.RootDirectory = "Content";
 
+            MediaPlayer.IsRepeating = true;
+            MediaPlayer.Play(Content.Load<Song>("main"));
+
             effect      = Content.Load<Effect>("effects");
+
             spriteBatch = new SpriteBatch(device = graphics.GraphicsDevice);
 
             Components.Add(camera = new Camera(this, mainConfig, isFlipped));
-
-            MediaPlayer.IsRepeating = true;
-            MediaPlayer.Play(Content.Load<Song>("main"));
         }
 
         public void flip()
