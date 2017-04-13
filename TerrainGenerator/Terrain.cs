@@ -299,9 +299,9 @@ namespace TerrainGenerator
                 //float[] noises = Noise.Calc1D(terrainWidth, frequency);
                 for (int j = 0; j < terrainWidth; j++)
                 {
-                    heightData[i, j] = noises[i, j] / 75 + fOff;
-                    if (heightData[i, j] > MaxHeight)
-                        MaxHeight = heightData[i, j];
+                    heightData[j, i] = noises[j, i] / 75 + fOff;
+                    if (heightData[j, i] > MaxHeight)
+                        MaxHeight = heightData[j, i];
                     //heightData[j, i] = new Func<float>(() =>
                     //{
                     //    double mantissa = (rng.NextDouble());
