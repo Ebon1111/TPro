@@ -35,9 +35,15 @@ namespace TerrainGenerator
 
         string type = null;
 
-        List<Color> darkGreens = new List<Color>();
-        List<Color> colours    = new List<Color>();
-        List<Color> seaColour  = new List<Color>();
+
+        // Colour
+        Color chosenColor;
+        Color secondaryColor;
+        Color waterColor;
+
+        List<Color> mainShades = new List<Color>();
+        List<Color> secondShades = new List<Color>();
+        List<Color> seaColour = new List<Color>();
 
         /// <summary>
         /// Terrain Constructor
@@ -69,7 +75,14 @@ namespace TerrainGenerator
             terrainWidth  = config.TerrainWidth;
             terrainLength = config.TerrainLength;
             noiseRange    = config.NoiseRange;
-          
+            chosenColor = config.ChosenShade;
+            if (chosenColor.A == 0)
+            {
+                chosenColor = new Color(20, 100, 30);
+            }
+            Console.WriteLine("color chosen " + chosenColor.ToString());
+            setSecondaryColors(chosenColor);
+
             LoadHeightData();
             SetUpVertices();
             SetUpIndices();
@@ -84,6 +97,14 @@ namespace TerrainGenerator
             //terrainLength = config.TerrainLength / 2;
             this.type = type;
 
+            chosenColor = config.ChosenShade;
+            if (chosenColor.A == 0)
+            {
+                chosenColor = new Color(20, 100, 30);
+            }
+            Console.WriteLine("color chosen " + chosenColor.ToString());
+            setSecondaryColors(chosenColor);
+
             LoadHeightData();
             SetUpSeaVertices();
             SetUpIndices();
@@ -96,13 +117,14 @@ namespace TerrainGenerator
         {
             //Random rng = new Random();
             //int counter = 0;
-            CreateColour();
+            CreateColour(chosenColor, mainShades);
+            CreateColour(secondaryColor, secondShades);
             Random rnd = new Random();
             vertices = new VertexPositionColor[terrainWidth * terrainLength];
-            // float hOffset = 0f;
-            //float xOffset = 0f;
+            float hOffset = 0f;
             for (int x = 0; x < terrainWidth; x++)
             {
+                float xOffset = 0f;
                 for (int y = 0; y < terrainLength; y++)
                 {
                     vertices[x + y * terrainWidth].Position = new Vector3(x, heightData[x, y], -y);
@@ -110,46 +132,108 @@ namespace TerrainGenerator
                     //vertices[x + y * terrainWidth].Color = new Color(rng.Next(0, 256), rng.Next(0, 256), rng.Next(0, 256));
 
                     //vertices[x + y * terrainWidth].Color = colours[counter];
-                    int i = rnd.Next(1, darkGreens.Count);
+                    int i = rnd.Next(0, mainShades.Count);
+                    //vertices[x + y * terrainWidth].TextureCoordinate = new Vector2(x,heightData[x,y]);
 
-                    vertices[x + y * terrainWidth].Color = getSingleColor(heightData[x,y],i);
+                    vertices[x + y * terrainWidth].Color = getSingleColor(heightData[x, y], i);
                     //if (counter < (colours.Count - 1))
                     //    counter++;
                     //else
                     //    counter = 0;
                 }
-                //xOffset += 0.2f;
-                // hOffset += 0.2f;
+                xOffset += 0.2f;
+                hOffset += 0.2f;
             }
         }
 
-        private Color getSingleColor(float y,int i)
+        private Color getSingleColor(float y, int i)
         {
-            
-            if (y < 1.6f)
+
+            Random rnd = new Random();
+            if (y < 1.8f)
             {
-                
-                return darkGreens[i]; //dark green
+
+                return mainShades[i]; //dark green
 
             }
             //else if (y < 1.5f)
             //{
             //    return new Color(34, 139, 34); //green
             //}
-            else if(y < 2.0f){
-                return new Color(50, 205, 50);//light green
-            }
-            else if(y < 2.4f)
+            //else if(y < 2.3f){
+            //    return new Color(50, 205, 50);//light green
+            //}
+            else if (y < 2.6f)
             {
-                return new Color(139, 69, 19);//brown
+                int x = rnd.Next(0, secondShades.Count);
+                return secondShades[x];//brown
             }
             else return new Color(255, 255, 255);
+        }
+
+        private void setSecondaryColors(Color color)
+        {
+            int r = color.R;
+            int g = color.G;
+            int b = color.B;
+
+            if (r > g && r > b)
+            {
+                if (b > g) //r>b>g
+                {
+                    secondaryColor = new Color(g, r, b);
+                    waterColor = new Color(b, g, r);
+                }
+                else //r>g>b
+                {
+                    secondaryColor = new Color(b, g, r);
+                    waterColor = new Color(g, r, b);
+
+                }
+            }
+            else if (g > r && g > b)
+            {
+                if (r > b) //g>r>b
+                {
+                    secondaryColor = new Color(r, b, g);
+                    waterColor = new Color(g, r, b);
+                }
+                else //g>b>r
+                {
+
+                    secondaryColor = new Color(g, r, b);
+                    waterColor = new Color(r, b, g);
+                }
+            }
+            else if (b > g && b > r)
+            {
+                if (g > r) //b>g>r
+                {
+                    secondaryColor = new Color(b, g, r);
+                    waterColor = new Color(r, b, g);
+                }
+                else //b>r>g 
+                {
+                    secondaryColor = new Color(r, b, g);
+                    waterColor = new Color(b, g, r);
+                }
+            }
+            else
+            {
+                secondaryColor = new Color((r + 100) % 255, (g - 100) % 255, (b - 100) % 255);
+                waterColor = new Color((r - 100) % 255, (g + 100) % 255, (b + 100) % 255);
+
+            }
+
+
+
         }
 
         private void SetUpSeaVertices()
         {
             //Random rng = new Random();
-            GenerateSeaColour();
+            int counter = 0;
+            GenerateSeaColour(waterColor);
             vertices = new VertexPositionColor[terrainWidth * terrainLength];
             // float hOffset = 0f;
             // float xOffset = 0f;
@@ -161,10 +245,10 @@ namespace TerrainGenerator
                     vertices[x + y * terrainWidth].Position = new Vector3(x, 0.8f, -y);
 
                     //vertices[x + y * terrainWidth].Color = new Color(rng.Next(0, 256), rng.Next(0, 256), rng.Next(0, 256));
-                    int i = rnd.Next(1, seaColour.Count);
+                    int i = rnd.Next(0, seaColour.Count);
                     vertices[x + y * terrainWidth].Color = seaColour[i];
 
-                   
+
                 }
                 // xOffset += 0.2f;
                 // hOffset += 0.2f;
@@ -207,16 +291,17 @@ namespace TerrainGenerator
             heightData = new float[terrainWidth, terrainLength];
             float fOff = 0.2f;
             float hOff = 0.02f;
-            float frequency = noiseRange / terrainWidth + fOff;
+            Console.WriteLine("Noise range " + noiseRange);
+            float frequency = noiseRange / terrainWidth;
             float[,] noises = Noise.Calc2D(terrainWidth, terrainLength, frequency);
             for (int i = 0; i < terrainLength; i++)
             {
                 //float[] noises = Noise.Calc1D(terrainWidth, frequency);
                 for (int j = 0; j < terrainWidth; j++)
                 {
-                    heightData[j, i] = noises[j,i]/100 + hOff;
-                    if (heightData[j, i] > MaxHeight)
-                        MaxHeight = heightData[j, i];
+                    heightData[i, j] = noises[i, j] / 75 + fOff;
+                    if (heightData[i, j] > MaxHeight)
+                        MaxHeight = heightData[i, j];
                     //heightData[j, i] = new Func<float>(() =>
                     //{
                     //    double mantissa = (rng.NextDouble());
@@ -227,9 +312,9 @@ namespace TerrainGenerator
                     //    return result;
                     //})();
                     //heightData[j, i] = (heightData[j, i] + 1) / 2;
-                    
+
                 }
-                fOff += 0.1f;
+                // fOff += 0.1f;
                // hOff += 0.01f;
             }
         }
@@ -252,34 +337,75 @@ namespace TerrainGenerator
         /// <summary>
         /// Generate the default colour set
         /// </summary>
-        private void CreateColour()
+        private void CreateColour(Color color, List<Color> list)
         {
-          //  Color mainDGreen = new Color(0, 100, 0);
-            int r = 0;
-            int g = 50;
-            int b = 0;
-            while(g<120){
-                darkGreens.Add(new Color(r, g, b));
-                if(r > (g - 20) && b > (g - 20))
-                {
-                    r = 0;
-                    b = 0;
-                    g = g + 5;
-                }
-                r = r + 5;
-                b = b + 5;
+            //  Color mainDGreen = new Color(0, 100, 0);
+            int r = color.R;
+            int g = color.G;
+            int b = color.B;
 
+            int offset = 30;
+
+            mainShades.Add(color);
+
+            Console.WriteLine("rgb = " + r + " " + g + " " + b);
+            if (r > 225)
+            {
+                r = 225;
             }
-            Console.WriteLine("Size of darkGreens List is" + darkGreens.Count);
+            else if (r < 30)
+            {
+                r = 30;
+            }
+
+            if (g > 225)
+            {
+                g = 225;
+            }
+            else if (g < 30)
+            {
+                g = 30;
+            }
+            if (b > 225)
+            {
+                b = 225;
+            }
+            else if (b < 30)
+            {
+                b = 30;
+            }
+
+
+
+            for (int i = (r - offset); i < (r + offset); i += 10)
+            {
+                list.Add(new Color(i, g, b));
+                for (int j = (g - offset); j < (g + offset); j += 10)
+                {
+                    list.Add(new Color(i, j, b));
+                    for (int k = (b - offset); k < (b + offset); k += 10)
+                    {
+                        list.Add(new Color(i, j, k));
+                    }
+                }
+            }
+
+
+            Console.WriteLine("shades size " + mainShades.Count);
+
         }
 
-        private void GenerateSeaColour()
+        private void GenerateSeaColour(Color color)
         {
-            int r = 0;
-            int g = 0;
-            int b = 150;
+            int r = color.R;
+            int g = color.G;
+            int b = color.B;
 
-            while (b < 255)
+            Console.WriteLine("rgb SEA = " + r + " " + g + " " + b);
+
+            seaColour.Add(color);
+
+            while (b < 255 && r < 255 && g < 255)
             {
                 seaColour.Add(new Color(r, g, b));
 
@@ -287,7 +413,7 @@ namespace TerrainGenerator
                 r = r + 5;
                 g = g + 5;
             }
-            
+
 
         }
     }

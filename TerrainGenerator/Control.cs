@@ -42,7 +42,10 @@ namespace TerrainGenerator
         {
             using (var d = new ColorDialog())
                 if (d.ShowDialog() == DialogResult.OK)
+                {
                     (sender as Button).BackColor = d.Color;
+                    config.ChosenShade = new Microsoft.Xna.Framework.Color((sender as Button).BackColor.R, (sender as Button).BackColor.G, (sender as Button).BackColor.B);
+                }
         }
 
         /// <summary>
@@ -60,6 +63,10 @@ namespace TerrainGenerator
             config.CameraSpeed = (float)cameraSpeed.Value;
             config.ViewDistance = (float)visibility.Value;
 
+            // Easter Egg: Flip the world
+            if (++generateCount == 5)
+                Game1.isFlipped = true;
+
             if (game.IsClosed)
             {
                 game.Dispose();
@@ -76,10 +83,6 @@ namespace TerrainGenerator
             
            (game.CameraObject as Camera).CameraSpeed  = (float) cameraSpeed.Value;
            (game.CameraObject as Camera).ViewDistance = (float) visibility.Value;
-
-            // Easter Egg: Flip the world
-            if (++generateCount == 5)
-                Game1.isFlipped = true;
         }
     }
 }

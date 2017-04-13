@@ -18,7 +18,7 @@ namespace TerrainGenerator
         public int TerrainHeight;
         public int TerrainWidth;
         public int TerrainLength;
-
+        public Color ChosenShade;
         public float CameraSpeed;
         public Vector3 CameraStartingPosition;
         public float ViewDistance;
