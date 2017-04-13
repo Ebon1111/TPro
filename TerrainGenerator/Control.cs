@@ -56,22 +56,20 @@ namespace TerrainGenerator
         /// <param name="sender">Generate World Button</param>
         /// <param name="e">Clicked</param>
         private void generate_Click(object sender, EventArgs e)
-        {
+        {                
             config.TerrainLength = (int)   terrainLength.Value;
             config.TerrainWidth  = (int)   terrainWidth.Value;
             config.NoiseRange    = (float) terrainNoise.Value;
-            config.CameraSpeed = (float)cameraSpeed.Value;
-            config.ViewDistance = (float)visibility.Value;
+            config.CameraSpeed   = (float) cameraSpeed.Value;
+            config.ViewDistance  = (float) visibility.Value;
 
             // Easter Egg: Flip the world
-            if (++generateCount == 5)
-                Game1.isFlipped = true;
+            if (Game1.isFlipped = ++generateCount == 5) game.flip();
 
             if (game.IsClosed)
             {
                 game.Dispose();
                (game = new Game1(config)).Controller = this;
-                game.Sea = new Terrain(game, config, "Sea");
                 game.Run();
             }
 

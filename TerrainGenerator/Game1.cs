@@ -52,7 +52,7 @@ namespace TerrainGenerator
         KeyboardState prev;
 
         public bool        IsClosed { private set; get; }
-        public static bool isFlipped = false;
+        public static bool isFlipped;
 
 
         public object  CameraObject { get { return camera; } set { camera = (Camera) value; } }
@@ -60,7 +60,7 @@ namespace TerrainGenerator
         public Terrain GameTerrain;
         public Terrain Sea;
 
-        Song bgMusic;
+        public Song bgMusic;
 
         private Config mainConfig;
 
@@ -75,6 +75,7 @@ namespace TerrainGenerator
         public Game1(Config config) : this()
         {
             GameTerrain = new Terrain(this, mainConfig = config);
+            Sea         = new Terrain(this, config, "Sea");
             graphics    = new GraphicsDeviceManager(this);                
         }
 
@@ -113,15 +114,21 @@ namespace TerrainGenerator
         {
             Content.RootDirectory = "Content";
 
-            effect  = Content.Load<Effect>("effects");
-            bgMusic = Content.Load<Song>("main");
-
+            effect      = Content.Load<Effect>("effects");
             spriteBatch = new SpriteBatch(device = graphics.GraphicsDevice);
 
             Components.Add(camera = new Camera(this, mainConfig, isFlipped));
 
             MediaPlayer.IsRepeating = true;
-            MediaPlayer.Play(bgMusic);
+            MediaPlayer.Play(Content.Load<Song>("main"));
+        }
+
+        public void flip()
+        {
+            Components.Clear();
+            Components.Add(camera = new Camera(this, mainConfig, isFlipped));
+
+            MediaPlayer.Play(Content.Load<Song>("song"));
         }
 
         protected override void UnloadContent()
@@ -142,8 +149,8 @@ namespace TerrainGenerator
                 IsMouseVisible = !IsMouseVisible;
 
                 if (paused) Controller.TopMost = true;
-            }
-            prev = Keyboard.GetState();
+
+            } prev = Keyboard.GetState();
 
             if (paused) return;
 
